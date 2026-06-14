@@ -1,0 +1,32 @@
+.titulo-pontos{
+    padding: 15px;
+    margin: 15px;
+}
+.pontuacao{
+    margin: 30px;
+    display: flex;
+    gap: 20px;
+    font-size: large;
+}
+.enviosPontuados{
+    margin: 30px;
+    font-size: large;
+}
+.cards{
+    display: flex;
+    gap: 10px;
+    margin: 30px;
+    flex-wrap: wrap;
+}
+.msg-erro{
+    color: #c0392b;
+    padding: 10px 0;
+    font-size: 1rem;
+    margin: 10px;
+}
+.msg-carregando{
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #555;
+    margin: 10px;
+}

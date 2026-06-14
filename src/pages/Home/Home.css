@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.banner-home {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;        /* recorta a imagem para preencher sem distorcer */
+    object-position: center;  /* centraliza o foco da imagem */
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .banner-home {
+        height: 180px;
+    }
+}
+
+.titulo-home {
+    color: #2b95d6;
+    text-align: center;
+    padding: 1rem 1.5rem 0;
+}
+
+.titulo-home h1 {
+    font-size: clamp(1.4rem, 4vw, 2.4rem); /* escala suavemente entre mobile e desktop */
+    margin: 0;
+    line-height: 1.3;
+}
+
+.conteudo-home {
+    display: flex;
+    flex-direction: column;   /* empilha verticalmente no mobile */
+    align-items: center;
+    gap: 24px;
+    padding: 2rem 1.5rem;
+}
+
+.imagem-home__img {
+    width: 100%;              /* ocupa toda a largura disponível no mobile */
+    max-width: 400px;
+    height: auto;       
+    display: block;
+}
+
+.texto-home {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;       /* centralizado no mobile */
+}
+
+.texto-home h2 {
+    color: #2b95d6;
+    margin: 0;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+}
+
+.texto-home p {
+    margin: 0;
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    line-height: 1.7;
+    color: #374151;
+}
+
+/* ========================================
+   Tablet / Desktop (≥ 768px)
+   ======================================== */
+@media (min-width: 768px) {
+    .banner-home {
+        height: 220px;
+    }
+
+    .titulo-home {
+        padding: 1.5rem 2rem 0;
+    }
+
+    .conteudo-home {
+        flex-direction: row;      /* lado a lado no desktop */
+        align-items: flex-start;
+        gap: 40px;
+        padding: 3rem 3rem;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    .imagem-home__img {
+        width: 400px;
+        flex-shrink: 0;
+    }
+
+    .texto-home {
+        text-align: left;         /* alinhado à esquerda no desktop */
+    }
+}

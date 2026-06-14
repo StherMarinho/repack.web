@@ -1,0 +1,51 @@
+.mapa{
+    padding: 40px 30px;
+}
+
+.mapa_titulo{
+    color: #EF803D;
+    margin-bottom: 8px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.mapa_subtitulo{
+    color: #555;
+    margin-bottom: 24px;
+    font-size: 1rem;
+}
+
+.mapa_container{
+    width: 100%;
+    height: 500px;
+}
+
+.mapa_conteiner{
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.mapa_popup strong{
+    font-size: 1rem;
+    color: #EF803D;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.mapa_popup p{
+    margin: 3px 0;
+    font-size: 0.875rem;
+    color: #383E49;
+}
+
+.mapa_mensagem{
+    padding: 40px 30px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.mapa_mensagem_erro{
+    color: #C0392B;
+}

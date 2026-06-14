@@ -1,0 +1,43 @@
+.meus-envios {
+    padding: 40px 30px;
+}
+ 
+.meus-envios__titulo {
+    color: #EF803D;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+ 
+.meus-envios__subtitulo {
+    color: #c0392b;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+ 
+.meus-envios__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+ 
+.meus-envios__secao-cancelados {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px solid #e5e7eb;
+}
+ 
+.meus-envios__mensagem {
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #555;
+    margin: 10px;
+}
+ 
+.meus-envios__mensagem--erro {
+    color: #c0392b;
+    padding: 10px 0;
+    font-size: 1rem;
+    margin: 10px;
+}

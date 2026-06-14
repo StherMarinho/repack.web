@@ -1,0 +1,9 @@
+.card {
+    width: 18rem
+}
+.card-body{
+    text-align: center;
+}
+.card-text, .card-link{
+    font-size: medium;
+}

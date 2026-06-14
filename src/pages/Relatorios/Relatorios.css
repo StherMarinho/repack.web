@@ -1,0 +1,300 @@
+.rel-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+}
+
+/* HEADER */
+.rel-header {
+    margin-bottom: 2.5rem;
+}
+
+.rel-titulo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 0.25rem;
+}
+
+.rel-subtitulo {
+    color: #6b7280;
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* SEÇÕES */
+.rel-secao {
+    margin-bottom: 2.5rem;
+}
+
+.rel-secao-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+/* CARDS */
+.rel-cards {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.rel-cards--coluna {
+    flex-direction: column;
+    min-width: 160px;
+}
+
+.rel-card {
+    flex: 1;
+    min-width: 130px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    border-left: 4px solid transparent;
+}
+
+.rel-card--verde   { border-left-color: #22c55e; }
+.rel-card--azul    { border-left-color: #3b82f6; }
+.rel-card--amarelo { border-left-color: #f59e0b; }
+.rel-card--cinza   { border-left-color: #9ca3af; }
+.rel-card--vermelho{ border-left-color: #ef4444; }
+.rel-card--destaque{ border-left-color: #6366f1; }
+
+.rel-card-numero {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1;
+}
+
+.rel-card-label {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+/* ENVIOS GRID */
+.rel-envios-grid {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* GRÁFICO DE BARRAS (STATUS) */
+.rel-grafico-status {
+    flex: 1;
+    min-width: 260px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.rel-grafico-titulo {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 1.25rem;
+}
+
+.rel-barra-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.9rem;
+}
+
+.rel-barra-label {
+    font-size: 0.82rem;
+    color: #6b7280;
+    width: 85px;
+    flex-shrink: 0;
+}
+
+.rel-barra-track {
+    flex: 1;
+    height: 10px;
+    background: #f3f4f6;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.rel-barra-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.6s ease;
+    min-width: 2px;
+}
+
+.rel-barra-fill--verde   { background: #22c55e; }
+.rel-barra-fill--amarelo { background: #f59e0b; }
+.rel-barra-fill--vermelho{ background: #ef4444; }
+
+.rel-barra-valor {
+    font-size: 0.8rem;
+    color: #374151;
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* GRÁFICO DE EMBALAGENS */
+.rel-grafico-embalagens {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.rel-emb-item {
+    display: grid;
+    grid-template-columns: 220px 1fr 120px;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rel-emb-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.rel-emb-nome {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #111827;
+}
+
+.rel-emb-material {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.rel-emb-barra-track {
+    height: 12px;
+    background: #f3f4f6;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.rel-emb-barra-fill {
+    height: 100%;
+    background: #6366f1;
+    border-radius: 99px;
+    transition: width 0.6s ease;
+    min-width: 2px;
+}
+
+.rel-emb-numeros {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+}
+
+.rel-emb-qtd {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.rel-emb-peso {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+/* VAZIO */
+.rel-vazio {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    padding: 1rem 0;
+}
+
+/* LOADING */
+.rel-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    gap: 1rem;
+    color: #6b7280;
+}
+
+.rel-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e5e7eb;
+    border-top-color: #6366f1;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ERRO */
+.rel-erro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    gap: 1rem;
+    color: #6b7280;
+    text-align: center;
+    padding: 2rem;
+}
+
+.rel-erro-icone {
+    font-size: 2.5rem;
+}
+
+.rel-btn-tentar {
+    margin-top: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    background: #6366f1;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.rel-btn-tentar:hover {
+    background: #4f46e5;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .rel-envios-grid {
+        flex-direction: column;
+    }
+
+    .rel-cards--coluna {
+        flex-direction: row;
+        min-width: unset;
+    }
+
+    .rel-emb-item {
+        grid-template-columns: 1fr;
+    }
+
+    .rel-emb-numeros {
+        align-items: flex-start;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+}

@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap');
+
+:root {
+    --color-background: #EF803D;
+    --color-text-primary: #383e49;
+    --color-text-secondary: #1f2937;
+    --color-cta: #21a2f2;
+    --color-cta-hover: #2b95d6;
+    --color-logout: #dc3545;
+    --color-logout-hover: #bd2130;
+    --color-border: #e5e7eb;
+    --font-family-sans-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-weight-medium: 500;
+    --font-weight-bold: 600;
+    --navbar-height: 72px;
+    --container-width: 1280px;
+    --navbar-padding: 1.5rem;
+    --transition-speed: 0.2s;
+    --border-radius: 0.5rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ========================================
+   Navbar Base
+   ======================================== */
+.navbar {
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--color-background);
+    border-bottom: none;
+}
+
+.navbar__container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--navbar-padding);
+}
+
+.navbar__brand {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    flex-shrink: 0;
+    margin-right: auto;
+}
+
+.navbar__brand-logo {
+    height: 55px;
+    width: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+/* Ocultos por padrão no Mobile */
+.navbar__main-nav { display: none; }
+.navbar__user-actions { display: none; }
+
+.navbar__mobile-toggle {
+    display: block;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1.4rem;
+    color: var(--color-text-primary);
+    line-height: 1;
+}
+
+/* ========================================
+   Estilização dos Botões de Ação (CTA)
+   ======================================== */
+.nav-link--cta {
+    display: inline-block;
+    color: #fff;
+    background-color: var(--color-cta);
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: var(--font-weight-bold);
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.nav-link--cta:hover {
+    background-color: var(--color-cta-hover);
+}
+
+/* Variação do botão de Logout */
+.nav-link--logout {
+    background-color: var(--color-logout);
+}
+
+.nav-link--logout:hover {
+    background-color: var(--color-logout-hover);
+}
+
+/* ========================================
+   Menu Mobile
+   ======================================== */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: var(--color-background);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    border-top: 1px solid var(--color-border);
+}
+
+.mobile-menu.is-active { display: block; }
+
+.mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.mobile-menu ul li a, 
+.mobile-menu ul li button {
+    display: block;
+    width: calc(100% - 3rem);
+    margin: 0.5rem 1.5rem;
+    padding: 1rem 1.5rem;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-family: var(--font-family-sans-serif);
+    font-weight: var(--font-weight-medium);
+    text-align: left;
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.mobile-menu ul li a:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Ajuste dos botões estruturados dentro do Menu Mobile */
+.mobile-menu ul li .nav-link--cta {
+    color: #fff;
+    background-color: var(--color-cta);
+    margin: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    padding: 0.75rem 1.25rem;
+    width: calc(100% - 3rem);
+}
+
+.mobile-menu ul li .nav-link--cta:hover {
+    background-color: var(--color-cta-hover);
+}
+
+.mobile-menu ul li .nav-link--logout {
+    background-color: var(--color-logout);
+}
+
+.mobile-menu ul li .nav-link--logout:hover {
+    background-color: var(--color-logout-hover);
+}
+
+/* ========================================
+   Responsivo Desktop (≥ 992px)
+   ======================================== */
+@media (min-width: 992px) {
+    .navbar__mobile-toggle,
+    .mobile-menu {
+        display: none !important;
+    }
+
+    .navbar__container {
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    .navbar__brand { margin-right: 0; }
+
+    .navbar__main-nav {
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+    }
+
+    .navbar__user-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-shrink: 0;
+    }
+
+    .nav-list {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-link {
+        color: var(--color-text-secondary);
+        font-weight: var(--font-weight-medium);
+        text-decoration: none;
+        transition: color var(--transition-speed) ease;
+    }
+    
+    .nav-link:hover { color: var(--color-text-primary); }
+}
+
+.navbar__main-nav a {
+    text-decoration: none;
+    color: black;
+}
+.navbar__main-nav a:hover { color: #383e49; }
+
+:is(.navbar__mobile-toggle, a, button):focus-visible {
+    outline: 2px solid var(--color-cta);
+    outline-offset: 4px;
+    border-radius: 4px;
+}

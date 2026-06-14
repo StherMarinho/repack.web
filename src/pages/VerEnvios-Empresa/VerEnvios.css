@@ -1,0 +1,72 @@
+.titulo {
+    font-size: 24px;
+    color: #000000;
+    margin: 30px 30px 0px;
+}
+
+.painel-container {
+    padding: 0 30px 30px;
+}
+
+.tabela-wrapper {
+    overflow-x: auto;
+}
+.filtros{
+    display: flex;
+    gap: 10px;
+}
+.filtro-btn{
+    padding: 3px 10px 3px;
+    border-radius: 20px;
+    border: solid 1px;
+    background-color: #EF803D;
+}
+.filtro-btn:hover{
+    background-color: #faa36c;
+}
+
+.mensagem-erro, .mensagem-vazia{
+    margin-top: 20px;
+}
+
+.tabela-envios {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.tabela-envios thead {
+    background: #fafafa;
+}
+
+.tabela-envios th {
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 500;
+    color: #888;
+    border-bottom: 1px solid #eee;
+}
+
+.tabela-envios td {
+    padding: 10px 14px;
+    color: #1a1a1a;
+    border-bottom: 1px solid #eee;
+}
+
+.tabela-envios tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela-wrapper {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.badge-id-envio {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 3px 8px;
+}
