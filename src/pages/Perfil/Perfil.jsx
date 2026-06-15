@@ -5,6 +5,7 @@ import CampoTexto from "../../componentes/CampoTexto/CampoTexto";
 import Botao from "../../componentes/Botao/Botao";
 
 import { getToken } from "../../services/auth";
+import { API_URL } from "../../services/api";
 
 import "./Perfil.css";
 
@@ -42,7 +43,7 @@ const Perfil = () => {
         try {
 
             const response = await fetch(
-                "https://localhost:7000/gateway/usuarios/perfil",
+                API_URL+"/usuarios/perfil",
                 {
                     headers: {
                         Authorization:
@@ -91,7 +92,7 @@ const Perfil = () => {
         try {
 
             const response = await fetch(
-                "https://localhost:7000/gateway/usuarios/perfil",
+                API_URL+"/usuarios/perfil",
                 {
                     method: "PUT",
 
@@ -141,7 +142,7 @@ const Perfil = () => {
         try {
 
             const response = await fetch(
-                "https://localhost:7000/gateway/usuarios/perfil/senha",
+                API_URL+"/usuarios/perfil/senha",
                 {
                     method: "PUT",
 
