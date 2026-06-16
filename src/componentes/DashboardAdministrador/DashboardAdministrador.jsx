@@ -14,9 +14,7 @@ const DashboardAdministrador = () => {
         useState(null);
 
     useEffect(() => {
-
         carregar();
-
     }, []);
 
     const carregar = async () => {
@@ -25,48 +23,46 @@ const DashboardAdministrador = () => {
             dadosUsuarios,
             dadosEnvios
         ] = await Promise.all([
-            relatorioService
-                .getEstatisticasUsuarios(),
-
-            relatorioService
-                .getEstatisticasEnvios()
+            relatorioService.getEstatisticasUsuarios(),
+            relatorioService.getEstatisticasEnvios()
         ]);
 
         setUsuarios(dadosUsuarios);
-
         setEnvios(dadosEnvios);
     };
 
     return (
-        <div className="dashboard-grid">
+        <div className="admin-dashboard">
 
-            <div className="dashboard-card">
-                <h3>👥 Usuários Ativos</h3>
+            <div className="admin-cards">
 
-                <span className="dashboard-numero">
-                    {usuarios?.totalUsuariosAtivos ?? 0}
-                </span>
+                <div className="admin-card">
+                    <h3>👥 Usuários Ativos</h3>
+
+                    <span className="admin-numero">
+                        {usuarios?.totalUsuariosAtivos ?? 0}
+                    </span>
+                </div>
+
+                <div className="admin-card">
+                    <h3>📦 Total Envios</h3>
+
+                    <span className="admin-numero">
+                        {envios?.totalEnvios ?? 0}
+                    </span>
+                </div>
+
             </div>
 
-            <div className="dashboard-card">
-                <h3>📦 Total Envios</h3>
+            <div className="admin-botao-area">
 
-                <span className="dashboard-numero">
-                    {envios?.totalEnvios ?? 0}
-                </span>
-            </div>
-
-            <div className="dashboard-card">
                 <button
-                    className="btn-relatorio"
-                    onClick={() =>
-                        navigate(
-                            "/relatorios"
-                        )
-                    }
+                    className="admin-btn-relatorio"
+                    onClick={() => navigate("/relatorios")}
                 >
-                    Ver Relatórios
+                    Ver Relatórios Completos
                 </button>
+
             </div>
 
         </div>

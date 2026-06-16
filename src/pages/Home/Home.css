@@ -96,3 +96,20 @@ body {
         text-align: left;         /* alinhado à esquerda no desktop */
     }
 }
+.painel-home {
+    max-width: 1280px;
+
+    margin: 60px auto 40px;
+
+    padding: 0 20px;
+}
+
+.painel-home-titulo {
+    text-align: center;
+
+    color: #2b95d6;
+
+    margin-bottom: 32px;
+
+    font-size: 2rem;
+}
