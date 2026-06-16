@@ -8,6 +8,12 @@ const DashboardUsuario = () => {
     const [ranking, setRanking] = useState([]);
     const [minhaPosicao, setMinhaPosicao] = useState(null);
 
+    const medalhas = [
+        "🥇",
+        "🥈",
+        "🥉"
+    ];
+
     useEffect(() => {
         carregar();
     }, []);
@@ -67,7 +73,15 @@ const DashboardUsuario = () => {
                         key={item.idUsuario}
                         className="usuario-top3-item"
                     >
-                        {index + 1}º - {item.nomeUsuario}
+
+                        <span className="usuario-medalha">
+                            {medalhas[index]}
+                        </span>
+
+                        <span className="usuario-nome">
+                            {item.nomeUsuario}
+                        </span>
+
                     </div>
 
                 ))}

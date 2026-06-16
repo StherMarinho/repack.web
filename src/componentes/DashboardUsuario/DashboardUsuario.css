@@ -27,6 +27,16 @@
         0 8px 20px rgba(0,0,0,0.08);
 }
 
+.usuario-card h3 {
+    margin-top: 0;
+
+    margin-bottom: 12px;
+
+    color: #2b95d6;
+
+    font-size: 1.25rem;
+}
+
 .usuario-numero {
     display: block;
 
@@ -53,21 +63,76 @@
 .usuario-top3 h3 {
     margin-top: 0;
 
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 
     text-align: center;
 
     color: #2b95d6;
+
+    font-size: 1.5rem;
 }
 
 .usuario-top3-item {
-    padding: 12px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    padding: 18px;
 
     border-bottom: 1px solid #e5e7eb;
-
-    font-size: 1rem;
 }
 
 .usuario-top3-item:last-child {
     border-bottom: none;
+}
+
+.usuario-medalha {
+    font-size: 2rem;
+
+    flex-shrink: 0;
+}
+
+.usuario-nome {
+    font-size: 1.25rem;
+
+    font-weight: 600;
+
+    color: #111827;
+
+    text-align: center;
+}
+
+/* Destaque visual das posições */
+
+.usuario-top3-item:nth-child(2) {
+    background: #fff8dc;
+}
+
+.usuario-top3-item:nth-child(3) {
+    background: #f8f8f8;
+}
+
+.usuario-top3-item:nth-child(4) {
+    background: #fff2e8;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .usuario-top3-item {
+        padding: 14px;
+    }
+
+    .usuario-medalha {
+        font-size: 1.8rem;
+    }
+
+    .usuario-nome {
+        font-size: 1.1rem;
+    }
 }
