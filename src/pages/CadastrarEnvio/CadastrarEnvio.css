@@ -3,29 +3,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
-  background: #f5f5f5;
+  padding: 40px 20px;
+  background: #f4f6f9;
 }
 
 .cadastro-card {
   width: 100%;
-  max-width: 520px;
+  max-width: 700px;
   background: #fff;
-  padding: 24px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
 }
 
-h2 {
+.titulo {
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  color: #1f2937;
 }
 
-/* 🔥 PADRONIZAÇÃO DOS CAMPOS */
+/* 🔥 PADRÃO IGUAL PERFIL */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 12px; /* reduzido e uniforme */
+  gap: 14px;
 }
 
 .campo {
@@ -34,19 +36,11 @@ h2 {
   gap: 6px;
 }
 
-/* LABEL PADRÃO */
-.campo label {
-  font-weight: 600;
-  font-size: 13px;
-  color: #444;
-}
-
 /* ALERTA */
 .alerta {
   padding: 10px;
   border-radius: 6px;
   text-align: center;
-  font-size: 13px;
 }
 
 .alerta.sucesso {
@@ -59,64 +53,44 @@ h2 {
   color: #721c24;
 }
 
-/* 🔥 CAMPOS IGUAIS (select, input, dropdown) */
-.campo input,
-.campo select,
+/* 🔥 DROPDOWN IGUAL SELECT */
 .dropdown-header {
-  height: 42px;
   width: 100%;
-  padding: 0 12px;
-
-  border: 1px solid #ddd;
-  border-radius: 6px;
-
-  font-size: 14px;
-  background: #fff;
-
-  box-sizing: border-box;
+  height: 46px;
 
   display: flex;
   align-items: center;
-}
 
-/* FOCO PADRÃO */
-.campo input:focus,
-.campo select:focus,
-.dropdown-header:focus {
-  outline: none;
-  border-color: #6278f7;
-  box-shadow: 0 0 5px rgba(98, 120, 247, 0.3);
-}
-
-/* DROPDOWN */
-.dropdown {
-  position: relative;
-}
-
-.dropdown-header {
-  cursor: pointer;
-  justify-content: space-between;
-}
-
-/* dropdown aberto */
-.dropdown-box {
-  position: absolute;
-  width: 100%;
-  background: #fff;
+  padding: 12px;
 
   border: 1px solid #ddd;
   border-radius: 6px;
 
-  margin-top: 6px;
+  background: #fff;
 
-  z-index: 10;
+  font-size: 16px;
+
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+
+  cursor: pointer;
+}
+
+.dropdown-box {
+  position: absolute;
+  width: 100%;
+
+  background: #fff;
+  border: 1px solid #ddd;
+
+  margin-top: 6px;
+  border-radius: 6px;
 
   max-height: 220px;
   overflow-y: auto;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+
+  z-index: 10;
 }
 
-/* busca */
 .search {
   width: 100%;
   padding: 10px;
@@ -127,24 +101,24 @@ h2 {
   outline: none;
 }
 
-/* itens dropdown */
+/* itens */
 .item {
   display: flex;
   gap: 10px;
-  padding: 8px 10px;
+  padding: 10px;
+  font-size: 14px;
   cursor: pointer;
-  font-size: 13px;
 }
 
 .item:hover {
-  background: #f3f3f3;
+  background: #f4f4f4;
 }
 
-/* lista selecionados */
+/* selecionados */
 .lista {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .item-card {
@@ -152,35 +126,25 @@ h2 {
   justify-content: space-between;
   align-items: center;
 
-  padding: 8px;
+  padding: 10px;
+
   border: 1px solid #ddd;
   border-radius: 6px;
-
-  font-size: 13px;
-  gap: 8px;
 }
 
 .item-card input {
-  width: 55px;
+  width: 60px;
   text-align: center;
 }
 
-.item-card button {
-  background: none;
-  border: none;
-  color: #dc3545;
-  cursor: pointer;
-  font-size: 16px;
-}
-
 /* RESPONSIVO */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .cadastro-card {
-    padding: 18px;
+    padding: 20px;
+    border-radius: 14px;
   }
 
-  .item-card {
-    flex-direction: column;
-    align-items: flex-start;
+  .titulo {
+    font-size: 1.5rem;
   }
 }

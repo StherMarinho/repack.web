@@ -44,14 +44,14 @@ export default function CadastroRecebimento() {
 
     carregarDados();
 
-    const fecharDropdown = (e) => {
+    const fechar = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setMenuAberto(false);
       }
     };
 
-    document.addEventListener('mousedown', fecharDropdown);
-    return () => document.removeEventListener('mousedown', fecharDropdown);
+    document.addEventListener('mousedown', fechar);
+    return () => document.removeEventListener('mousedown', fechar);
   }, []);
 
   const opcoesEmpresas = empresas.map(e => ({
@@ -67,7 +67,7 @@ export default function CadastroRecebimento() {
     } else {
       setItensSelecionados([
         ...itensSelecionados,
-        { id: emb.id, nome: emb.descricao, quantidade: 1 }
+        { id: emb.id, nome: emb.descricao || emb.tipo, quantidade: 1 }
       ]);
     }
   };
@@ -86,7 +86,7 @@ export default function CadastroRecebimento() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (itensSelecionados.length === 0) {
+    if (!itensSelecionados.length) {
       return setFeedback({ tipo: 'erro', msg: 'Selecione embalagens.' });
     }
 
@@ -95,7 +95,6 @@ export default function CadastroRecebimento() {
     }
 
     setLoading(true);
-    setFeedback({ tipo: '', msg: '' });
 
     const ids = itensSelecionados.flatMap(i =>
       Array(i.quantidade).fill(i.id)
@@ -111,16 +110,17 @@ export default function CadastroRecebimento() {
     try {
       const res = await envioService.criarEnvio(payload);
 
-      if (res.sucesso || res.data) {
-        setFeedback({ tipo: 'sucesso', msg: 'Envio registrado!' });
+      setFeedback({
+        tipo: res.sucesso || res.data ? 'sucesso' : 'erro',
+        msg: res.sucesso ? 'Envio registrado!' : res.mensagem
+      });
 
+      if (res.sucesso) {
         setIdUsuario('');
         setIdEmpresa('');
         setObservacao('');
         setItensSelecionados([]);
         setMenuAberto(false);
-      } else {
-        setFeedback({ tipo: 'erro', msg: res.mensagem });
       }
     } catch {
       setFeedback({ tipo: 'erro', msg: 'Erro de conexão.' });
@@ -142,7 +142,7 @@ export default function CadastroRecebimento() {
       <div className="cadastro-wrapper">
         <div className="cadastro-card">
 
-          <h2>Registrar Envio</h2>
+          <h2 className="titulo">Registrar Envio</h2>
 
           {feedback.msg && (
             <div className={`alerta ${feedback.tipo}`}>
@@ -152,25 +152,22 @@ export default function CadastroRecebimento() {
 
           <form onSubmit={handleSubmit} className="form">
 
-            <div className="campo">
-              <CampoTexto
-                label="ID Usuário"
-                type="number"
-                valor={idUsuario}
-                aoAlterado={setIdUsuario}
-                obrigatorio
-              />
-            </div>
+            <CampoTexto
+              label="ID Usuário"
+              type="number"
+              valor={idUsuario}
+              aoAlterado={setIdUsuario}
+              obrigatorio
+            />
 
-            <div className="campo">
-              <CampoSelect
-                label="Empresa"
-                options={opcoesEmpresas}
-                value={idEmpresa}
-                aoAlterado={setIdEmpresa}
-              />
-            </div>
+            <CampoSelect
+              label="Empresa"
+              options={opcoesEmpresas}
+              value={idEmpresa}
+              aoAlterado={setIdEmpresa}
+            />
 
+            {/* DROPDOWN PADRONIZADO */}
             <div className="campo">
               <label>Embalagens</label>
 
@@ -186,6 +183,7 @@ export default function CadastroRecebimento() {
 
                 {menuAberto && (
                   <div className="dropdown-box">
+
                     <input
                       className="search"
                       placeholder="Buscar..."
@@ -203,6 +201,7 @@ export default function CadastroRecebimento() {
                         {e.descricao || e.tipo}
                       </label>
                     ))}
+
                   </div>
                 )}
               </div>
@@ -212,6 +211,7 @@ export default function CadastroRecebimento() {
               <div className="lista">
                 {itensSelecionados.map(i => (
                   <div key={i.id} className="item-card">
+
                     <span>{i.nome}</span>
 
                     <input
@@ -224,19 +224,18 @@ export default function CadastroRecebimento() {
                     <button type="button" onClick={() => toggleEmbalagem(i)}>
                       ✕
                     </button>
+
                   </div>
                 ))}
               </div>
             )}
 
-            <div className="campo">
-              <CampoTexto
-                label="Observação"
-                valor={observacao}
-                aoAlterado={setObservacao}
-                obrigatorio
-              />
-            </div>
+            <CampoTexto
+              label="Observação"
+              valor={observacao}
+              aoAlterado={setObservacao}
+              obrigatorio
+            />
 
             <Botao disabled={loading}>
               {loading ? 'Enviando...' : 'Cadastrar'}
