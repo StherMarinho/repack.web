@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CadastrarEnvio.css';
 
 import envioService from '../../services/envioService';
@@ -8,9 +8,11 @@ import embalagemService from '../../services/embalagemService';
 import Navbar from '../../componentes/Navbar/Navbar';
 import CampoTexto from '../../componentes/CampoTexto/CampoTexto';
 import CampoSelect from '../../componentes/CampoSelect/CampoSelect';
+import CampoMultiSelect from '../../componentes/CampoMultiSelect/CampoMultiSelect';
 import Botao from '../../componentes/Botao/Botao';
 
 export default function CadastroRecebimento() {
+
   const [empresas, setEmpresas] = useState([]);
   const [embalagens, setEmbalagens] = useState([]);
 
@@ -19,10 +21,6 @@ export default function CadastroRecebimento() {
   const [observacao, setObservacao] = useState('');
 
   const [itensSelecionados, setItensSelecionados] = useState([]);
-  const [termoBusca, setTermoBusca] = useState('');
-  const [menuAberto, setMenuAberto] = useState(false);
-
-  const dropdownRef = useRef(null);
 
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState({ tipo: '', msg: '' });
@@ -37,51 +35,19 @@ export default function CadastroRecebimento() {
 
         setEmpresas(resEmpresas.data || resEmpresas || []);
         setEmbalagens(resEmbalagens.data || resEmbalagens || []);
+
       } catch {
         setFeedback({ tipo: 'erro', msg: 'Erro ao carregar dados.' });
       }
     }
 
     carregarDados();
-
-    const fechar = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setMenuAberto(false);
-      }
-    };
-
-    document.addEventListener('mousedown', fechar);
-    return () => document.removeEventListener('mousedown', fechar);
   }, []);
 
   const opcoesEmpresas = empresas.map(e => ({
     id: e.id,
     descricao: e.nome
   }));
-
-  const toggleEmbalagem = (emb) => {
-    const existe = itensSelecionados.find(i => i.id === emb.id);
-
-    if (existe) {
-      setItensSelecionados(itensSelecionados.filter(i => i.id !== emb.id));
-    } else {
-      setItensSelecionados([
-        ...itensSelecionados,
-        { id: emb.id, nome: emb.descricao || emb.tipo, quantidade: 1 }
-      ]);
-    }
-  };
-
-  const atualizarQtd = (id, valor) => {
-    const qtd = parseInt(valor, 10);
-    if (!qtd || qtd < 1) return;
-
-    setItensSelecionados(
-      itensSelecionados.map(i =>
-        i.id === id ? { ...i, quantidade: qtd } : i
-      )
-    );
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -120,20 +86,14 @@ export default function CadastroRecebimento() {
         setIdEmpresa('');
         setObservacao('');
         setItensSelecionados([]);
-        setMenuAberto(false);
       }
+
     } catch {
       setFeedback({ tipo: 'erro', msg: 'Erro de conexão.' });
     } finally {
       setLoading(false);
     }
   };
-
-  const embalagensFiltradas = embalagens.filter(e =>
-    (e.descricao || e.tipo || '')
-      .toLowerCase()
-      .includes(termoBusca.toLowerCase())
-  );
 
   return (
     <>
@@ -167,48 +127,19 @@ export default function CadastroRecebimento() {
               aoAlterado={setIdEmpresa}
             />
 
-            {/* DROPDOWN PADRONIZADO */}
-            <div className="campo">
-              <label>Embalagens</label>
-
-              <div className="dropdown" ref={dropdownRef}>
-                <div
-                  className="dropdown-header"
-                  onClick={() => setMenuAberto(!menuAberto)}
-                >
-                  {itensSelecionados.length
-                    ? `${itensSelecionados.length} selecionado(s)`
-                    : 'Selecione...'}
-                </div>
-
-                {menuAberto && (
-                  <div className="dropdown-box">
-
-                    <input
-                      className="search"
-                      placeholder="Buscar..."
-                      value={termoBusca}
-                      onChange={e => setTermoBusca(e.target.value)}
-                    />
-
-                    {embalagensFiltradas.map(e => (
-                      <label key={e.id} className="item">
-                        <input
-                          type="checkbox"
-                          checked={itensSelecionados.some(i => i.id === e.id)}
-                          onChange={() => toggleEmbalagem(e)}
-                        />
-                        {e.descricao || e.tipo}
-                      </label>
-                    ))}
-
-                  </div>
-                )}
-              </div>
-            </div>
+            <CampoMultiSelect
+              label="Embalagens"
+              options={embalagens.map(e => ({
+                id: e.id,
+                descricao: e.descricao || e.tipo
+              }))}
+              value={itensSelecionados}
+              aoAlterado={setItensSelecionados}
+            />
 
             {itensSelecionados.length > 0 && (
               <div className="lista">
+
                 {itensSelecionados.map(i => (
                   <div key={i.id} className="item-card">
 
@@ -218,15 +149,35 @@ export default function CadastroRecebimento() {
                       type="number"
                       min="1"
                       value={i.quantidade}
-                      onChange={e => atualizarQtd(i.id, e.target.value)}
+                      onChange={(e) => {
+                        const qtd = parseInt(e.target.value, 10);
+
+                        if (!qtd || qtd < 1) return;
+
+                        setItensSelecionados(prev =>
+                          prev.map(item =>
+                            item.id === i.id
+                              ? { ...item, quantidade: qtd }
+                              : item
+                          )
+                        );
+                      }}
                     />
 
-                    <button type="button" onClick={() => toggleEmbalagem(i)}>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setItensSelecionados(prev =>
+                          prev.filter(item => item.id !== i.id)
+                        )
+                      }
+                    >
                       ✕
                     </button>
 
                   </div>
                 ))}
+
               </div>
             )}
 
