@@ -1,5 +1,5 @@
 import { API_URL } from "./api";
-const BASE_URL = API_URL+"/relatorio";
+const BASE_URL = API_URL+"/relatorios";
 
 const rankingService = {
 
