@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 16px;
   background: #f5f5f5;
 }
 
@@ -11,26 +11,30 @@
   width: 100%;
   max-width: 520px;
   background: #fff;
-  padding: 30px;
+  padding: 26px;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
+/* 🔥 REDUÇÃO DO ESPAÇAMENTO ENTRE CAMPOS */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px; /* antes 15px */
 }
 
+/* cada campo mais compacto */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* título */
 .campo label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  color: #444;
 }
 
 /* ALERTA */
@@ -38,6 +42,7 @@ h2 {
   padding: 10px;
   border-radius: 6px;
   text-align: center;
+  font-size: 13px;
 }
 
 .alerta.sucesso {
@@ -50,74 +55,101 @@ h2 {
   color: #721c24;
 }
 
-/* DROPDOWN */
+/* 🔥 DROPDOWN AJUSTADO (não fica achatado mais) */
 .dropdown {
   position: relative;
 }
 
 .dropdown-header {
-  padding: 10px;
+  height: 42px;
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+
   border: 1px solid #ccc;
-  cursor: pointer;
   border-radius: 6px;
   background: #fff;
+
+  font-size: 14px;
+  cursor: pointer;
 }
 
+/* dropdown aberto */
 .dropdown-box {
   position: absolute;
   width: 100%;
   background: #fff;
+
   border: 1px solid #ccc;
-  margin-top: 5px;
   border-radius: 6px;
+
+  margin-top: 6px;
+
   z-index: 10;
-  max-height: 200px;
+
+  max-height: 220px;
   overflow-y: auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
+/* busca mais confortável */
 .search {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
+
   border: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
+
+  outline: none;
 }
 
+/* itens dropdown */
 .item {
   display: flex;
   gap: 10px;
-  padding: 8px;
+  padding: 8px 10px;
   cursor: pointer;
+  font-size: 13px;
 }
 
 .item:hover {
-  background: #f2f2f2;
+  background: #f3f3f3;
 }
 
-/* LISTA SELECIONADOS */
+/* lista selecionados */
 .lista {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .item-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 6px;
+
+  font-size: 13px;
+}
+
+.item-card input {
+  width: 55px;
+  text-align: center;
 }
 
 /* RESPONSIVO */
 @media (max-width: 600px) {
   .cadastro-card {
-    padding: 20px;
+    padding: 18px;
   }
 
   .item-card {
     flex-direction: column;
-    gap: 10px;
     align-items: flex-start;
+    gap: 8px;
   }
 }
