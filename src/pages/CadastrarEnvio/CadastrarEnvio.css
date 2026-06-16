@@ -10,11 +10,12 @@
 
 .cadastro-card {
   width: 100%;
-  max-width: 560px; /* ↓ menor que antes */
+  max-width: 480px; /* mais estreito */
+
   background: #fff;
 
   border-radius: 14px;
-  padding: 22px; /* ↓ mais compacto */
+  padding: 22px;
 
   box-shadow: 0 10px 25px rgba(0,0,0,0.10);
 }
@@ -27,14 +28,14 @@
   color: #1f2937;
 }
 
-/* FORM MAIS COMPACTO */
+/* FORM (mantém altura confortável) */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* ↓ menor */
+  gap: 12px;
 }
 
-/* LABEL MAIS LIMPO */
+/* LABELS */
 .campo label {
   font-size: 13px;
   font-weight: 600;
@@ -50,7 +51,7 @@ select,
 .dropdown-header,
 .textarea-field {
   width: 100%;
-  height: 40px; /* ↓ menor que 42/46 */
+  height: 40px;
 
   font-size: 14px;
 
@@ -62,19 +63,21 @@ select,
   background: #fff;
 
   box-shadow: 0px 3px 10px rgba(0,0,0,0.06);
+
+  box-sizing: border-box;
 }
 
-/* textarea */
+/* textarea maior */
 .textarea-field {
   height: 70px;
   padding: 10px;
 }
 
-/* dropdown */
+/* dropdown alinhado */
 .dropdown-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 
   cursor: pointer;
 }
@@ -108,25 +111,38 @@ select,
 }
 
 /* =========================
-   🔥 BOTÃO MENOR (20%)
+   🔥 BOTÃO (20% MENOR)
    ========================= */
 
 button,
 .btn-enviar {
-  width: 80%;        /* ↓ 20% menor */
-  margin: 10px auto 0;
+  width: 60%;         /* menor que inputs */
+  max-width: 240px;
 
-  height: 36px;      /* ↓ menor */
-  font-size: 14px;
+  margin: 14px auto 0;
+
+  height: 34px;
+  font-size: 13px;
 
   border-radius: 6px;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: 0.2s;
+  cursor: pointer;
 }
 
-/* responsivo */
+button:hover,
+.btn-enviar:hover {
+  transform: scale(1.02);
+}
+
+/* =========================
+   RESPONSIVO
+   ========================= */
+
 @media (max-width: 768px) {
   .cadastro-card {
     max-width: 95%;
@@ -135,5 +151,10 @@ button,
 
   .titulo {
     font-size: 1.3rem;
+  }
+
+  button,
+  .btn-enviar {
+    width: 80%;
   }
 }
