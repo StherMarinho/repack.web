@@ -158,3 +158,21 @@
 
     box-shadow: 0 0 10px rgba(33, 162, 242, 0.5);
 }
+
+.id-usuario {
+    display: table;
+
+    margin: 0 auto 15px;
+
+    padding: 4px 12px;
+
+    background: #f3f4f6;
+
+    color: #4b5563;
+
+    border-radius: 999px;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+}

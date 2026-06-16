@@ -237,6 +237,10 @@ const Perfil = () => {
                         {usuario?.nome}
                     </h2>
 
+                    <span className="id-usuario">
+                        Usuário #{usuario?.id}
+                    </span>
+
                     {usuario?.pontuacaoTotal > 0 && (
                         <div className="pontuacao-box">
                             ⭐ {usuario.pontuacaoTotal} pontos
