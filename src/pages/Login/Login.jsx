@@ -15,12 +15,11 @@ const Login = () => {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
-    // useEffect(() => {
-    //     // Função assíncrona para buscar os dados
-    // }, []);
+    const [carregando, setCarregando] = useState(false);
 
     async function aoLogar(e) {
         e.preventDefault();
+        setCarregando(true);
 
         try {
             const res = await login({ email, senha });
@@ -41,6 +40,8 @@ const Login = () => {
 
         } catch (e){
             alert(e);
+        } finally {
+            setCarregando(false);
         }
     };
     
@@ -65,11 +66,12 @@ const Login = () => {
                     aoAlterado={setSenha}
                 />
 
-                <Botao>Entrar</Botao>
-
+                <Botao disabled={carregando}>Entrar</Botao>
                 <p onClick={() => navigate("/cadastro")} className="link mt-4">
                     Não tem conta? Cadastre-se
                 </p>
+
+                {carregando && <p className="mt-2">Carregando...</p>}
             </Formulario>
         </>
     );

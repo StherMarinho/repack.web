@@ -17,6 +17,7 @@ const Cadastro = () => {
     const [senha, setSenha] = useState("");
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [telefone, setTelefone] = useState("");
+    const [carregando, setCarregando] = useState(false);
 
     const aoCadastrar = async (e) => {
         e.preventDefault();
@@ -31,6 +32,8 @@ const Cadastro = () => {
             return;
         }
 
+        setCarregando(true);
+
         try {
             await register({
                 nome,
@@ -44,6 +47,8 @@ const Cadastro = () => {
             navigate("/");
         } catch {
             alert("Erro no cadastro");
+        } finally {
+            setCarregando(false);
         }
     };
 
@@ -61,7 +66,9 @@ const Cadastro = () => {
                 <CampoTexto label="Confirmar Senha" type="password" valor={confirmarSenha} aoAlterado={setConfirmarSenha} obrigatorio />
                 <CampoTexto label="Telefone" valor={telefone} aoAlterado={setTelefone} />
 
-                <Botao>Cadastrar</Botao>
+                <Botao disabled={carregando}>Cadastrar</Botao>
+
+                {carregando && <p className="mt-2">Carregando...</p>}
 
                 <p 
                     onClick={() => navigate("/")} className="link mt-4"
