@@ -152,97 +152,97 @@ export default function CadastroRecebimento() {
 
           <form onSubmit={handleSubmit} className="form">
 
-  <div className="campo">
-    <CampoTexto
-      label="ID Usuário"
-      type="number"
-      valor={idUsuario}
-      aoAlterado={setIdUsuario}
-      obrigatorio
-    />
-  </div>
-
-  <div className="campo">
-    <CampoSelect
-      label="Empresa"
-      options={opcoesEmpresas}
-      value={idEmpresa}
-      aoAlterado={setIdEmpresa}
-    />
-  </div>
-
-  <div className="campo">
-    <label>Embalagens</label>
-
-    <div className="dropdown" ref={dropdownRef}>
-      <div
-        className="dropdown-header"
-        onClick={() => setMenuAberto(!menuAberto)}
-      >
-        {itensSelecionados.length
-          ? `${itensSelecionados.length} selecionado(s)`
-          : 'Selecione...'}
-      </div>
-
-      {menuAberto && (
-        <div className="dropdown-box">
-          <input
-            className="search"
-            placeholder="Buscar..."
-            value={termoBusca}
-            onChange={e => setTermoBusca(e.target.value)}
-          />
-
-          {embalagensFiltradas.map(e => (
-            <label key={e.id} className="item">
-              <input
-                type="checkbox"
-                checked={itensSelecionados.some(i => i.id === e.id)}
-                onChange={() => toggleEmbalagem(e)}
+            <div className="campo">
+              <CampoTexto
+                label="ID Usuário"
+                type="number"
+                valor={idUsuario}
+                aoAlterado={setIdUsuario}
+                obrigatorio
               />
-              {e.descricao || e.tipo}
-            </label>
-          ))}
-        </div>
-      )}
-    </div>
-  </div>
+            </div>
 
-  {itensSelecionados.length > 0 && (
-    <div className="lista">
-      {itensSelecionados.map(i => (
-        <div key={i.id} className="item-card">
-          <span>{i.nome}</span>
+            <div className="campo">
+              <CampoSelect
+                label="Empresa"
+                options={opcoesEmpresas}
+                value={idEmpresa}
+                aoAlterado={setIdEmpresa}
+              />
+            </div>
 
-          <input
-            type="number"
-            min="1"
-            value={i.quantidade}
-            onChange={e => atualizarQtd(i.id, e.target.value)}
-          />
+            <div className="campo">
+              <label>Embalagens</label>
 
-          <button type="button" onClick={() => toggleEmbalagem(i)}>
-            ✕
-          </button>
-        </div>
-      ))}
-    </div>
-  )}
+              <div className="dropdown" ref={dropdownRef}>
+                <div
+                  className="dropdown-header"
+                  onClick={() => setMenuAberto(!menuAberto)}
+                >
+                  {itensSelecionados.length
+                    ? `${itensSelecionados.length} selecionado(s)`
+                    : 'Selecione...'}
+                </div>
 
-  <div className="campo">
-    <CampoTexto
-      label="Observação"
-      valor={observacao}
-      aoAlterado={setObservacao}
-      obrigatorio
-    />
-  </div>
+                {menuAberto && (
+                  <div className="dropdown-box">
+                    <input
+                      className="search"
+                      placeholder="Buscar..."
+                      value={termoBusca}
+                      onChange={e => setTermoBusca(e.target.value)}
+                    />
 
-  <Botao disabled={loading}>
-    {loading ? 'Enviando...' : 'Cadastrar'}
-  </Botao>
+                    {embalagensFiltradas.map(e => (
+                      <label key={e.id} className="item">
+                        <input
+                          type="checkbox"
+                          checked={itensSelecionados.some(i => i.id === e.id)}
+                          onChange={() => toggleEmbalagem(e)}
+                        />
+                        {e.descricao || e.tipo}
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
 
-</form>
+            {itensSelecionados.length > 0 && (
+              <div className="lista">
+                {itensSelecionados.map(i => (
+                  <div key={i.id} className="item-card">
+                    <span>{i.nome}</span>
+
+                    <input
+                      type="number"
+                      min="1"
+                      value={i.quantidade}
+                      onChange={e => atualizarQtd(i.id, e.target.value)}
+                    />
+
+                    <button type="button" onClick={() => toggleEmbalagem(i)}>
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="campo">
+              <CampoTexto
+                label="Observação"
+                valor={observacao}
+                aoAlterado={setObservacao}
+                obrigatorio
+              />
+            </div>
+
+            <Botao disabled={loading}>
+              {loading ? 'Enviando...' : 'Cadastrar'}
+            </Botao>
+
+          </form>
         </div>
       </div>
     </>

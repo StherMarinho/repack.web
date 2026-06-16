@@ -11,26 +11,30 @@
   width: 100%;
   max-width: 520px;
   background: #fff;
-  padding: 26px;
+  padding: 24px;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
-/* 🔥 REDUÇÃO DO ESPAÇAMENTO ENTRE CAMPOS */
+h2 {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* 🔥 PADRONIZAÇÃO DOS CAMPOS */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* antes 15px */
+  gap: 12px; /* reduzido e uniforme */
 }
 
-/* cada campo mais compacto */
 .campo {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
-/* título */
+/* LABEL PADRÃO */
 .campo label {
   font-weight: 600;
   font-size: 13px;
@@ -55,24 +59,43 @@
   color: #721c24;
 }
 
-/* 🔥 DROPDOWN AJUSTADO (não fica achatado mais) */
+/* 🔥 CAMPOS IGUAIS (select, input, dropdown) */
+.campo input,
+.campo select,
+.dropdown-header {
+  height: 42px;
+  width: 100%;
+  padding: 0 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 6px;
+
+  font-size: 14px;
+  background: #fff;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+}
+
+/* FOCO PADRÃO */
+.campo input:focus,
+.campo select:focus,
+.dropdown-header:focus {
+  outline: none;
+  border-color: #6278f7;
+  box-shadow: 0 0 5px rgba(98, 120, 247, 0.3);
+}
+
+/* DROPDOWN */
 .dropdown {
   position: relative;
 }
 
 .dropdown-header {
-  height: 42px;
-  padding: 0 12px;
-
-  display: flex;
-  align-items: center;
-
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fff;
-
-  font-size: 14px;
   cursor: pointer;
+  justify-content: space-between;
 }
 
 /* dropdown aberto */
@@ -81,7 +104,7 @@
   width: 100%;
   background: #fff;
 
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 6px;
 
   margin-top: 6px;
@@ -93,7 +116,7 @@
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-/* busca mais confortável */
+/* busca */
 .search {
   width: 100%;
   padding: 10px;
@@ -134,11 +157,20 @@
   border-radius: 6px;
 
   font-size: 13px;
+  gap: 8px;
 }
 
 .item-card input {
   width: 55px;
   text-align: center;
+}
+
+.item-card button {
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 /* RESPONSIVO */
@@ -150,6 +182,5 @@
   .item-card {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
   }
 }
