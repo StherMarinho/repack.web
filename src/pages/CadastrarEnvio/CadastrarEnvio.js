@@ -25,88 +25,60 @@ export default function CadastroRecebimento() {
   const dropdownRef = useRef(null);
 
   const [loading, setLoading] = useState(false);
-  const [feedback, setFeedback] = useState({
-    tipo: '',
-    msg: ''
-  });
+  const [feedback, setFeedback] = useState({ tipo: '', msg: '' });
 
   useEffect(() => {
-    async function carregarDadosIniciais() {
+    async function carregarDados() {
       try {
         const [resEmpresas, resEmbalagens] = await Promise.all([
           empresaService.listarEmpresas(),
           embalagemService.listarEmbalagens()
         ]);
 
-        const dadosEmpresas = resEmpresas.data || resEmpresas;
-        const dadosEmbalagens = resEmbalagens.data || resEmbalagens;
-
-        if (Array.isArray(dadosEmpresas)) {
-          setEmpresas(dadosEmpresas);
-        }
-
-        if (Array.isArray(dadosEmbalagens)) {
-          setEmbalagens(dadosEmbalagens);
-        }
+        setEmpresas(resEmpresas.data || resEmpresas || []);
+        setEmbalagens(resEmbalagens.data || resEmbalagens || []);
       } catch {
-        setFeedback({
-          tipo: 'erro',
-          msg: 'Erro ao carregar seletores.'
-        });
+        setFeedback({ tipo: 'erro', msg: 'Erro ao carregar dados.' });
       }
     }
 
-    const fecharAoClicarFora = (e) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target)
-      ) {
+    carregarDados();
+
+    const fecharDropdown = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setMenuAberto(false);
       }
     };
 
-    carregarDadosIniciais();
-
-    document.addEventListener('mousedown', fecharAoClicarFora);
-
-    return () => {
-      document.removeEventListener('mousedown', fecharAoClicarFora);
-    };
+    document.addEventListener('mousedown', fecharDropdown);
+    return () => document.removeEventListener('mousedown', fecharDropdown);
   }, []);
 
-  const toggleEmbalagem = (emb) => {
-    const jaSelecionado = itensSelecionados.find(
-      item => item.id === emb.id
-    );
+  const opcoesEmpresas = empresas.map(e => ({
+    id: e.id,
+    descricao: e.nome
+  }));
 
-    if (jaSelecionado) {
-      setItensSelecionados(
-        itensSelecionados.filter(item => item.id !== emb.id)
-      );
+  const toggleEmbalagem = (emb) => {
+    const existe = itensSelecionados.find(i => i.id === emb.id);
+
+    if (existe) {
+      setItensSelecionados(itensSelecionados.filter(i => i.id !== emb.id));
     } else {
       setItensSelecionados([
         ...itensSelecionados,
-        {
-          id: emb.id,
-          nome: emb.descricao || emb.tipo,
-          quantidade: 1
-        }
+        { id: emb.id, nome: emb.descricao, quantidade: 1 }
       ]);
     }
   };
 
   const atualizarQtd = (id, valor) => {
-    const novaQtd = parseInt(valor, 10);
-
-    if (isNaN(novaQtd) || novaQtd < 1) {
-      return;
-    }
+    const qtd = parseInt(valor, 10);
+    if (!qtd || qtd < 1) return;
 
     setItensSelecionados(
-      itensSelecionados.map(item =>
-        item.id === id
-          ? { ...item, quantidade: novaQtd }
-          : item
+      itensSelecionados.map(i =>
+        i.id === id ? { ...i, quantidade: qtd } : i
       )
     );
   };
@@ -115,106 +87,77 @@ export default function CadastroRecebimento() {
     e.preventDefault();
 
     if (itensSelecionados.length === 0) {
-      setFeedback({
-        tipo: 'erro',
-        msg: 'Selecione pelo menos uma embalagem.'
-      });
-      return;
+      return setFeedback({ tipo: 'erro', msg: 'Selecione embalagens.' });
     }
 
     if (!observacao.trim()) {
-      setFeedback({
-        tipo: 'erro',
-        msg: 'O campo observação é obrigatório.'
-      });
-      return;
+      return setFeedback({ tipo: 'erro', msg: 'Observação obrigatória.' });
     }
 
     setLoading(true);
-    setFeedback({
-      tipo: '',
-      msg: ''
-    });
+    setFeedback({ tipo: '', msg: '' });
 
-    const idsParaEnvio = itensSelecionados.flatMap(item =>
-      Array(item.quantidade).fill(item.id)
+    const ids = itensSelecionados.flatMap(i =>
+      Array(i.quantidade).fill(i.id)
     );
 
     const payload = {
-      idUsuario: parseInt(idUsuario, 10),
-      idEmpresa: parseInt(idEmpresa, 10),
-      idsEmbalagens: idsParaEnvio,
+      idUsuario: Number(idUsuario),
+      idEmpresa: Number(idEmpresa),
+      idsEmbalagens: ids,
       observacao
     };
 
     try {
-      const response = await envioService.criarEnvio(payload);
+      const res = await envioService.criarEnvio(payload);
 
-      if (response.sucesso || response.data) {
-        setFeedback({
-          tipo: 'sucesso',
-          msg: 'Envio registrado com sucesso!'
-        });
+      if (res.sucesso || res.data) {
+        setFeedback({ tipo: 'sucesso', msg: 'Envio registrado!' });
 
         setIdUsuario('');
         setIdEmpresa('');
         setObservacao('');
         setItensSelecionados([]);
-        setTermoBusca('');
         setMenuAberto(false);
       } else {
-        setFeedback({
-          tipo: 'erro',
-          msg: response.mensagem || 'Falha ao registrar.'
-        });
+        setFeedback({ tipo: 'erro', msg: res.mensagem });
       }
     } catch {
-      setFeedback({
-        tipo: 'erro',
-        msg: 'Erro de comunicação.'
-      });
+      setFeedback({ tipo: 'erro', msg: 'Erro de conexão.' });
     } finally {
       setLoading(false);
     }
   };
 
-  const embalagensFiltradas = embalagens.filter(emb =>
-    (emb.descricao || emb.tipo)
+  const embalagensFiltradas = embalagens.filter(e =>
+    (e.descricao || e.tipo || '')
       .toLowerCase()
       .includes(termoBusca.toLowerCase())
   );
-
-  const opcoesEmpresas = empresas.map(emp => ({
-    id: emp.id,
-    descricao: emp.nome
-  }));
 
   return (
     <>
       <Navbar tipoUsuario="empresa" />
 
-      <div className="cadastro-container">
-        <div className="cadastro-card form-centralizado">
+      <div className="cadastro-wrapper">
+        <div className="cadastro-card">
 
-          <h2>Registrar Envio de Embalagens</h2>
+          <h2>Registrar Envio</h2>
 
           {feedback.msg && (
-            <div className={`alerta alerta-${feedback.tipo}`}>
+            <div className={`alerta ${feedback.tipo}`}>
               {feedback.msg}
             </div>
           )}
 
-          <form
-            className="form-recebimento"
-            onSubmit={handleSubmit}
-          >
+          <form onSubmit={handleSubmit} className="form">
 
             <CampoTexto
-              label="ID do Usuário"
+              label="ID Usuário"
               type="number"
               valor={idUsuario}
               aoAlterado={setIdUsuario}
-              obrigatorio={true}
+              obrigatorio
             />
 
             <CampoSelect
@@ -224,142 +167,74 @@ export default function CadastroRecebimento() {
               aoAlterado={setIdEmpresa}
             />
 
-            <div className="campo-grupo">
+            {/* Dropdown embalagens */}
+            <div className="campo">
               <label>Embalagens</label>
 
-              <div
-                className="dropdown-customizado"
-                ref={dropdownRef}
-              >
+              <div className="dropdown" ref={dropdownRef}>
                 <div
-                  className={`dropdown-header ${
-                    menuAberto ? 'ativo' : ''
-                  }`}
+                  className="dropdown-header"
                   onClick={() => setMenuAberto(!menuAberto)}
                 >
-                  <span>
-                    {itensSelecionados.length > 0
-                      ? `${itensSelecionados.length} item(ns) selecionado(s)`
-                      : 'Selecione as embalagens...'}
-                  </span>
-
-                  <span className="seta">
-                    {menuAberto ? '▲' : '▼'}
-                  </span>
+                  {itensSelecionados.length
+                    ? `${itensSelecionados.length} selecionado(s)`
+                    : 'Selecione...'}
                 </div>
 
                 {menuAberto && (
-                  <div className="dropdown-expansivel">
-
+                  <div className="dropdown-box">
                     <input
-                      type="text"
-                      className="input-busca"
-                      placeholder="Pesquisar..."
+                      className="search"
+                      placeholder="Buscar..."
                       value={termoBusca}
-                      onChange={(e) =>
-                        setTermoBusca(e.target.value)
-                      }
-                      autoFocus
+                      onChange={e => setTermoBusca(e.target.value)}
                     />
 
-                    <div className="lista-opcoes">
-                      {embalagensFiltradas.length > 0 ? (
-                        embalagensFiltradas.map(emb => (
-                          <label
-                            key={emb.id}
-                            className="opcao-item"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={itensSelecionados.some(
-                                item => item.id === emb.id
-                              )}
-                              onChange={() =>
-                                toggleEmbalagem(emb)
-                              }
-                            />
-
-                            {emb.descricao || emb.tipo}
-                          </label>
-                        ))
-                      ) : (
-                        <div className="sem-resultados">
-                          Nenhuma embalagem encontrada
-                        </div>
-                      )}
-                    </div>
-
+                    {embalagensFiltradas.map(e => (
+                      <label key={e.id} className="item">
+                        <input
+                          type="checkbox"
+                          checked={itensSelecionados.some(i => i.id === e.id)}
+                          onChange={() => toggleEmbalagem(e)}
+                        />
+                        {e.descricao || e.tipo}
+                      </label>
+                    ))}
                   </div>
                 )}
               </div>
             </div>
 
             {itensSelecionados.length > 0 && (
-              <div className="container-itens-selecionados">
+              <div className="lista">
+                {itensSelecionados.map(i => (
+                  <div key={i.id} className="item-card">
+                    <span>{i.nome}</span>
 
-                {itensSelecionados.map(item => (
-                  <div
-                    key={item.id}
-                    className="card-item-qtd"
-                  >
-                    <span className="nome-item">
-                      {item.nome}
-                    </span>
+                    <input
+                      type="number"
+                      min="1"
+                      value={i.quantidade}
+                      onChange={e => atualizarQtd(i.id, e.target.value)}
+                    />
 
-                    <div className="controles-qtd">
-
-                      <input
-                        type="number"
-                        min="1"
-                        className="input-qtd-mini"
-                        value={item.quantidade}
-                        onChange={(e) =>
-                          atualizarQtd(
-                            item.id,
-                            e.target.value
-                          )
-                        }
-                      />
-
-                      <button
-                        type="button"
-                        className="btn-remover-item"
-                        onClick={() =>
-                          toggleEmbalagem({
-                            id: item.id
-                          })
-                        }
-                      >
-                        ✕
-                      </button>
-
-                    </div>
+                    <button type="button" onClick={() => toggleEmbalagem(i)}>
+                      ✕
+                    </button>
                   </div>
                 ))}
-
               </div>
             )}
 
-            <div className="campo-grupo">
-              <label>Observações</label>
+            <CampoTexto
+              label="Observação"
+              valor={observacao}
+              aoAlterado={setObservacao}
+              obrigatorio
+            />
 
-              <textarea
-                className="input-field textarea-field"
-                value={observacao}
-                onChange={(e) =>
-                  setObservacao(e.target.value)
-                }
-                required
-              />
-            </div>
-
-            <Botao
-              type="submit"
-              disabled={loading}
-            >
-              {loading
-                ? 'Processando...'
-                : 'Cadastrar'}
+            <Botao disabled={loading}>
+              {loading ? 'Enviando...' : 'Cadastrar'}
             </Botao>
 
           </form>
