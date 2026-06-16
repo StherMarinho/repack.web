@@ -3,23 +3,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 25px 15px;
+
+  padding: 20px 12px;
   background: #f4f6f9;
 }
 
 .cadastro-card {
   width: 100%;
-  max-width: 650px; /* menor que 700 mas ainda confortável */
+  max-width: 560px; /* ↓ menor que antes */
   background: #fff;
-  border-radius: 16px;
-  padding: 28px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+
+  border-radius: 14px;
+  padding: 22px; /* ↓ mais compacto */
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.10);
 }
 
 .titulo {
   text-align: center;
-  margin-bottom: 18px;
-  font-size: 1.6rem;
+  margin-bottom: 14px;
+
+  font-size: 1.5rem;
   color: #1f2937;
 }
 
@@ -27,113 +31,58 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 12px; /* reduzido */
+  gap: 10px; /* ↓ menor */
 }
 
-/* AGRUPAMENTO PADRÃO */
-.campo {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-/* LABEL MAIS LEVE (igual perfil) */
+/* LABEL MAIS LIMPO */
 .campo label {
   font-size: 13px;
   font-weight: 600;
   color: #444;
 }
 
-/* ALERTA */
-.alerta {
-  padding: 10px;
-  border-radius: 6px;
-  text-align: center;
-  font-size: 13px;
-}
-
-.alerta.sucesso {
-  background: #d4edda;
-  color: #155724;
-}
-
-.alerta.erro {
-  background: #f8d7da;
-  color: #721c24;
-}
-
 /* =========================
-   DROPDOWN IGUAL SELECT
+   INPUTS / SELECT / DROPDOWN
    ========================= */
 
-.dropdown {
-  position: relative;
+input,
+select,
+.dropdown-header,
+.textarea-field {
+  width: 100%;
+  height: 40px; /* ↓ menor que 42/46 */
+
+  font-size: 14px;
+
+  border: 1px solid #ddd;
+  border-radius: 6px;
+
+  padding: 0 10px;
+
+  background: #fff;
+
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.06);
 }
 
-.dropdown-header {
-  width: 100%;
-  height: 42px; /* IGUAL select */
-  padding: 12px;
+/* textarea */
+.textarea-field {
+  height: 70px;
+  padding: 10px;
+}
 
+/* dropdown */
+.dropdown-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  border: 1px solid #ddd;
-  border-radius: 6px;
-
-  background: #fff;
-
-  font-size: 14px;
-  color: #333;
-
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
-
   cursor: pointer;
 }
 
-.dropdown-box {
-  position: absolute;
-  width: 100%;
+/* =========================
+   LISTA SELECIONADOS
+   ========================= */
 
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-
-  margin-top: 5px;
-
-  max-height: 220px;
-  overflow-y: auto;
-
-  z-index: 10;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-/* busca */
-.search {
-  width: 100%;
-  padding: 10px;
-
-  border: none;
-  border-bottom: 1px solid #eee;
-
-  outline: none;
-}
-
-/* itens */
-.item {
-  display: flex;
-  gap: 10px;
-  padding: 10px;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.item:hover {
-  background: #f4f4f4;
-}
-
-/* selecionados */
 .lista {
   display: flex;
   flex-direction: column;
@@ -145,7 +94,8 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 10px;
+  padding: 8px;
+
   border: 1px solid #ddd;
   border-radius: 6px;
 
@@ -153,22 +103,37 @@
 }
 
 .item-card input {
-  width: 55px;
+  width: 50px;
   text-align: center;
 }
 
-/* RESPONSIVO */
+/* =========================
+   🔥 BOTÃO MENOR (20%)
+   ========================= */
+
+button,
+.btn-enviar {
+  width: 80%;        /* ↓ 20% menor */
+  margin: 10px auto 0;
+
+  height: 36px;      /* ↓ menor */
+  font-size: 14px;
+
+  border-radius: 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* responsivo */
 @media (max-width: 768px) {
   .cadastro-card {
-    padding: 20px;
-    border-radius: 14px;
+    max-width: 95%;
+    padding: 18px;
   }
 
   .titulo {
-    font-size: 1.4rem;
-  }
-
-  .form {
-    gap: 10px;
+    font-size: 1.3rem;
   }
 }
