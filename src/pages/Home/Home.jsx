@@ -1,5 +1,10 @@
 import Navbar from "../../componentes/Navbar/Navbar";
 import { getRole } from "../../services/auth";
+
+import DashboardUsuario from "../../componentes/DashboardUsuario/DashboardUsuario";
+import DashboardFuncionario from "../../componentes/DashboardFuncionario/DashboardFuncionario";
+import DashboardAdministrador from "../../componentes/DashboardAdministrador/DashboardAdministrador";
+
 import "./Home.css";
 
 const Home = () => {
@@ -66,6 +71,23 @@ const Home = () => {
                         </>
                     )}
                 </div>
+            </div>
+            <div className="painel-home">
+                <h2 className="painel-home-titulo">
+                    Meu Painel
+                </h2>
+
+                {roleUsuario === "Usuario" && (
+                    <DashboardUsuario />
+                )}
+
+                {roleUsuario === "Funcionario" && (
+                    <DashboardFuncionario />
+                )}
+
+                {roleUsuario === "Administrador" && (
+                    <DashboardAdministrador />
+                )}
             </div>
         </>
     );
