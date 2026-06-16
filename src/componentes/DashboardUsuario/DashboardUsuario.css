@@ -49,3 +49,25 @@
     box-shadow:
         0 8px 20px rgba(0,0,0,0.08);
 }
+
+.usuario-top3 h3 {
+    margin-top: 0;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    color: #2b95d6;
+}
+
+.usuario-top3-item {
+    padding: 12px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    font-size: 1rem;
+}
+
+.usuario-top3-item:last-child {
+    border-bottom: none;
+}

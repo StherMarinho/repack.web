@@ -6,14 +6,10 @@ import "./DashboardUsuario.css";
 const DashboardUsuario = () => {
 
     const [ranking, setRanking] = useState([]);
-
-    const [minhaPosicao, setMinhaPosicao] =
-        useState(null);
+    const [minhaPosicao, setMinhaPosicao] = useState(null);
 
     useEffect(() => {
-
         carregar();
-
     }, []);
 
     const carregar = async () => {
@@ -39,36 +35,43 @@ const DashboardUsuario = () => {
     };
 
     return (
-        <div className="dashboard-grid">
+        <div className="usuario-dashboard">
 
-            <div className="dashboard-card">
-                <h3>🏆 Minha Posição</h3>
+            <div className="usuario-cards">
 
-                <span className="dashboard-numero">
-                    {minhaPosicao?.posicao ?? "-"}
-                </span>
+                <div className="usuario-card">
+                    <h3>🏆 Minha Posição</h3>
+
+                    <span className="usuario-numero">
+                        {minhaPosicao?.posicao ?? "-"}
+                    </span>
+                </div>
+
+                <div className="usuario-card">
+                    <h3>⭐ Meus Pontos</h3>
+
+                    <span className="usuario-numero">
+                        {minhaPosicao?.totalPontos ?? 0}
+                    </span>
+                </div>
+
             </div>
 
-            <div className="dashboard-card">
-                <h3>⭐ Meus Pontos</h3>
+            <div className="usuario-top3">
 
-                <span className="dashboard-numero">
-                    {minhaPosicao?.totalPontos ?? 0}
-                </span>
-            </div>
-
-            <div className="dashboard-card dashboard-card-ranking">
-                <h3>Top 3 Ranking</h3>
+                <h3>🏅 Top 3 Ranking</h3>
 
                 {ranking.map((item, index) => (
+
                     <div
                         key={item.idUsuario}
+                        className="usuario-top3-item"
                     >
-                        {index + 1}º -
-                        {" "}
-                        {item.nomeUsuario}
+                        {index + 1}º - {item.nomeUsuario}
                     </div>
+
                 ))}
+
             </div>
 
         </div>

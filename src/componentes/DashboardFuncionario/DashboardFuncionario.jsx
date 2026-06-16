@@ -15,38 +15,56 @@ const DashboardFuncionario = () => {
 
     const carregar = async () => {
 
-        const dados =
-            await relatorioService
-                .getEstatisticasEnvios();
+        try {
 
-        setEnvios(dados);
+            const dados =
+                await relatorioService
+                    .getEstatisticasEnvios();
+
+            setEnvios(dados);
+
+        } catch (erro) {
+
+            console.error(erro);
+
+        }
     };
 
     return (
-        <div className="dashboard-grid">
+        <div className="func-dashboard">
 
-            <div className="dashboard-card">
-                <h3>📦 Pendentes</h3>
+            <div className="func-cards">
 
-                <span className="dashboard-numero">
-                    {envios?.enviosPendentes ?? 0}
-                </span>
-            </div>
+                <div className="func-card func-card--pendente">
 
-            <div className="dashboard-card">
-                <h3>✅ Concluídos</h3>
+                    <h3>📦 Pendentes</h3>
 
-                <span className="dashboard-numero">
-                    {envios?.enviosConcluidos ?? 0}
-                </span>
-            </div>
+                    <span className="func-numero">
+                        {envios?.enviosPendentes ?? 0}
+                    </span>
 
-            <div className="dashboard-card">
-                <h3>❌ Cancelados</h3>
+                </div>
 
-                <span className="dashboard-numero">
-                    {envios?.enviosCancelados ?? 0}
-                </span>
+                <div className="func-card func-card--concluido">
+
+                    <h3>✅ Concluídos</h3>
+
+                    <span className="func-numero">
+                        {envios?.enviosConcluidos ?? 0}
+                    </span>
+
+                </div>
+
+                <div className="func-card func-card--cancelado">
+
+                    <h3>❌ Cancelados</h3>
+
+                    <span className="func-numero">
+                        {envios?.enviosCancelados ?? 0}
+                    </span>
+
+                </div>
+
             </div>
 
         </div>
