@@ -29,16 +29,18 @@ const CampoMultiSelect = ({ label, options = [], value = [], aoAlterado }) => {
 
     return (
         <div className="campo-texto" ref={ref}>
+
             <label>{label}</label>
 
             <div
-                className="dropdown-input"
+                className={`dropdown-input ${aberto ? 'ativo' : ''}`}
                 onClick={() => setAberto(!aberto)}
             >
-                {value.length > 0
-                    ? `${value.length} selecionado(s)`
-                    : 'Selecione...'
-                }
+                <span>
+                    {value.length > 0
+                        ? `${value.length} selecionado(s)`
+                        : 'Selecione...'}
+                </span>
 
                 <span className="arrow">
                     {aberto ? '▲' : '▼'}
@@ -47,20 +49,26 @@ const CampoMultiSelect = ({ label, options = [], value = [], aoAlterado }) => {
 
             {aberto && (
                 <div className="dropdown-box">
+
                     {options.map((opt) => {
                         const checked = value.some(v => v.id === opt.id);
 
                         return (
-                            <label key={opt.id} className="dropdown-item">
+                            <div
+                                key={opt.id}
+                                className="dropdown-item"
+                                onClick={() => toggleItem(opt)}
+                            >
                                 <input
                                     type="checkbox"
                                     checked={checked}
-                                    onChange={() => toggleItem(opt)}
+                                    readOnly
                                 />
-                                {opt.descricao}
-                            </label>
+                                <span>{opt.descricao}</span>
+                            </div>
                         );
                     })}
+
                 </div>
             )}
         </div>
