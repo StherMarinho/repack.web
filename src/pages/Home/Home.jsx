@@ -61,13 +61,17 @@ const Home = () => {
                 <div className="subtitulo-home">
                     Recicle embalagens, ganhe pontos, gere impacto!
                 </div>
+            </div>
 
-                {roleUsuario === "Usuario" && (
-                    <div className="painel-home-titulo painel-home-titulo-home">
+            {roleUsuario === "Usuario" && (
+                <div className="painel-home">
+                    <div className="painel-home-titulo">
                         Meu Painel
                     </div>
-                )}
-            </div>
+
+                    <DashboardUsuario />
+                </div>
+            )}
 
             <div className="conteudo-home">
                 <div className="imagem-home">
@@ -131,25 +135,21 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className="painel-home">
-                {roleUsuario !== "Usuario" && (
+            {roleUsuario !== "Usuario" && (
+                <div className="painel-home">
                     <div className="painel-home-titulo">
                         Meu Painel
                     </div>
-                )}
 
-                {roleUsuario === "Usuario" && (
-                    <DashboardUsuario />
-                )}
+                    {roleUsuario === "Funcionario" && (
+                        <DashboardFuncionario />
+                    )}
 
-                {roleUsuario === "Funcionario" && (
-                    <DashboardFuncionario />
-                )}
-
-                {roleUsuario === "Administrador" && (
-                    <DashboardAdministrador />
-                )}
-            </div>
+                    {roleUsuario === "Administrador" && (
+                        <DashboardAdministrador />
+                    )}
+                </div>
+            )}
         </>
     );
 };

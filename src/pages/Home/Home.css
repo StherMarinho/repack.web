@@ -83,7 +83,7 @@ body {
 
 .painel-home {
     max-width: 1280px;
-    margin: 30px auto 40px;
+    margin: 35px auto;
     padding: 0 20px;
 }
 
@@ -93,11 +93,6 @@ body {
     font-size: 34px;
     font-weight: 700;
     margin-bottom: 24px;
-}
-
-.painel-home-titulo-home {
-    margin-top: 30px;
-    margin-bottom: 0;
 }
 
 /* ========================================
@@ -169,9 +164,5 @@ body {
 
     .secao-titulo {
         font-size: 18px;
-    }
-
-    .painel-home-titulo-home {
-        margin-top: 20px;
     }
 }
