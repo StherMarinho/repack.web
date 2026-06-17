@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import "./Embalagens.css";
 import Navbar from "../../componentes/Navbar/Navbar";
 
 import Formulario from "../../componentes/Formulario/Formulario";
@@ -10,7 +9,7 @@ import Botao from "../../componentes/Botao/Botao";
 
 import embalagemService from "../../services/embalagemService";
 import materialService from "../../services/materialService"; // (se existir sua API de materiais)
-
+import './Embalagens.css';
 function Embalagens() {
     // estados da lista
     const [embalagens, setEmbalagens] = useState([]);
