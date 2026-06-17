@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import "./Empresa.css";
-import Navbar from "../../../componentes/Navbar/Navbar";
+import Navbar from "../../componentes/Navbar/Navbar";
 
 const Empresas = () => {
     //precisa criar e de algum modo ligar com o mapa para aparecer lá

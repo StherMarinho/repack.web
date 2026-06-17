@@ -18,8 +18,8 @@ import Relatorios from "../pages/Relatorios/Relatorios";
 import CadastroAdm from "../pages/CadastroAdm/CadastroAdm";
 import EnviosAdmin from "../pages/EnviosAdmin/EnviosAdmin";
 import RegrasPontos from "../pages/Admin/RegrasPontos";
-import Embalagens from "../pages/Admin/Embalagens/Embalagens";
-import Empresas from "../pages/Admin/Empresas/Empresas";
+import Embalagens from "../pages/Embalagens/Embalagens";
+import Empresas from "../pages/Empresas/Empresas";
 
 
 import RotaProtegida from "./RotaProtegida";
