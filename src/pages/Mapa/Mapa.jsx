@@ -181,48 +181,17 @@ const Mapa = () => {
 
                             {mostrarForm && (
                                 <form onSubmit={handleIncluir} className="mapa_form">
- 
-                                    {/* CEP com busca automática */}
-                                    <div className="mapa_form__campo">
-                                        <label>CEP</label>
-                                        <input
-                                            type="text"
-                                            value={novaEmpresa.cep}
-                                            onChange={(e) =>
-                                                setNovaEmpresa((prev) => ({ ...prev, cep: e.target.value }))
-                                            }
-                                            onBlur={(e) => buscarCep(e.target.value)}
-                                            placeholder="00000-000"
-                                            maxLength={9}
-                                        />
-                                    </div>
- 
-                                    {/* Campos preenchidos automaticamente pelo ViaCEP */}
-                                    {[
-                                        { label: "Logradouro", campo: "logradouro" },
-                                        { label: "Bairro", campo: "bairro" },
-                                        { label: "Cidade", campo: "cidade" },
-                                        { label: "Estado", campo: "estado" },
-                                    ].map(({ label, campo }) => (
-                                        <div key={campo} className="mapa_form__campo">
-                                            <label>{label}</label>
-                                            <input
-                                                type="text"
-                                                value={novaEmpresa[campo]}
-                                                onChange={(e) =>
-                                                    setNovaEmpresa((prev) => ({ ...prev, [campo]: e.target.value }))
-                                                }
-                                            />
-                                        </div>
-                                    ))}
- 
-                                    {/* Campos preenchidos manualmente */}
                                     {[
                                         { label: "Nome", campo: "nome" },
                                         { label: "CNPJ", campo: "cnpj" },
                                         { label: "Telefone", campo: "telefone" },
                                         { label: "Email", campo: "email" },
+                                        { label: "CEP", campo: "cep" },
+                                        { label: "Logradouro", campo: "logradouro" },
                                         { label: "Número", campo: "numero" },
+                                        { label: "Bairro", campo: "bairro" },
+                                        { label: "Cidade", campo: "cidade" },
+                                        { label: "Estado", campo: "estado" },
                                         { label: "Latitude", campo: "latitude" },
                                         { label: "Longitude", campo: "longitude" },
                                     ].map(({ label, campo }) => (
@@ -238,7 +207,6 @@ const Mapa = () => {
                                             />
                                         </div>
                                     ))}
- 
                                     <button type="submit" className="mapa_btn mapa_btn--incluir">
                                         Salvar
                                     </button>
