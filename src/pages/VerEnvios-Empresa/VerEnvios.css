@@ -20,7 +20,7 @@
     border: none;
     border-radius: 20px;
     background-color: #EF803D;
-    color: black /*mudei*/
+    color: black; /*mudei*/
     cursor: pointer;
     transition: all 0.2s ease;
 }
