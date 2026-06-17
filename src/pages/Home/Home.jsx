@@ -22,8 +22,14 @@ const Home = () => {
                 className="banner-home"
             />
 
-            <div className="titulo-home">
-                <h1>Recicle embalagens e ganhe pontos!</h1>
+            <div className="cabecalho-home">
+                <div className="titulo-home">
+                    Sistema de Logística Reversa
+                </div>
+
+                <div className="subtitulo-home">
+                    Conectando usuários e empresas para o descarte correto de embalagens e geração de recompensas sustentáveis.
+                </div>
             </div>
 
             <div className="conteudo-home">
@@ -39,18 +45,22 @@ const Home = () => {
                     {/* ====== CONTEÚDO DINÂMICO BASEADO NA ROLE ====== */}
                     {roleUsuario === "Funcionario" ? (
                         <>
-                            <h2>Painel da Empresa</h2>
+                            <div className="secao-titulo">
+                                Recebimentos da Empresa
+                            </div>
                             <p>
-                                Utilize o menu superior para registrar novos envios recebidos dos clientes 
-                                ou gerenciar as aprovações pendentes.
+                                Gerencie as embalagens entregues pelos usuários, acompanhe os recebimentos e realize as avaliações pendentes.
                             </p>
+
                             <p>
-                                Cada validação ajuda a manter nossa comunidade sustentável e engajada!
+                                Cada recebimento validado contribui para a reciclagem adequada e para a distribuição de pontos aos participantes.
                             </p>
                         </>
                     ) : roleUsuario === "Administrador" ? (
                         <>
-                            <h2>Painel Administrativo</h2>
+                            <div className="secao-titulo">
+                                Gestão da Plataforma
+                            </div>
                             <p>
                                 Visão geral do ecossistema RePack. Acesse os relatórios gerenciais, 
                                 gerencie usuários cadastrados e ajuste as regras de pontuação ativa.
@@ -59,7 +69,9 @@ const Home = () => {
                     ) : (
                         <>
                             {/* Conteúdo Padrão para "Usuario" comum ou qualquer outro */}
-                            <h2>Como funciona?</h2>
+                            <div className="secao-titulo">
+                                Como funciona?
+                            </div>
                             <p>
                                 Entregue suas embalagens em pontos de coleta para promover a reciclagem
                                 e acumule pontos de recompensa.
@@ -73,9 +85,9 @@ const Home = () => {
                 </div>
             </div>
             <div className="painel-home">
-                <h2 className="painel-home-titulo">
+                <div className="painel-home-titulo">
                     Meu Painel
-                </h2>
+                </div>
 
                 {roleUsuario === "Usuario" && (
                     <DashboardUsuario />

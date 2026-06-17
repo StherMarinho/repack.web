@@ -17,16 +17,24 @@ body {
     }
 }
 
-.titulo-home {
-    color: #2b95d6;
+.cabecalho-home {
     text-align: center;
-    padding: 1rem 1.5rem 0;
+    padding: 1.5rem 1.5rem 0.5rem;
 }
 
-.titulo-home h1 {
-    font-size: clamp(1.4rem, 4vw, 2.4rem); /* escala suavemente entre mobile e desktop */
-    margin: 0;
-    line-height: 1.3;
+.titulo-home {
+    font-size: 34px;
+    font-weight: 700;
+    color: #154570;
+    line-height: 1.2;
+}
+
+.subtitulo-home {
+    margin-top: 12px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #154570;
+    line-height: 1.4;
 }
 
 .conteudo-home {
@@ -53,10 +61,12 @@ body {
     text-align: center;       /* centralizado no mobile */
 }
 
-.texto-home h2 {
-    color: #2b95d6;
-    margin: 0;
-    font-size: clamp(1.2rem, 3vw, 1.6rem);
+.secao-titulo {
+    color: #154570;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0 0 16px;
 }
 
 .texto-home p {
@@ -96,20 +106,37 @@ body {
         text-align: left;         /* alinhado à esquerda no desktop */
     }
 }
+
 .painel-home {
     max-width: 1280px;
-
-    margin: 60px auto 40px;
-
+    margin: 30px auto 40px;
     padding: 0 20px;
 }
 
 .painel-home-titulo {
     text-align: center;
+    color: #154570;
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
 
-    color: #2b95d6;
+@media (max-width: 768px) {
+    .titulo-home,
+    .painel-home-titulo {
+        font-size: 28px;
+    }
 
-    margin-bottom: 32px;
+    .subtitulo-home,
+    .secao-titulo {
+        font-size: 20px;
+    }
 
-    font-size: 2rem;
+    .texto-home p {
+        font-size: 15px;
+    }
+
+    .painel-home {
+        margin-top: 20px;
+    }
 }
