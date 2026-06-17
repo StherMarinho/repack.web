@@ -285,3 +285,10 @@
         padding: 3px 8px;
     }
 }
+.rank-posicao-usuario {
+    text-align: center;
+    color: #154570;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 24px;
+}

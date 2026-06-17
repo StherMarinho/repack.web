@@ -22,6 +22,14 @@ const Ranking = () => {
     const idUsuarioLogado = getUserId();
     const tipoUsuario = roleParaTipoUsuario[getRole()] ?? "comum";
 
+    const usuarioLogado = dados?.itens?.find(
+        (item) => String(item.idUsuario) === String(idUsuarioLogado)
+    );
+
+    const posicaoUsuario = usuarioLogado
+        ? (pagina - 1) * 20 + usuarioLogado.posicao
+        : null;
+
     useEffect(() => {
         carregarRanking(pagina);
     }, [pagina]);
@@ -79,9 +87,9 @@ const Ranking = () => {
                     </div>
 
                     {!carregando && !erro && dados && (
-                        <div className="rank-posicao-usuario">
-                            Sua posição é destacada na lista abaixo
-                        </div>
+                        <p className="rank-posicao-usuario">
+                            Sua posição é: {posicaoUsuario}º
+                        </p>
                     )}
 
                 </div>
