@@ -207,7 +207,7 @@ const Perfil = () => {
                     </div>
                     
                         <h4>
-                            Escolha seu Avatar
+                            Escolha seu Avatar:
                         </h4>
 
                         <div className="lista-avatares">
