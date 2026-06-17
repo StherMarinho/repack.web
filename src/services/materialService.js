@@ -1,15 +1,8 @@
 import { API_URL } from "./api";
-
 const BASE_URL = API_URL;
 
-const materialService = {
-  listarMateriais: async () => {
-    const response = await fetch(`${BASE_URL}/materiaisembalagens`);
-
-    if (!response.ok) throw new Error("Erro ao buscar materiais");
-
-    return response.json();
-  }
-};
-
-export default materialService;
+export async function getMateriais() {
+  const response = await fetch(`${BASE_URL}/materiasembalagens`);
+  if (!response.ok) throw new Error("Erro ao buscar materiais");
+  return response.json();
+}

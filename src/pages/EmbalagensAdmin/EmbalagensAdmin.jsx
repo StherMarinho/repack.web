@@ -9,7 +9,7 @@ import CampoSelect from "../../componentes/CampoSelect/CampoSelect";
 import Botao from "../../componentes/Botao/Botao";
 
 import embalagemService from "../../services/embalagemService";
-import materialService from "../../services/materialService"; // (se existir sua API de materiais)
+import { getMateriais } from "../../services/materialService";
 
 function EmbalagensAdmin() {
     // estados da lista
@@ -32,7 +32,7 @@ function EmbalagensAdmin() {
 
     const carregarEmbalagens = async () => {
         try {
-            const dados = await embalagemService.listarEmbalagens();
+            const dados = await getMateriais();
             setEmbalagens(dados);
         } catch (err) {
             alert(err.message);
