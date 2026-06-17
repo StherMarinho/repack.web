@@ -6,10 +6,26 @@
   min-height: 100vh;
 }
 
-.painel-titulo {
-  font-size: 24px;
-  color: #2c3e50;
-  margin-bottom: 5px;
+.cabecalho-pagina {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.titulo-pagina {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  color: #154570;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.subtitulo-pagina {
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.5;
 }
 
 .mensagem-vazia {
@@ -258,4 +274,23 @@ button.btn-cancelar:hover, .btn-cancelar:hover {
   gap: 12px;
   border-top: 1px solid #e2e8f0;
   padding-top: 15px;
+}
+@media (max-width: 768px) {
+  .titulo-pagina {
+    font-size: 30px;
+  }
+
+  .subtitulo-pagina {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .titulo-pagina {
+    font-size: 26px;
+  }
+
+  .subtitulo-pagina {
+    font-size: 13px;
+  }
 }

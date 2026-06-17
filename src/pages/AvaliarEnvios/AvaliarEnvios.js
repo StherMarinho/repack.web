@@ -125,7 +125,12 @@ const calcularPontos = async (envio) => {
     <>
     <Navbar tipoUsuario={"empresa"}/>
     <div className="painel-container">
-      <h2 className="painel-titulo">Avaliar Envios</h2>
+      <div className="cabecalho-pagina">
+        <h1 className="titulo-pagina">Avaliação de Envios</h1>
+        <p className="subtitulo-pagina">
+          Aprove ou rejeite os envios pendentes realizados pelos usuários.
+        </p>
+      </div>
       
       {envios.length === 0 ? (
         <div className="mensagem-vazia">
