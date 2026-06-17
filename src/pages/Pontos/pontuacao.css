@@ -1,32 +1,109 @@
-.titulo-pontos{
-    padding: 15px;
-    margin: 15px;
+.titulo-pontos {
+    text-align: center;
+    color: #154570;
+    font-size: 34px;
+    font-weight: 700;
+    margin: 30px 0;
 }
-.pontuacao{
+
+.subtitulo-pontos {
+    text-align: center;
+    color: #154570;
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.pontuacao-container {
     margin: 30px;
+}
+
+.pontuacao {
     display: flex;
-    gap: 20px;
-    font-size: large;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
 }
-.enviosPontuados{
-    margin: 30px;
-    font-size: large;
+
+.pontuacao strong {
+    font-size: 28px;
+    color: #111827;
 }
-.cards{
+
+.enviosPontuados {
+    text-align: center;
+    color: #154570;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 30px 0 20px;
+}
+
+.cards {
     display: flex;
     gap: 10px;
     margin: 30px;
     flex-wrap: wrap;
+    justify-content: center;
 }
-.msg-erro{
+
+.msg-erro {
     color: #c0392b;
     padding: 10px 0;
-    font-size: 1rem;
+    font-size: 15px;
     margin: 10px;
 }
-.msg-carregando{
+
+.msg-carregando {
     padding: 10px 0;
-    font-size: 1rem;
+    font-size: 15px;
     color: #555;
     margin: 10px;
+}
+
+/* TABLET */
+@media (max-width: 768px) {
+    .titulo-pontos {
+        font-size: 28px;
+    }
+
+    .subtitulo-pontos,
+    .enviosPontuados {
+        font-size: 20px;
+    }
+
+    .pontuacao strong {
+        font-size: 24px;
+    }
+
+    .cards {
+        justify-content: center;
+        margin: 20px;
+    }
+}
+
+/* CELULAR */
+@media (max-width: 480px) {
+    .titulo-pontos {
+        font-size: 26px;
+        padding: 0 10px;
+    }
+
+    .subtitulo-pontos,
+    .enviosPontuados {
+        font-size: 18px;
+    }
+
+    .pontuacao {
+        margin-bottom: 30px;
+    }
+
+    .pontuacao strong {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .cards {
+        margin: 15px;
+        gap: 15px;
+    }
 }

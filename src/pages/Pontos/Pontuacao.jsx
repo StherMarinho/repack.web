@@ -61,17 +61,24 @@ const Pontos = () => {
     <>
       <Navbar tipoUsuario={"comum"} />
 
-      <div>
-        <h1 className="titulo-pontos"> Minha pontuação</h1>
+      <div className="titulo-pontos">
+          Minha Pontuação
       </div>
 
-      <div className="pontuacao"> 
-        <div><p>Total de pontos: </p></div>
-        <strong>{totalPontosCalculado.toLocaleString("pt-BR")} pontos.</strong>
+      <div className="pontuacao-container">
+          <div className="subtitulo-pontos">
+              Total de pontos
+          </div>
+
+          <div className="pontuacao">
+              <strong>
+                  {totalPontosCalculado.toLocaleString("pt-BR")} pontos
+              </strong>
+          </div>
       </div>
 
-      <div className="enviosPontuados"> 
-        <div><p>Envios que pontuaram: </p></div>
+      <div className="enviosPontuados">
+          Envios que pontuaram
       </div>
       
       <div className="cards">
