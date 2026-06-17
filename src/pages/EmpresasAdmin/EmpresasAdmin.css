@@ -1,81 +1,81 @@
 .container {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px 20px;
 }
 
 /* TÍTULO */
 h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
-/* BOTÃO NOVA EMPRESA CENTRALIZADO */
+/* BOTÃO NOVA EMPRESA */
 .container > button {
     display: block;
-    margin: 2px auto 20px auto;
+    margin: 0 auto 30px auto; /* mais espaço */
 }
 
-/* BOTÕES PADRÃO */
+/* BOTÕES */
 .botao {
     padding: 6px 10px;
     font-size: 0.85rem;
     border-radius: 6px;
 }
 
-/* LISTA EM 4 COLUNAS */
+/* CONTAINER DOS CARDS */
 .lista {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    gap: 20px;
+
+    margin-top: 20px;   /* MAIS ESPAÇO EM CIMA */
+    padding: 10px;      /* ESPAÇO INTERNO */
 }
 
-/* CARDS */
+/* CARD */
 .card {
     background: #fff;
-    padding: 16px;
+    padding: 18px;
     border-radius: 12px;
 
-    /* SOMBRA MAIS FORTE */
     box-shadow: 0 6px 18px rgba(0,0,0,0.20);
-
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    /* BORDA MAIS VISÍVEL */
     border: 1.5px solid #e0e0e0;
-}
 
-/* REMOVE HOVER (INTENCIONAL) */
-.card:hover {
-    transform: none;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.20);
-}
-
-/* ÁREA DE TEXTO */
-.card > div:first-child {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-/* BOTÕES LADO A LADO */
-.acoes {
-    display: flex;
-    flex-direction: row;
+    flex-direction: column;  /* agora tudo centralizado verticalmente */
+    align-items: center;     /* CENTRALIZA HORIZONTAL */
+    justify-content: center;
+    text-align: center;      /* texto centralizado */
     gap: 8px;
 }
 
-/* BOTÕES FORM CENTRALIZADO */
+/* TEXTO DO CARD */
+.card > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+}
+
+/* AÇÕES (BOTÕES) */
+.acoes {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* BOTÕES FORM */
 .botoes {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
-/* RESPONSIVIDADE (IMPORTANTE) */
+/* RESPONSIVO */
 @media (max-width: 1200px) {
     .lista {
         grid-template-columns: repeat(3, 1fr);
@@ -91,9 +91,5 @@ h1 {
 @media (max-width: 600px) {
     .lista {
         grid-template-columns: 1fr;
-    }
-
-    .acoes {
-        flex-direction: column;
     }
 }
