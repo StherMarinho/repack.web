@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import "./Empresas.css";
+import "./EmpresasAdmin.css";
 import Navbar from "../../componentes/Navbar/Navbar";
 
 import Formulario from "../../componentes/Formulario/Formulario";
