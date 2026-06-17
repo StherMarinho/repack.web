@@ -9,11 +9,11 @@ import Botao from "../../componentes/Botao/Botao";
 
 import empresaService from "../../services/empresaService";
 
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// corrige ícone do Leaflet
+// Leaflet icons
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -21,7 +21,6 @@ L.Icon.Default.mergeOptions({
     shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-// centro padrão (BH)
 const CENTRO = [-19.9191, -43.9386];
 
 function EmpresasAdmin() {
@@ -37,6 +36,10 @@ function EmpresasAdmin() {
     const [email, setEmail] = useState("");
     const [telefone, setTelefone] = useState("");
 
+    // endereço (NOVA PARTE)
+    const [endereco, setEndereco] = useState("");
+
+    // coordenadas
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
 
@@ -53,22 +56,34 @@ function EmpresasAdmin() {
         }
     };
 
-    // clique no mapa para pegar coordenadas
-    function SeletorMapa() {
-        useMapEvents({
-            click(e) {
-                setLatitude(e.latlng.lat);
-                setLongitude(e.latlng.lng);
+    // 🌍 GEOCODING (endereço -> coordenadas)
+    const buscarCoordenadas = async () => {
+        if (!endereco) return;
+
+        try {
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(endereco)}`
+            );
+
+            const data = await response.json();
+
+            if (data.length > 0) {
+                setLatitude(parseFloat(data[0].lat));
+                setLongitude(parseFloat(data[0].lon));
+            } else {
+                alert("Endereço não encontrado");
             }
-        });
-        return null;
-    }
+        } catch (err) {
+            alert("Erro ao buscar localização");
+        }
+    };
 
     const novaEmpresa = () => {
         setIdEdicao(null);
         setNome("");
         setEmail("");
         setTelefone("");
+        setEndereco("");
         setLatitude(null);
         setLongitude(null);
         setMostrarForm(true);
@@ -108,6 +123,7 @@ function EmpresasAdmin() {
         setTelefone(empresa.telefone);
         setLatitude(empresa.latitude);
         setLongitude(empresa.longitude);
+        setEndereco("");
         setMostrarForm(true);
     };
 
@@ -186,11 +202,30 @@ function EmpresasAdmin() {
                             aoAlterado={setTelefone}
                         />
 
-                        <p><strong>Clique no mapa para definir localização:</strong></p>
+                        {/* ENDEREÇO */}
+                        <CampoTexto
+                            label="Endereço (para localizar no mapa)"
+                            valor={endereco}
+                            aoAlterado={setEndereco}
+                            placeholder="Ex: Av. Afonso Pena, Belo Horizonte"
+                        />
+
+                        <Botao
+                            type="button"
+                            onClick={buscarCoordenadas}
+                        >
+                            Buscar localização
+                        </Botao>
+
+                        <p><strong>Pré-visualização no mapa:</strong></p>
 
                         <div className="mapa-mini">
                             <MapContainer
-                                center={CENTRO}
+                                center={
+                                    latitude && longitude
+                                        ? [latitude, longitude]
+                                        : CENTRO
+                                }
                                 zoom={13}
                                 style={{ height: "250px", width: "100%" }}
                             >
@@ -199,12 +234,10 @@ function EmpresasAdmin() {
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 />
 
-                                <SeletorMapa />
-
                                 {latitude && longitude && (
                                     <Marker position={[latitude, longitude]}>
                                         <Popup>
-                                            Local selecionado
+                                            Local da empresa
                                         </Popup>
                                     </Marker>
                                 )}
@@ -216,7 +249,10 @@ function EmpresasAdmin() {
                                 Salvar
                             </Botao>
 
-                            <Botao onClick={() => setMostrarForm(false)}>
+                            <Botao
+                                type="button"
+                                onClick={() => setMostrarForm(false)}
+                            >
                                 Cancelar
                             </Botao>
                         </div>
