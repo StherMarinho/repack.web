@@ -80,7 +80,9 @@ const MeusEnvios = () => {
         <>
         <Navbar tipoUsuario={"comum"}/>
         <div className="meus-envios">
-            <h2 className="meus-envios__titulo">Meus envios</h2>
+            <div className="meus-envios__titulo">
+                Histórico de Envios
+            </div>'
 
             {enviosConcluidos.length === 0 ? (
                 <p className="meus-envios__mensagem">Você ainda não possui envios concluídos.</p>
@@ -103,8 +105,9 @@ const MeusEnvios = () => {
 
             {enviosCancelados.length > 0 && (
                 <div className="meus-envios__secao-cancelados">
-                    <h3 className="meus-envios__subtitulo">Envios cancelados</h3>
-
+                    <div className="meus-envios__subtitulo">
+                        Envios Cancelados
+                    </div>
                     <div className="meus-envios__grid">
                         {enviosCancelados.map((envio) => (
                             <Card

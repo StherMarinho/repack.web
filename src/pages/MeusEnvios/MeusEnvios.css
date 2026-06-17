@@ -1,43 +1,91 @@
 .meus-envios {
-    padding: 40px 30px;
+    padding: 30px;
 }
- 
+
 .meus-envios__titulo {
-    color: #EF803D;
+    text-align: center;
+    color: #154570;
+    font-size: 34px;
+    font-weight: 700;
     margin-bottom: 30px;
-    font-size: 1.8rem;
-    font-weight: 600;
 }
- 
+
 .meus-envios__subtitulo {
-    color: #c0392b;
-    margin-bottom: 20px;
-    font-size: 1.3rem;
+    text-align: center;
+    color: #154570;
+    font-size: 20px;
     font-weight: 600;
+    margin-bottom: 20px;
 }
- 
+
 .meus-envios__grid {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
+    justify-content: center;
 }
- 
+
 .meus-envios__secao-cancelados {
     margin-top: 50px;
     padding-top: 30px;
     border-top: 2px solid #e5e7eb;
 }
- 
+
 .meus-envios__mensagem {
-    padding: 10px 0;
-    font-size: 1rem;
-    color: #555;
-    margin: 10px;
+    text-align: center;
+    color: #4b5563;
+    font-size: 15px;
+    margin: 20px 0;
 }
- 
+
 .meus-envios__mensagem--erro {
+    text-align: center;
     color: #c0392b;
-    padding: 10px 0;
-    font-size: 1rem;
-    margin: 10px;
+    font-size: 15px;
+    margin: 20px 0;
+}
+
+/* TABLET */
+@media (max-width: 768px) {
+    .meus-envios {
+        padding: 20px;
+    }
+
+    .meus-envios__titulo {
+        font-size: 28px;
+    }
+
+    .meus-envios__subtitulo {
+        font-size: 20px;
+    }
+
+    .meus-envios__grid {
+        gap: 20px;
+    }
+}
+
+/* CELULAR */
+@media (max-width: 480px) {
+    .meus-envios {
+        padding: 15px;
+    }
+
+    .meus-envios__titulo {
+        font-size: 26px;
+        padding: 0 10px;
+    }
+
+    .meus-envios__subtitulo {
+        font-size: 18px;
+    }
+
+    .meus-envios__grid {
+        gap: 15px;
+    }
+
+    .meus-envios__mensagem,
+    .meus-envios__mensagem--erro {
+        font-size: 15px;
+        padding: 0 10px;
+    }
 }
