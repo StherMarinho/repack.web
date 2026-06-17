@@ -9,7 +9,8 @@ import Botao from "../../componentes/Botao/Botao";
 
 import embalagemService from "../../services/embalagemService";
 import materialService from "../../services/materialService"; // (se existir sua API de materiais)
-import './Embalagens.css';
+import './Embalagens.css'
+
 function Embalagens() {
     // estados da lista
     const [embalagens, setEmbalagens] = useState([]);
