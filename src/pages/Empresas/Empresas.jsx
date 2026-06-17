@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import "./Empresa.css";
+import "./Empresas.css";
 import Navbar from "../../componentes/Navbar/Navbar";
 
 const Empresas = () => {
