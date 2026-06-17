@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
 
 import "./Empresas.css";
 import Navbar from "../../componentes/Navbar/Navbar";
