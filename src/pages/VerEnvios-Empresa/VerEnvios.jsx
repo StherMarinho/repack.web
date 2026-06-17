@@ -62,7 +62,7 @@ const VerEnvios = () => {
         <>
             <Navbar tipoUsuario={"empresa"} />
             <div className="cabecalho-pagina">
-                <h1 className="titulo-pagina">Envios Recebidas</h1>
+                <h1 className="titulo-pagina">Envios Recebidos</h1>
                 <p className="subtitulo-pagina">
                     Acompanhe as embalagens entregues pelos usuários para análise e pontuação.
                 </p>
