@@ -6,26 +6,23 @@
     margin: 30px 0;
 }
 
-.subtitulo-pontos {
-    text-align: center;
-    color: #154570;
-    font-size: 25px;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
 .pontuacao-container {
-    margin: 30px;
-}
-
-.pontuacao {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 40px;
+    gap: 10px;
+
+    margin: 30px 0 40px;
+    flex-wrap: wrap;
 }
 
-.pontuacao strong {
+.subtitulo-pontos {
+    color: #154570;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.valor-pontos {
     font-size: 28px;
     color: #111827;
 }
@@ -71,7 +68,7 @@
         font-size: 20px;
     }
 
-    .pontuacao strong {
+    .valor-pontos {
         font-size: 24px;
     }
 
@@ -93,13 +90,14 @@
         font-size: 18px;
     }
 
-    .pontuacao {
-        margin-bottom: 30px;
-    }
-
-    .pontuacao strong {
+    .valor-pontos {
         font-size: 22px;
         text-align: center;
+    }
+
+    .pontuacao-container {
+        gap: 6px;
+        padding: 0 10px;
     }
 
     .cards {

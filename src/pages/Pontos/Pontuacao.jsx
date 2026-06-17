@@ -66,19 +66,17 @@ const Pontos = () => {
       </div>
 
       <div className="pontuacao-container">
-          <div className="subtitulo-pontos">
-              Total de pontos
-          </div>
+          <span className="subtitulo-pontos">
+              Total de pontos:
+          </span>
 
-          <div className="pontuacao">
-              <strong>
-                  {totalPontosCalculado.toLocaleString("pt-BR")} pontos
-              </strong>
-          </div>
+          <strong className="valor-pontos">
+              {totalPontosCalculado.toLocaleString("pt-BR")} pontos
+          </strong>
       </div>
 
       <div className="enviosPontuados">
-          Envios que pontuaram
+          Envios que pontuaram:
       </div>
       
       <div className="cards">
