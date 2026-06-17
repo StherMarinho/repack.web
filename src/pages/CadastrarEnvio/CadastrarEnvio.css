@@ -18,10 +18,25 @@
   max-width: 500px;
 }
 
-.cadastro-card h2 {
+.cabecalho-formulario {
   text-align: center;
   margin-bottom: 30px;
-  color: #333333;
+}
+
+.titulo-pagina {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 700;
+  color: #154570;
+  line-height: 1.1;
+}
+
+.subtitulo-pagina {
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.5;
 }
 
 .form-recebimento {
@@ -278,9 +293,12 @@ select.input-field {
     padding: 30px 25px;
   }
 
-  .cadastro-card h2 {
-    font-size: 1.4rem;
-    margin-bottom: 25px;
+  .titulo-pagina {
+    font-size: 34px;
+  }
+
+  .subtitulo-pagina {
+    font-size: 14px;
   }
 }
 
@@ -297,9 +315,12 @@ select.input-field {
     margin-top: 15px;
   }
 
-  .cadastro-card h2 {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+  .titulo-pagina {
+    font-size: 28px;
+  }
+
+  .subtitulo-pagina {
+    font-size: 13px;
   }
 
   .form-recebimento {

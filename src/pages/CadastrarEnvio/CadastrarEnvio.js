@@ -122,7 +122,12 @@ export default function CadastroRecebimento() {
     <Navbar tipoUsuario={"empresa"}/>
     <div className="cadastro-container">
       <div className="cadastro-card form-centralizado">
-        <h2>Registrar Envio de Embalagens</h2>
+        <div className="cabecalho-formulario">
+            <h1 className="titulo-pagina">Novo Envio</h1>
+            <p className="subtitulo-pagina">
+                Registre as embalagens recebidas para processamento e pontuação.
+            </p>
+        </div>
 
         {feedback.msg && <div className={`alerta alerta-${feedback.tipo}`}>{feedback.msg}</div>}
 
