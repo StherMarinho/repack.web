@@ -81,13 +81,12 @@ const AppRoutes = () => {
                     <AvaliarEnvios />
                 </RotaProtegida>
             } />
-
-            {/* ================= ROTAS: APENAS ADMINISTRADOR ================= */}
-            <Route path="/admin/envios" element={
-                <RotaProtegida role="Administrador">
+            <Route path="/funcionario/envios" element={
+                <RotaProtegida role="Funcionario">
                     <EnviosAdmin />
                 </RotaProtegida>
             } />
+            {/* ================= ROTAS: APENAS ADMINISTRADOR ================= */}
             <Route path="/usuarios" element={
                 <RotaProtegida role="Administrador">
                     <GerenciarUsuarios />

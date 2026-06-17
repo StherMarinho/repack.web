@@ -39,15 +39,14 @@ const Navbar = () => {
                         <li><Link to="/cadastrar-envio" onClick={fecharMenu}>Cadastrar Envio</Link></li>
                         <li><Link to="/envios-empresa" onClick={fecharMenu}>Ver envios</Link></li>
                         <li><Link to="/aprovar-envios" onClick={fecharMenu}>Avaliar Envios</Link></li>
+                        <li><Link to="/funcionario/envios" onClick={fecharMenu}>Envios</Link></li>
                     </>
                 );
             case "Administrador":
                 return (
                     <>
-                        <li><Link to="/admin/envios" onClick={fecharMenu}>Envios</Link></li>
-                        <li><Link to="/empresas" onClick={fecharMenu}>Empresa</Link></li> {/*tem que fazer */}
                         <li><Link to="/embalagens" onClick={fecharMenu}>Embalagens</Link></li> {/*tem que fazer */}
-                        {/*<li><Link to="/mapa" onClick={fecharMenu}>Mapa</Link></li>*/}
+                        <li><Link to="/mapa" onClick={fecharMenu}>Mapa</Link></li>
                         <li><Link to="/regras" onClick={fecharMenu}>Regras de Pontuação</Link></li>
                         <li><Link to="/relatorios" onClick={fecharMenu}>Relatórios</Link></li>
                         <li><Link to="/cadastroAdm" onClick={fecharMenu}>Usuários</Link></li>
