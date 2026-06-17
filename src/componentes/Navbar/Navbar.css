@@ -231,3 +231,11 @@
     outline-offset: 4px;
     border-radius: 4px;
 }
+
+.nav-link--perfil {
+    background-color: #154570;
+}
+
+.nav-link--perfil:hover {
+    background-color: #1d5c96;
+}

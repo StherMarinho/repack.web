@@ -82,7 +82,7 @@ const Navbar = () => {
 
                 {/* Desktop Actions */}
                 <div className="navbar__user-actions">
-                    <Link to="/perfil" className="nav-link--cta">
+                    <Link to="/perfil" className="nav-link--cta nav-link--perfil">
                         Meu Perfil
                     </Link>
                     <button onClick={handleLogout} className="nav-link--cta nav-link--logout">
