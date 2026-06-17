@@ -25,21 +25,18 @@ const CENTRO = [-19.9191, -43.9386];
 
 function EmpresasAdmin() {
 
-    // lista
     const [empresas, setEmpresas] = useState([]);
 
-    // form
     const [mostrarForm, setMostrarForm] = useState(false);
     const [idEdicao, setIdEdicao] = useState(null);
 
     const [nome, setNome] = useState("");
+    const [cnpj, setCnpj] = useState("");
     const [email, setEmail] = useState("");
     const [telefone, setTelefone] = useState("");
 
-    // endereço (NOVA PARTE)
     const [endereco, setEndereco] = useState("");
 
-    // coordenadas
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
 
@@ -56,7 +53,7 @@ function EmpresasAdmin() {
         }
     };
 
-    // 🌍 GEOCODING (endereço -> coordenadas)
+    // 🌍 Geocoding
     const buscarCoordenadas = async () => {
         if (!endereco) return;
 
@@ -81,6 +78,7 @@ function EmpresasAdmin() {
     const novaEmpresa = () => {
         setIdEdicao(null);
         setNome("");
+        setCnpj("");
         setEmail("");
         setTelefone("");
         setEndereco("");
@@ -94,6 +92,7 @@ function EmpresasAdmin() {
 
         const dto = {
             nome,
+            cnpj,
             email,
             telefone,
             latitude,
@@ -119,6 +118,7 @@ function EmpresasAdmin() {
     const editar = (empresa) => {
         setIdEdicao(empresa.id);
         setNome(empresa.nome);
+        setCnpj(empresa.cnpj);
         setEmail(empresa.email);
         setTelefone(empresa.telefone);
         setLatitude(empresa.latitude);
@@ -158,6 +158,7 @@ function EmpresasAdmin() {
                             <div key={e.id} className="card">
                                 <div>
                                     <strong>{e.nome}</strong>
+                                    <p>{e.cnpj}</p>
                                     <p>{e.email}</p>
                                     <p>{e.telefone}</p>
                                 </div>
@@ -191,6 +192,14 @@ function EmpresasAdmin() {
                         />
 
                         <CampoTexto
+                            label="CNPJ"
+                            valor={cnpj}
+                            aoAlterado={setCnpj}
+                            obrigatorio
+                            placeholder="00.000.000/0000-00"
+                        />
+
+                        <CampoTexto
                             label="Email"
                             valor={email}
                             aoAlterado={setEmail}
@@ -202,18 +211,14 @@ function EmpresasAdmin() {
                             aoAlterado={setTelefone}
                         />
 
-                        {/* ENDEREÇO */}
                         <CampoTexto
-                            label="Endereço (para localizar no mapa)"
+                            label="Endereço"
                             valor={endereco}
                             aoAlterado={setEndereco}
-                            placeholder="Ex: Av. Afonso Pena, Belo Horizonte"
+                            placeholder="Ex: Av. Afonso Pena, BH"
                         />
 
-                        <Botao
-                            type="button"
-                            onClick={buscarCoordenadas}
-                        >
+                        <Botao type="button" onClick={buscarCoordenadas}>
                             Buscar localização
                         </Botao>
 
@@ -245,9 +250,7 @@ function EmpresasAdmin() {
                         </div>
 
                         <div className="botoes">
-                            <Botao>
-                                Salvar
-                            </Botao>
+                            <Botao>Salvar</Botao>
 
                             <Botao
                                 type="button"
