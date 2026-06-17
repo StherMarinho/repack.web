@@ -18,7 +18,7 @@ import Relatorios from "../pages/Relatorios/Relatorios";
 import CadastroAdm from "../pages/CadastroAdm/CadastroAdm";
 import EnviosAdmin from "../pages/EnviosAdmin/EnviosAdmin";
 import RegrasPontos from "../pages/Admin/RegrasPontos";
-
+import EmpresasAdmin from "../pages/EmpresasAdmin/EmpresasAdmin";
 
 import RotaProtegida from "./RotaProtegida";
 

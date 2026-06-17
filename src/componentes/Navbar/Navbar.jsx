@@ -45,7 +45,7 @@ const Navbar = () => {
                 return (
                     <>
                         <li><Link to="/admin/envios" onClick={fecharMenu}>Envios</Link></li>
-                        <li><Link to="/empresas" onClick={fecharMenu}>Empresas</Link></li> {/*tem que fazer */}
+                        <li><Link to="/empresas" onClick={fecharMenu}>Empresa</Link></li> {/*tem que fazer */}
                         <li><Link to="/embalagens" onClick={fecharMenu}>Embalagens</Link></li> {/*tem que fazer */}
                         <li><Link to="/mapa" onClick={fecharMenu}>Mapa</Link></li>
                         <li><Link to="/regras" onClick={fecharMenu}>Regras de Pontuação</Link></li>
