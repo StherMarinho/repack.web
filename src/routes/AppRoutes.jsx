@@ -19,6 +19,7 @@ import CadastroAdm from "../pages/CadastroAdm/CadastroAdm";
 import EnviosAdmin from "../pages/EnviosAdmin/EnviosAdmin";
 import RegrasPontos from "../pages/Admin/RegrasPontos";
 import EmpresasAdmin from "../pages/EmpresasAdmin/EmpresasAdmin";
+import EmbalagensAdmin from "../pages/EmbalagensAdmin/EmbalagensAdmin";
 
 import RotaProtegida from "./RotaProtegida";
 
@@ -115,6 +116,11 @@ const AppRoutes = () => {
             <Route path="/empresas" element={
                 <RotaProtegida role="Administrador">
                     <EmpresasAdmin />
+                </RotaProtegida>
+            } />
+            <Route path="/embalagenAdmin" element={
+                <RotaProtegida role="Administrador">
+                    <EmbalagensAdmin />
                 </RotaProtegida>
             } />
         </Routes>
