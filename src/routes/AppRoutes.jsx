@@ -114,6 +114,16 @@ const AppRoutes = () => {
                     <Relatorios />
                 </RotaProtegida>
             } />
+            <Route path="/empresas" element={
+                <RotaProtegida role="Administrador">
+                    <Empresa />
+                </RotaProtegida>
+            } />
+            <Route path="/embalagens" element={
+                <RotaProtegida role="Administrador">
+                    <Embalagens />
+                </RotaProtegida>
+            } />
         </Routes>
     );
 };
