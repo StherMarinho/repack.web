@@ -5,6 +5,7 @@ import { getUserId, getRole } from "../../services/auth";
 import "./Ranking.css";
 
 const medalhas = ["🥇", "🥈", "🥉"];
+const ITENS_POR_PAGINA = 10;
 
 const roleParaTipoUsuario = {
     "Administrador": "administrador",
@@ -27,7 +28,7 @@ const Ranking = () => {
     );
 
     const posicaoUsuario = usuarioLogado
-        ? (pagina - 1) * 20 + usuarioLogado.posicao
+        ? (pagina - 1) * ITENS_POR_PAGINA + usuarioLogado.posicao
         : null;
 
     useEffect(() => {
@@ -40,7 +41,10 @@ const Ranking = () => {
             setErro(null);
 
             const resultado =
-                await rankingService.getRanking(p, 20);
+                await rankingService.getRanking(
+                    p,
+                    ITENS_POR_PAGINA
+                );
 
             setDados(resultado);
 
@@ -86,7 +90,7 @@ const Ranking = () => {
                         Os usuários que mais acumularam pontos com a reciclagem de embalagens
                     </div>
 
-                    {!carregando && !erro && dados && (
+                    {!carregando && !erro && dados && posicaoUsuario && (
                         <p className="rank-posicao-usuario">
                             Sua posição é: {posicaoUsuario}º
                         </p>
@@ -132,7 +136,7 @@ const Ranking = () => {
                                     String(idUsuarioLogado);
 
                                 const posicaoGlobal =
-                                    (pagina - 1) * 20 +
+                                    (pagina - 1) * ITENS_POR_PAGINA +
                                     item.posicao;
 
                                 return (
@@ -164,7 +168,7 @@ const Ranking = () => {
 
                                             {ehLogado && (
                                                 <span className="rank-voce">
-                                                    Sua posição é #{posicaoGlobal}
+                                                    Você
                                                 </span>
                                             )}
 
