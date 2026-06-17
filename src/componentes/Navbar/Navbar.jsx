@@ -45,10 +45,12 @@ const Navbar = () => {
                 return (
                     <>
                         <li><Link to="/admin/envios" onClick={fecharMenu}>Envios</Link></li>
-                        <li><Link to="/cadastroAdm" onClick={fecharMenu}>Usuários</Link></li>
+                        <li><Link to="/empresa" onClick={fecharMenu}>Empresa</Link></li> {/*tem que fazer */}
+                        <li><Link to="/embalagens" onClick={fecharMenu}>Embalagens</Link></li> {/*tem que fazer */}
                         <li><Link to="/mapa" onClick={fecharMenu}>Mapa</Link></li>
                         <li><Link to="/regras" onClick={fecharMenu}>Regras de Pontuação</Link></li>
                         <li><Link to="/relatorios" onClick={fecharMenu}>Relatórios</Link></li>
+                        <li><Link to="/cadastroAdm" onClick={fecharMenu}>Usuários</Link></li>
                     </>
                 );
             default:
