@@ -11,56 +11,59 @@ h1 {
 }
 
 /* BOTÃO NOVA EMPRESA CENTRALIZADO */
-.botao-central {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+.container > button {
+    display: block;
+    margin: 0 auto 20px auto;
 }
 
-/* BOTÕES GERAIS */
+/* BOTÕES PADRÃO */
 .botao {
     padding: 6px 10px;
     font-size: 0.85rem;
     border-radius: 6px;
+    transition: all 0.2s ease;
 }
 
-/* LISTA EM GRID (lado a lado) */
+/* LISTA EM GRID (UM AO LADO DO OUTRO) */
 .lista {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
+    gap: 15px;
 }
 
-/* CARDS MAIS FORTES */
+/* CARDS ESTILO MODERNO */
 .card {
     background: #fff;
     padding: 16px;
     border-radius: 12px;
 
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-    transition: all 0.25s ease;
+    /* sombra leve base */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+
+    transition: all 0.25s ease;
 }
 
-/* HOVER MAIS FORTE (efeito "hover card") */
+/* HOVER MAIS FORTE (efeito flutuante) */
 .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
 }
 
 /* AÇÕES */
 .acoes {
     display: flex;
-    gap: 8px;
+    flex-direction: column;
+    gap: 6px;
 }
 
-/* BOTÕES DO FORM */
+/* BOTÕES CENTRALIZADOS DO FORM */
 .botoes {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 15px;
+    margin-top: 10px;
 }
