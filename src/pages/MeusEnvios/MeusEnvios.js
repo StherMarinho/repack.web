@@ -94,9 +94,13 @@ const MeusEnvios = () => {
                             titulo={`Envio #${envio.id}`}
                             subtitulo={envio.nomeEmpresa}
                             descricao={
-                                `Data: ${formatarData(envio.dataEnvio)} | ` + 
-                                `Quantidade: ${envio.quantidadeItens} | ` +
-                                `${envio.pontos.toLocaleString("pt-BR")} pontos gerados`
+                                <>
+                                    Data: {formatarData(envio.dataEnvio)}
+                                    <br />
+                                    Quantidade: {envio.quantidadeItens}
+                                    <br />
+                                    {envio.pontos.toLocaleString("pt-BR")} pontos gerados
+                                </>
                             }
                         />
                     ))}
@@ -115,10 +119,12 @@ const MeusEnvios = () => {
                                 titulo={`Envio #${envio.id}`}
                                 subtitulo={envio.nomeEmpresa}
                                 descricao={
-                                    `Data: ${formatarData(envio.dataEnvio)} | ` + 
-                                    `Quantidade: ${envio.quantidadeItens}`
+                                    <>
+                                        Data: {formatarData(envio.dataEnvio)}
+                                        <br />
+                                        Quantidade: {envio.quantidadeItens}
+                                    </>
                                 }
-                                link={`/envios/${envio.id}`}
                             />
                         ))}
                     </div>
