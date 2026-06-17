@@ -55,7 +55,7 @@ const Home = () => {
 
             <div className="cabecalho-home">
                 <div className="titulo-home">
-                    Bem-vindo{usuario?.nome ? `, ${usuario.nome}` : ""} ao RePack
+                    Olá{usuario?.nome ? `, ${usuario.nome}` : ""}! Bem-vindo(a) ao RePack
                 </div>
 
                 <div className="subtitulo-home">
