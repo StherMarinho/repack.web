@@ -4,34 +4,51 @@
     padding: 20px;
 }
 
+/* TÍTULO */
 h1 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* BOTÕES */
+/* BOTÃO NOVA EMPRESA CENTRALIZADO */
+.botao-central {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* BOTÕES GERAIS */
 .botao {
     padding: 6px 10px;
     font-size: 0.85rem;
     border-radius: 6px;
 }
 
-/* LISTA */
+/* LISTA EM GRID (lado a lado) */
 .lista {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
 }
 
-/* CARDS */
+/* CARDS MAIS FORTES */
 .card {
     background: #fff;
-    padding: 14px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 16px;
+    border-radius: 12px;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    transition: all 0.25s ease;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+/* HOVER MAIS FORTE (efeito "hover card") */
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
 }
 
 /* AÇÕES */
@@ -40,10 +57,10 @@ h1 {
     gap: 8px;
 }
 
-/* BOTÕES CENTRALIZADOS */
+/* BOTÕES DO FORM */
 .botoes {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
