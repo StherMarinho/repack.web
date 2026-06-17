@@ -34,7 +34,7 @@
 .subtitulo-pagina {
   margin-top: 10px;
   margin-bottom: 0;
-  font-size: 15px;
+  font-size: 13px;
   color: #6b7280;
   line-height: 1.5;
 }
@@ -320,7 +320,7 @@ select.input-field {
   }
 
   .subtitulo-pagina {
-    font-size: 13px;
+    font-size: 11px;
   }
 
   .form-recebimento {
