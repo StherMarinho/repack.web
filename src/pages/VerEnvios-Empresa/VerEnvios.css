@@ -16,11 +16,11 @@
     gap: 10px;
 }
 .filtro-btn{
-    padding: 3px 10px 3px;
+    padding: 4px 11px 4px;
     border: none;
     border-radius: 20px;
     background-color: #EF803D;
-    color: white; /*mudei*/
+    color: black /*mudei*/
     cursor: pointer;
     transition: all 0.2s ease;
 }
