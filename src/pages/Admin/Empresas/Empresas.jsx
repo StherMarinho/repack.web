@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
-import "./empresa.css";
+import "./Empresa.css";
 import Navbar from "../../../componentes/Navbar/Navbar";
 
-const Empresa = () => {
+const Empresas = () => {
     //precisa criar e de algum modo ligar com o mapa para aparecer lá
-    <h1>TELA EMPRESA</h1>
+    return(<h1>TELA EMPRESA</h1>);
 }
-export default Empresa;
+
+export default Empresas;
