@@ -83,7 +83,7 @@ const Ranking = () => {
                 <div className="rank-header">
 
                     <div className="rank-titulo">
-                        Ranking de Reciclagem
+                        🏆 Ranking de Reciclagem
                     </div>
 
                     <div className="rank-subtitulo">
