@@ -1,5 +1,9 @@
+import { useEffect, useState } from "react";
+
 import Navbar from "../../componentes/Navbar/Navbar";
-import { getRole } from "../../services/auth";
+
+import { getRole, getToken } from "../../services/auth";
+import { API_URL } from "../../services/api";
 
 import DashboardUsuario from "../../componentes/DashboardUsuario/DashboardUsuario";
 import DashboardFuncionario from "../../componentes/DashboardFuncionario/DashboardFuncionario";
@@ -8,15 +12,42 @@ import DashboardAdministrador from "../../componentes/DashboardAdministrador/Das
 import "./Home.css";
 
 const Home = () => {
-    // Descobre automaticamente quem está logado: "Usuario", "Funcionario" ou "Administrador"
-    const roleUsuario = getRole(); 
+    const roleUsuario = getRole();
+
+    const [usuario, setUsuario] = useState(null);
+
+    useEffect(() => {
+        carregarUsuario();
+    }, []);
+
+    const carregarUsuario = async () => {
+        try {
+            const response = await fetch(
+                API_URL + "/usuarios/perfil",
+                {
+                    headers: {
+                        Authorization: `Bearer ${getToken()}`
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error();
+            }
+
+            const data = await response.json();
+
+            setUsuario(data);
+        } catch (error) {
+            console.error("Erro ao carregar usuário:", error);
+        }
+    };
 
     return (
         <>
-            {/* A Navbar se adapta sozinha lá dentro */}
             <Navbar />
 
-            <img 
+            <img
                 src="../imagens/bannerHome2.jpg"
                 alt="Banner"
                 className="banner-home"
@@ -24,11 +55,11 @@ const Home = () => {
 
             <div className="cabecalho-home">
                 <div className="titulo-home">
-                    Sistema de Logística Reversa
+                    Bem-vindo{usuario?.nome ? `, ${usuario.nome}` : ""} ao RePack
                 </div>
 
                 <div className="subtitulo-home">
-                    Conectando usuários e empresas para o descarte correto de embalagens e geração de recompensas sustentáveis.
+                    Recicle embalagens, ganhe pontos, gere impacto!
                 </div>
             </div>
 
@@ -42,18 +73,22 @@ const Home = () => {
                 </div>
 
                 <div className="texto-home">
-                    {/* ====== CONTEÚDO DINÂMICO BASEADO NA ROLE ====== */}
                     {roleUsuario === "Funcionario" ? (
                         <>
                             <div className="secao-titulo">
                                 Recebimentos da Empresa
                             </div>
+
                             <p>
-                                Gerencie as embalagens entregues pelos usuários, acompanhe os recebimentos e realize as avaliações pendentes.
+                                Gerencie as embalagens entregues pelos usuários,
+                                acompanhe os recebimentos e realize as avaliações
+                                pendentes.
                             </p>
 
                             <p>
-                                Cada recebimento validado contribui para a reciclagem adequada e para a distribuição de pontos aos participantes.
+                                Cada recebimento validado contribui para a
+                                reciclagem adequada e para a distribuição de
+                                pontos aos participantes.
                             </p>
                         </>
                     ) : roleUsuario === "Administrador" ? (
@@ -61,29 +96,35 @@ const Home = () => {
                             <div className="secao-titulo">
                                 Gestão da Plataforma
                             </div>
+
                             <p>
-                                Visão geral do ecossistema RePack. Acesse os relatórios gerenciais, 
-                                gerencie usuários cadastrados e ajuste as regras de pontuação ativa.
+                                Visão geral do ecossistema RePack. Acesse os
+                                relatórios gerenciais, gerencie usuários
+                                cadastrados e ajuste as regras de pontuação
+                                ativa.
                             </p>
                         </>
                     ) : (
                         <>
-                            {/* Conteúdo Padrão para "Usuario" comum ou qualquer outro */}
                             <div className="secao-titulo">
                                 Como funciona?
                             </div>
+
                             <p>
-                                Entregue suas embalagens em pontos de coleta para promover a reciclagem
-                                e acumule pontos de recompensa.
+                                Entregue suas embalagens em pontos de coleta
+                                para promover a reciclagem e acumule pontos de
+                                recompensa.
                             </p>
+
                             <p>
-                                Acompanhe seus envios e suba no ranking dos usuários
-                                que mais reciclam!
+                                Acompanhe seus envios e suba no ranking dos
+                                usuários que mais reciclam.
                             </p>
                         </>
                     )}
                 </div>
             </div>
+
             <div className="painel-home">
                 <div className="painel-home-titulo">
                     Meu Painel
