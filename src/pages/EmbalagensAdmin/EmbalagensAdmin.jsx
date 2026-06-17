@@ -9,22 +9,22 @@ import CampoSelect from "../../componentes/CampoSelect/CampoSelect";
 import Botao from "../../componentes/Botao/Botao";
 
 import embalagemService from "../../services/embalagemService";
-import { getMateriais } from "../../services/materialService";
+import materialService from "../../services/materialService";
 
 function EmbalagensAdmin() {
-    // estados da lista
+    // lista
     const [embalagens, setEmbalagens] = useState([]);
 
-    // estados do formulário
-    const [mostrarFormulario, setMostrarFormulario] = useState(false);
+    // materiais
+    const [materiais, setMateriais] = useState([]);
 
+    // form
+    const [mostrarFormulario, setMostrarFormulario] = useState(false);
     const [idEdicao, setIdEdicao] = useState(null);
+
     const [descricao, setDescricao] = useState("");
     const [materialId, setMaterialId] = useState("");
 
-    const [materiais, setMateriais] = useState([]);
-
-    // carregar dados
     useEffect(() => {
         carregarEmbalagens();
         carregarMateriais();
@@ -32,7 +32,7 @@ function EmbalagensAdmin() {
 
     const carregarEmbalagens = async () => {
         try {
-            const dados = await getMateriais();
+            const dados = await embalagemService.listarEmbalagens();
             setEmbalagens(dados);
         } catch (err) {
             alert(err.message);
@@ -48,7 +48,6 @@ function EmbalagensAdmin() {
         }
     };
 
-    // abrir formulário novo
     const novaEmbalagem = () => {
         setIdEdicao(null);
         setDescricao("");
@@ -56,7 +55,6 @@ function EmbalagensAdmin() {
         setMostrarFormulario(true);
     };
 
-    // salvar
     const salvar = async (e) => {
         e.preventDefault();
 
@@ -79,7 +77,6 @@ function EmbalagensAdmin() {
         }
     };
 
-    // editar
     const editar = (embalagem) => {
         setIdEdicao(embalagem.id);
         setDescricao(embalagem.descricao);
@@ -87,7 +84,6 @@ function EmbalagensAdmin() {
         setMostrarFormulario(true);
     };
 
-    // deletar
     const deletar = async (id) => {
         if (!window.confirm("Deseja realmente excluir?")) return;
 
@@ -117,8 +113,10 @@ function EmbalagensAdmin() {
                     <div className="lista">
                         {embalagens.map((e) => (
                             <div key={e.id} className="card">
-                                <p><strong>{e.descricao}</strong></p>
-                                <p>Material: {e.materialDescricao}</p>
+                                <div>
+                                    <strong>{e.descricao}</strong>
+                                    <p>Material: {e.materialDescricao}</p>
+                                </div>
 
                                 <div className="acoes">
                                     <Botao onClick={() => editar(e)}>
@@ -155,11 +153,12 @@ function EmbalagensAdmin() {
                         />
 
                         <div className="botoes">
-                            <Botao>
+                            <Botao type="submit">
                                 Salvar
                             </Botao>
 
                             <Botao
+                                type="button"
                                 onClick={() => setMostrarFormulario(false)}
                             >
                                 Cancelar
