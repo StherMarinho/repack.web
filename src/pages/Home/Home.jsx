@@ -61,6 +61,12 @@ const Home = () => {
                 <div className="subtitulo-home">
                     Recicle embalagens, ganhe pontos, gere impacto!
                 </div>
+
+                {roleUsuario === "Usuario" && (
+                    <div className="painel-home-titulo painel-home-titulo-home">
+                        Meu Painel
+                    </div>
+                )}
             </div>
 
             <div className="conteudo-home">
@@ -126,9 +132,11 @@ const Home = () => {
             </div>
 
             <div className="painel-home">
-                <div className="painel-home-titulo">
-                    Meu Painel
-                </div>
+                {roleUsuario !== "Usuario" && (
+                    <div className="painel-home-titulo">
+                        Meu Painel
+                    </div>
+                )}
 
                 {roleUsuario === "Usuario" && (
                     <DashboardUsuario />
