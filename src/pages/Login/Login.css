@@ -1,57 +1,70 @@
-/* CENTRALIZAÇÃO DA TELA */
-.login-wrapper {
+.login-page {
+    min-height: calc(100vh - 80px);
+
     display: flex;
     justify-content: center;
     align-items: center;
 
-    padding: 60px 20px;
+    padding: 40px 20px;
+
+    background: #f4f6f9;
 }
 
-/* FORM NÃO É ALTERADO (mantém seu componente igual) */
-.login-wrapper form {
+/* CARD IGUAL PERFIL */
+.login-card {
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
 
-    background: #f2f2f2;
+    background: white;
+
+    border-radius: 20px;
 
     padding: 40px;
 
-    border-radius: 12px;
-
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
-/* TÍTULO (caso Formulario use h1/h2 internamente) */
-.login-wrapper h1,
-.login-wrapper h2 {
+/* TÍTULO (mesmo padrão do perfil) */
+.login-card h1,
+.login-card h2 {
     text-align: center;
 
-    font-size: 32px;
-    font-weight: 700;
+    margin-bottom: 30px;
+
+    font-size: 2rem;
 
     color: #154570;
-
-    margin-bottom: 25px;
 }
 
-/* BOTÃO CENTRALIZADO SEM MEXER NO COMPONENTE */
-.login-wrapper button {
-    display: block;
+/* BOTÃO CENTRALIZADO */
+.login-botao-area {
+    display: flex;
+    justify-content: center;
 
-    margin: 25px auto 0;
+    margin-top: 20px;
+}
 
+/* BOTÃO PADRÃO CONTROLADO */
+.login-card button {
     min-width: 200px;
+    height: 44px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 600;
 }
 
 /* LINK */
 .link {
     text-align: center;
 
+    margin-top: 20px;
+
     color: #154570;
 
     cursor: pointer;
-
-    margin-top: 18px;
 }
 
 .link:hover {
@@ -68,8 +81,8 @@
 
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
     gap: 12px;
 
@@ -77,8 +90,8 @@
 }
 
 .loading-spinner {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
 
     border: 5px solid #dbeafe;
     border-top: 5px solid #154570;
@@ -110,24 +123,34 @@
 
     font-weight: 600;
 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 
     z-index: 10000;
 }
 
 /* RESPONSIVO */
 @media (max-width: 768px) {
-    .login-wrapper form {
-        padding: 30px;
+    .login-card {
+        padding: 30px 20px;
+    }
+
+    .login-card h1,
+    .login-card h2 {
+        font-size: 1.6rem;
     }
 }
 
 @media (max-width: 480px) {
-    .login-wrapper {
-        padding: 30px 15px;
+    .login-page {
+        padding: 20px 12px;
     }
 
-    .login-wrapper button {
+    .login-card {
+        padding: 20px 15px;
+        border-radius: 14px;
+    }
+
+    .login-card button {
         width: 100%;
     }
 }

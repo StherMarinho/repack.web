@@ -36,7 +36,7 @@ const Login = () => {
                 navigate("/home");
             }, 1000);
 
-        } catch (e) {
+        } catch {
             alert("Erro ao realizar login");
         } finally {
             setCarregando(false);
@@ -60,39 +60,42 @@ const Login = () => {
                 </div>
             )}
 
-            {/* SÓ O CONTAINER EXTERNO MUDOU */}
-            <div className="login-wrapper">
+            <div className="login-page">
+                <div className="login-card">
 
-                <Formulario titulo="Login" onSubmit={aoLogar}>
+                    <Formulario titulo="Login" onSubmit={aoLogar}>
 
-                    <CampoTexto
-                        obrigatorio
-                        label="Email"
-                        valor={email}
-                        aoAlterado={setEmail}
-                    />
+                        <CampoTexto
+                            obrigatorio
+                            label="Email"
+                            valor={email}
+                            aoAlterado={setEmail}
+                        />
 
-                    <CampoTexto
-                        obrigatorio
-                        label="Senha"
-                        type="password"
-                        valor={senha}
-                        aoAlterado={setSenha}
-                    />
+                        <CampoTexto
+                            obrigatorio
+                            label="Senha"
+                            type="password"
+                            valor={senha}
+                            aoAlterado={setSenha}
+                        />
 
-                    <Botao disabled={carregando}>
-                        Entrar
-                    </Botao>
+                        <div className="login-botao-area">
+                            <Botao disabled={carregando}>
+                                Entrar
+                            </Botao>
+                        </div>
 
-                    <p
-                        onClick={() => navigate("/cadastro")}
-                        className="link"
-                    >
-                        Não tem conta? Cadastre-se
-                    </p>
+                        <p
+                            onClick={() => navigate("/cadastro")}
+                            className="link"
+                        >
+                            Não tem conta? Cadastre-se
+                        </p>
 
-                </Formulario>
+                    </Formulario>
 
+                </div>
             </div>
         </>
     );
