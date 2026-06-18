@@ -45,7 +45,8 @@ const Navbar = () => {
             case "Administrador":
                 return (
                     <>
-                        <li><Link to="/embalagens" onClick={fecharMenu}>Embalagens</Link></li> {/*tem que fazer */}
+                        <li><Link to="/empresas" onClick={fecharMenu}>Empresas</Link></li>
+                        <li><Link to="/embalagens" onClick={fecharMenu}>Materiais</Link></li> {/*tem que fazer */}
                         <li><Link to="/mapa" onClick={fecharMenu}>Mapa</Link></li>
                         <li><Link to="/regras" onClick={fecharMenu}>Regras de Pontuação</Link></li>
                         <li><Link to="/relatorios" onClick={fecharMenu}>Relatórios</Link></li>
