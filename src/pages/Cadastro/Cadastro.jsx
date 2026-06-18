@@ -7,6 +7,7 @@ import Formulario from "../../componentes/Formulario/Formulario";
 import Banner from "../../componentes/Banner/Banner";
 
 import { register } from "../../services/authService";
+
 import "./Cadastro.css";
 
 const Cadastro = () => {
@@ -18,6 +19,7 @@ const Cadastro = () => {
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [telefone, setTelefone] = useState("");
     const [carregando, setCarregando] = useState(false);
+    const [sucesso, setSucesso] = useState(false);
 
     const aoCadastrar = async (e) => {
         e.preventDefault();
@@ -43,8 +45,12 @@ const Cadastro = () => {
                 idTipoUsuario: 1
             });
 
-            alert("Cadastro realizado!");
-            navigate("/");
+            setSucesso(true);
+
+            setTimeout(() => {
+                navigate("/");
+            }, 1200);
+
         } catch {
             alert("Erro no cadastro");
         } finally {
@@ -56,26 +62,43 @@ const Cadastro = () => {
         <>
             <Banner />
 
-            <Formulario 
-                titulo="Cadastro" 
-                onSubmit={aoCadastrar}
-            >
-                <CampoTexto label="Nome" valor={nome} aoAlterado={setNome} obrigatorio />
-                <CampoTexto label="Email" valor={email} aoAlterado={setEmail} obrigatorio />
-                <CampoTexto label="Senha" type="password" valor={senha} aoAlterado={setSenha} obrigatorio />
-                <CampoTexto label="Confirmar Senha" type="password" valor={confirmarSenha} aoAlterado={setConfirmarSenha} obrigatorio />
-                <CampoTexto label="Telefone" valor={telefone} aoAlterado={setTelefone} />
+            {/* LOADING OVERLAY */}
+            {carregando && (
+                <div className="loading-overlay">
+                    <div className="loading-spinner"></div>
+                    <p>Criando sua conta...</p>
+                </div>
+            )}
 
-                <Botao disabled={carregando}>Cadastrar</Botao>
+            {/* TOAST SUCESSO */}
+            {sucesso && (
+                <div className="success-toast">
+                    ✓ Cadastro realizado com sucesso
+                </div>
+            )}
 
-                {carregando && <p className="mt-2">Carregando...</p>}
+            <div className="cadastro-page">
+                <Formulario titulo="Cadastro" onSubmit={aoCadastrar}>
 
-                <p 
-                    onClick={() => navigate("/")} className="link mt-4"
-                >
-                    Já tem conta? Faça login
-                </p>
-            </Formulario>
+                    <CampoTexto label="Nome" valor={nome} aoAlterado={setNome} obrigatorio />
+                    <CampoTexto label="Email" valor={email} aoAlterado={setEmail} obrigatorio />
+                    <CampoTexto label="Senha" type="password" valor={senha} aoAlterado={setSenha} obrigatorio />
+                    <CampoTexto label="Confirmar Senha" type="password" valor={confirmarSenha} aoAlterado={setConfirmarSenha} obrigatorio />
+                    <CampoTexto label="Telefone" valor={telefone} aoAlterado={setTelefone} />
+
+                    <Botao disabled={carregando}>
+                        Cadastrar
+                    </Botao>
+
+                    <p
+                        onClick={() => navigate("/")}
+                        className="link"
+                    >
+                        Já tem conta? Faça login
+                    </p>
+
+                </Formulario>
+            </div>
         </>
     );
 };

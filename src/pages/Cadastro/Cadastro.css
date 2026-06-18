@@ -1,25 +1,159 @@
-.cadastro {
+.cadastro-page {
+    min-height: calc(100vh - 80px);
+
     display: flex;
     justify-content: center;
-    margin: 80px 0;
+    align-items: center;
+
+    padding: 40px 20px;
+
+    background: #f4f6f9;
 }
 
-.cadastro form {
-    width: 400px;
+/* FORMULÁRIO (mesma base do login, mais largo) */
+.cadastro-page form {
+    width: 100%;
+    max-width: 650px;
+
     background: #f2f2f2;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 8px 8px 16px rgba(0,0,0,0.08);
+
+    padding: 45px;
+
+    border-radius: 12px;
+
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.08);
 }
 
+/* TÍTULO DO FORM */
+.cadastro-page h1,
+.cadastro-page h2 {
+    text-align: center;
+
+    color: #154570;
+
+    font-size: 34px;
+    font-weight: 700;
+
+    margin-bottom: 25px;
+}
+
+/* BOTÃO CENTRALIZADO E PADRONIZADO */
+.cadastro-page button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 240px;
+    height: 44px;
+
+    margin: 25px auto 0;
+
+    font-weight: 600;
+}
+
+/* LINK LOGIN */
 .link {
     text-align: center;
-    margin-top: 15px;
-    color: #6278f7;
+
+    margin-top: 18px;
+
+    color: #154570;
+
     cursor: pointer;
+
     font-size: 14px;
 }
 
 .link:hover {
     text-decoration: underline;
+}
+
+/* LOADING OVERLAY */
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(4px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    z-index: 9999;
+}
+
+.loading-overlay p {
+    color: #154570;
+    font-weight: 600;
+}
+
+/* SPINNER */
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+
+    border: 5px solid #dbeafe;
+    border-top: 5px solid #154570;
+
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* TOAST SUCESSO */
+.success-toast {
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    background: #16a34a;
+    color: white;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+    z-index: 10000;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .cadastro-page form {
+        max-width: 520px;
+        padding: 30px;
+    }
+
+    .cadastro-page h1,
+    .cadastro-page h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cadastro-page {
+        padding: 20px 12px;
+    }
+
+    .cadastro-page form {
+        padding: 20px;
+    }
+
+    .cadastro-page button {
+        width: 100%;
+    }
 }
