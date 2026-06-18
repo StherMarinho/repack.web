@@ -70,7 +70,7 @@
 }
 
 .envios-admin__btn--editar {
-    background-color: #21a2f2;
+    background-color: #154570;
     color: white;
 }
 
@@ -151,7 +151,7 @@
 .envios-admin__campo input:focus,
 .envios-admin__campo select:focus {
     outline: none;
-    border-color: #21a2f2;
+    border-color: #154570;
 }
 
 .envios-admin__modal-acoes {
