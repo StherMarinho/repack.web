@@ -7,7 +7,7 @@ import Formulario from "../../componentes/Formulario/Formulario";
 import Banner from "../../componentes/Banner/Banner";
 
 import { login } from "../../services/authService";
-import { salvarLogin } from "../../services/auth";
+import { salvarLogin, getUsuario } from "../../services/auth";
 
 import "./Login.css";
 
@@ -16,6 +16,7 @@ const Login = () => {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+
     const [carregando, setCarregando] = useState(false);
     const [sucesso, setSucesso] = useState(false);
 
@@ -33,9 +34,9 @@ const Login = () => {
 
             setTimeout(() => {
                 navigate("/home");
-            }, 1200);
+            }, 1000);
 
-        } catch {
+        } catch (e) {
             alert("Erro ao realizar login");
         } finally {
             setCarregando(false);
@@ -59,40 +60,39 @@ const Login = () => {
                 </div>
             )}
 
-            <div className="login">
-                <div className="login-card">
-                    <Formulario titulo="Login" onSubmit={aoLogar}>
+            {/* SÓ O CONTAINER EXTERNO MUDOU */}
+            <div className="login-wrapper">
 
-                        <CampoTexto
-                            obrigatorio
-                            label="Email"
-                            valor={email}
-                            aoAlterado={setEmail}
-                        />
+                <Formulario titulo="Login" onSubmit={aoLogar}>
 
-                        <CampoTexto
-                            obrigatorio
-                            label="Senha"
-                            type="password"
-                            valor={senha}
-                            aoAlterado={setSenha}
-                        />
+                    <CampoTexto
+                        obrigatorio
+                        label="Email"
+                        valor={email}
+                        aoAlterado={setEmail}
+                    />
 
-                        <div className="login-botao-area">
-                            <Botao disabled={carregando}>
-                                Entrar
-                            </Botao>
-                        </div>
+                    <CampoTexto
+                        obrigatorio
+                        label="Senha"
+                        type="password"
+                        valor={senha}
+                        aoAlterado={setSenha}
+                    />
 
-                        <p
-                            onClick={() => navigate("/cadastro")}
-                            className="link"
-                        >
-                            Não tem conta? Cadastre-se
-                        </p>
+                    <Botao disabled={carregando}>
+                        Entrar
+                    </Botao>
 
-                    </Formulario>
-                </div>
+                    <p
+                        onClick={() => navigate("/cadastro")}
+                        className="link"
+                    >
+                        Não tem conta? Cadastre-se
+                    </p>
+
+                </Formulario>
+
             </div>
         </>
     );

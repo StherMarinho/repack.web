@@ -1,63 +1,57 @@
-.login {
+/* CENTRALIZAÇÃO DA TELA */
+.login-wrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
+
     padding: 60px 20px;
 }
 
-/* CARD MAIS CONFORTÁVEL */
-.login-card {
+/* FORM NÃO É ALTERADO (mantém seu componente igual) */
+.login-wrapper form {
     width: 100%;
-    max-width: 650px;
-}
+    max-width: 600px;
 
-/* FORM */
-.login form {
-    width: 100%;
     background: #f2f2f2;
 
-    padding: 50px 45px;
+    padding: 40px;
 
-    border-radius: 14px;
+    border-radius: 12px;
 
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-/* TÍTULO */
-.login h1,
-.login h2 {
+/* TÍTULO (caso Formulario use h1/h2 internamente) */
+.login-wrapper h1,
+.login-wrapper h2 {
     text-align: center;
-    color: #154570;
-    font-size: 34px;
+
+    font-size: 32px;
     font-weight: 700;
-    margin-bottom: 30px;
+
+    color: #154570;
+
+    margin-bottom: 25px;
 }
 
-/* BOTÃO CENTRALIZADO E AJUSTADO */
-.login-botao-area {
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
-}
+/* BOTÃO CENTRALIZADO SEM MEXER NO COMPONENTE */
+.login-wrapper button {
+    display: block;
 
-/* GARANTE CENTRALIZAÇÃO DO TEXTO DO BOTÃO */
-.login button {
-    width: 220px;
-    height: 44px;
+    margin: 25px auto 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-weight: 600;
+    min-width: 200px;
 }
 
 /* LINK */
 .link {
     text-align: center;
+
     color: #154570;
+
     cursor: pointer;
-    margin-top: 22px;
-    font-size: 14px;
+
+    margin-top: 18px;
 }
 
 .link:hover {
@@ -74,23 +68,17 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    gap: 14px;
+    gap: 12px;
 
     z-index: 9999;
 }
 
-.loading-overlay p {
-    color: #154570;
-    font-weight: 600;
-}
-
-/* SPINNER */
 .loading-spinner {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
 
     border: 5px solid #dbeafe;
     border-top: 5px solid #154570;
@@ -106,57 +94,40 @@
     }
 }
 
-/* TOAST SUCESSO */
+/* TOAST */
 .success-toast {
     position: fixed;
+
     top: 20px;
     right: 20px;
 
     background: #16a34a;
     color: white;
 
-    padding: 14px 20px;
+    padding: 12px 18px;
+
     border-radius: 10px;
 
     font-weight: 600;
 
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 
     z-index: 10000;
-
-    animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 
 /* RESPONSIVO */
 @media (max-width: 768px) {
-    .login form {
-        padding: 35px 25px;
-    }
-
-    .login h1,
-    .login h2 {
-        font-size: 28px;
+    .login-wrapper form {
+        padding: 30px;
     }
 }
 
 @media (max-width: 480px) {
-    .login {
+    .login-wrapper {
         padding: 30px 15px;
     }
 
-    .login button {
+    .login-wrapper button {
         width: 100%;
     }
 }
