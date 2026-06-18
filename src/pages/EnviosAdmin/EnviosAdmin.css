@@ -18,6 +18,14 @@
     margin-bottom: 30px;
 }
 
+.subtitulo-pagina {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 15px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
 .envios-admin__tabela {
     width: 100%;
     border-collapse: collapse;
@@ -202,6 +210,9 @@
     .formEnvios__titulo {
         font-size: 20px;
     }
+    .subtitulo-pagina {
+    font-size: 13px;
+    }
 }
 
 /* CELULAR */
@@ -210,5 +221,8 @@
     .formEnvios__titulo{
         font-size: 16px;
         padding: 0 10px;
+    }
+    .subtitulo-pagina {
+    font-size: 13px;
     }
 }

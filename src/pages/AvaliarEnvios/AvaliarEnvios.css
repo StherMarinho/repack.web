@@ -40,7 +40,7 @@
 .mensagem-carregando {
   text-align: center;
   font-weight: 500;
-  color: #3498db;
+  color: #154570;
   margin-top: 50px;
 }
 
@@ -53,7 +53,7 @@
 }
 
 .texto-calculando-pontos {
-  color: #3498db;
+  color: #154570;
   font-size: 14px;
   font-style: italic;
 }
@@ -257,7 +257,7 @@ button.btn-cancelar:hover, .btn-cancelar:hover {
 
 .form-input:focus, .form-textarea:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: #154570;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 

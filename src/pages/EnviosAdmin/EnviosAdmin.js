@@ -109,6 +109,11 @@ const EnviosAdmin = () => {
             <div className="envios__titulo">
                 Gerenciar Envios
             </div>
+
+            <p className="subtitulo-pagina">
+                Edite ou cancele os envios realizados pelos usuários.
+            </p>
+
             {mensagem && (
                 <p className={`envios-admin__feedback envios-admin__feedback--${mensagem.tipo}`}>
                     {mensagem.texto}
