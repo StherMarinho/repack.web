@@ -2,34 +2,37 @@
     padding: 40px 30px;
 }
 
-.formEnvios__titulo {
-    text-align: center;
-    color: #154570;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 30px;
-}
-
 .envios__titulo {
     text-align: center;
     color: #154570;
     font-size: 34px;
     font-weight: 700;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .subtitulo-pagina {
-    margin-top: 10px;
-    margin-bottom: 0;
+    text-align: center;
+    color: #374151;
     font-size: 15px;
-    color: #6b7280;
-    line-height: 1.5;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.formEnvios__titulo {
+    text-align: center;
+    color: #154570;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
 }
 
 .envios-admin__tabela {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.95rem;
+    font-size: 15px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .envios-admin__tabela th,
@@ -42,7 +45,7 @@
 .envios-admin__tabela th {
     background-color: #f9fafb;
     font-weight: 600;
-    color: #383e49;
+    color: #374151;
 }
 
 .envios-admin__tabela tr:hover {
@@ -52,7 +55,7 @@
 .envios-admin__status {
     padding: 4px 10px;
     border-radius: 20px;
-    font-size: 0.85rem;
+    font-size: 13px;
     font-weight: 600;
 }
 
@@ -74,15 +77,17 @@
 .envios-admin__acoes {
     display: flex;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 .envios-admin__btn {
-    padding: 6px 14px;
+    padding: 8px 14px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.875rem;
+    font-size: 14px;
     font-weight: 600;
+    transition: 0.2s;
 }
 
 .envios-admin__btn--editar {
@@ -91,7 +96,7 @@
 }
 
 .envios-admin__btn--editar:hover {
-    background-color: #1d5c96;
+    background-color: #123b60;
 }
 
 .envios-admin__btn--excluir {
@@ -105,41 +110,38 @@
 
 .envios-admin__btn--cancelar {
     background-color: #e5e7eb;
-    color: #383e49;
+    color: #374151;
 }
 
 .envios-admin__btn--cancelar:hover {
     background-color: #d1d5db;
 }
 
-/* Modal */
+/* MODAL */
+
 .envios-admin__modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    right: 0;
+    bottom: 0;
+
+    background: rgba(0, 0, 0, 0.5);
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     z-index: 1000;
 }
 
 .envios-admin__modal {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 32px;
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
     width: 100%;
     max-width: 450px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-.envios-admin__modal h3 {
-    color: #EF803D;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .envios-admin__campo {
@@ -149,18 +151,18 @@
 .envios-admin__campo label {
     display: block;
     margin-bottom: 6px;
-    font-size: 0.95rem;
+    color: #374151;
+    font-size: 15px;
     font-weight: 500;
-    color: #383e49;
 }
 
 .envios-admin__campo input,
 .envios-admin__campo select {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 0.95rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
     box-sizing: border-box;
 }
 
@@ -177,52 +179,91 @@
 }
 
 .envios-admin__feedback {
-    padding: 10px 16px;
-    border-radius: 6px;
-    margin-bottom: 16px;
-    font-size: 0.95rem;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 15px;
 }
 
 .envios-admin__feedback--sucesso {
-    background-color: #d1fae5;
+    background: #d1fae5;
     color: #065f46;
 }
 
 .envios-admin__feedback--erro {
-    background-color: #fee2e2;
+    background: #fee2e2;
     color: #991b1b;
 }
 
 .envios-admin__mensagem {
-    padding: 10px 0;
-    font-size: 1rem;
+    text-align: center;
     color: #555;
+    font-size: 15px;
+    margin: 20px 0;
 }
 
 .envios-admin__mensagem--erro {
     color: #c0392b;
-    margin: 30px;
 }
 
 /* TABLET */
+
 @media (max-width: 768px) {
 
-    .formEnvios__titulo {
-        font-size: 20px;
+    .envios-admin {
+        padding: 30px 20px;
     }
+
+    .envios__titulo {
+        font-size: 28px;
+    }
+
     .subtitulo-pagina {
-    font-size: 13px;
+        font-size: 15px;
+        padding: 0 10px;
+    }
+
+    .envios-admin__tabela {
+        font-size: 14px;
     }
 }
 
 /* CELULAR */
+
 @media (max-width: 480px) {
 
-    .formEnvios__titulo{
-        font-size: 16px;
-        padding: 0 10px;
+    .envios-admin {
+        padding: 20px 15px;
     }
+
+    .envios__titulo {
+        font-size: 26px;
+    }
+
     .subtitulo-pagina {
-    font-size: 13px;
+        font-size: 14px;
+    }
+
+    .formEnvios__titulo {
+        font-size: 18px;
+    }
+
+    .envios-admin__modal {
+        padding: 20px;
+        margin: 0 10px;
+    }
+
+    .envios-admin__tabela {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .envios-admin__acoes {
+        flex-direction: column;
+    }
+
+    .envios-admin__btn {
+        width: 100%;
     }
 }
