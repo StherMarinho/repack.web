@@ -7,7 +7,7 @@ import Formulario from "../../componentes/Formulario/Formulario";
 import Banner from "../../componentes/Banner/Banner";
 
 import { login } from "../../services/authService";
-import { salvarLogin, getUsuario } from "../../services/auth";
+import { salvarLogin } from "../../services/auth";
 
 import "./Login.css";
 
