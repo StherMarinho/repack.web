@@ -7,25 +7,10 @@
 
     padding: 40px 20px;
 
-    /* REMOVIDO: background cinza */
-    /* background: #f4f6f9; */
+    background: #f4f6f9;
 }
 
-/* CARD IGUAL PERFIL */
-.login-card {
-    width: 100%;
-    max-width: 700px;
-
-    background: white;
-
-    border-radius: 20px;
-
-    padding: 40px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-}
-
-/* TÍTULO */
+/* TÍTULO (mesmo padrão do perfil) */
 .login-card h1,
 .login-card h2 {
     text-align: center;
@@ -45,6 +30,7 @@
     margin-top: 20px;
 }
 
+/* BOTÃO PADRÃO CONTROLADO */
 .login-card button {
     min-width: 200px;
     height: 44px;
