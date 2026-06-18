@@ -168,8 +168,10 @@ const EnviosAdmin = () => {
             {envioEditando && (
                 <div className="envios-admin__modal-overlay">
                     <div className="envios-admin__modal">
-                        <h3>Editar Envio #{envioEditando.id}</h3>
- 
+                        <div className="formEnvios__titulo">
+                            Editar Envio #{envioEditando.id}
+                        </div>
+
                         <form onSubmit={handleEditar}>
                             <div className="envios-admin__campo">
                                 <label>Data do envio</label>

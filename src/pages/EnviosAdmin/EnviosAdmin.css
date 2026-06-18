@@ -2,11 +2,12 @@
     padding: 40px 30px;
 }
 
-.envios-admin__titulo {
-    color: #EF803D;
-    margin-bottom: 24px;
-    font-size: 1.8rem;
-    font-weight: 600;
+.formEnvios__titulo {
+    text-align: center;
+    color: #154570;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 30px;
 }
 
 .envios-admin__tabela {
@@ -185,4 +186,21 @@
 .envios-admin__mensagem--erro {
     color: #c0392b;
     margin: 30px;
+}
+
+/* TABLET */
+@media (max-width: 768px) {
+
+    .formEnvios__titulo {
+        font-size: 20px;
+    }
+}
+
+/* CELULAR */
+@media (max-width: 480px) {
+
+    .formEnvios__titulo{
+        font-size: 16px;
+        padding: 0 10px;
+    }
 }
