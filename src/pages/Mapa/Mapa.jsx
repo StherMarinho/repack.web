@@ -119,10 +119,14 @@ const Mapa = () => {
     return (
         <>
             <Navbar />
-            <div className="mapa">
-                <h2 className="mapa_titulo">Pontos de Coleta</h2>
-                <p className="mapa_subtitulo">Encontre o ponto de coleta mais próximo de você!</p>
+                <div className="mapa">
+                    <div className="mapa_titulo">
+                        Pontos de Coleta
+                    </div>
 
+                    <p className="mapa_subtitulo">
+                        Encontre o ponto de coleta mais próximo de você!
+                    </p>
                 {mensagem && (
                     <p className={`mapa_feedback mapa_feedback--${mensagem.tipo}`}>
                         {mensagem.texto}
