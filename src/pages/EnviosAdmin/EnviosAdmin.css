@@ -10,6 +10,14 @@
     margin-bottom: 30px;
 }
 
+.envios__titulo {
+    text-align: center;
+    color: #154570;
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
 .envios-admin__tabela {
     width: 100%;
     border-collapse: collapse;
@@ -75,7 +83,7 @@
 }
 
 .envios-admin__btn--editar:hover {
-    background-color: #1a8fd6;
+    background-color: #1d5c96;
 }
 
 .envios-admin__btn--excluir {
