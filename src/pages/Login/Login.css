@@ -1,21 +1,25 @@
 .login {
     display: flex;
     justify-content: center;
-    margin: 60px 0;
+    padding: 60px 20px;
 }
 
-/* FORMULÁRIO */
+/* CARD MAIS CONFORTÁVEL */
+.login-card {
+    width: 100%;
+    max-width: 650px;
+}
+
+/* FORM */
 .login form {
     width: 100%;
-    max-width: 550px;
-
     background: #f2f2f2;
 
-    padding: 40px;
+    padding: 50px 45px;
 
-    border-radius: 10px;
+    border-radius: 14px;
 
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
 }
 
 /* TÍTULO */
@@ -25,28 +29,35 @@
     color: #154570;
     font-size: 34px;
     font-weight: 700;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
-/* BOTÃO */
+/* BOTÃO CENTRALIZADO E AJUSTADO */
+.login-botao-area {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/* GARANTE CENTRALIZAÇÃO DO TEXTO DO BOTÃO */
 .login button {
-    display: block;
-
     width: 220px;
-    height: 42px;
+    height: 44px;
 
-    margin: 25px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 600;
 }
 
 /* LINK */
 .link {
     text-align: center;
-
     color: #154570;
-
     cursor: pointer;
-
-    margin-top: 20px;
+    margin-top: 22px;
+    font-size: 14px;
 }
 
 .link:hover {
@@ -59,15 +70,14 @@
     inset: 0;
 
     background: rgba(255, 255, 255, 0.75);
-
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(4px);
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    gap: 15px;
+    gap: 14px;
 
     z-index: 9999;
 }
@@ -75,13 +85,12 @@
 .loading-overlay p {
     color: #154570;
     font-weight: 600;
-    font-size: 16px;
 }
 
 /* SPINNER */
 .loading-spinner {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
 
     border: 5px solid #dbeafe;
     border-top: 5px solid #154570;
@@ -100,20 +109,18 @@
 /* TOAST SUCESSO */
 .success-toast {
     position: fixed;
-
     top: 20px;
     right: 20px;
 
     background: #16a34a;
     color: white;
 
-    padding: 12px 18px;
-
+    padding: 14px 20px;
     border-radius: 10px;
 
     font-weight: 600;
 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 
     z-index: 10000;
 
@@ -135,7 +142,7 @@
 /* RESPONSIVO */
 @media (max-width: 768px) {
     .login form {
-        max-width: 500px;
+        padding: 35px 25px;
     }
 
     .login h1,
@@ -146,16 +153,7 @@
 
 @media (max-width: 480px) {
     .login {
-        margin: 30px 15px;
-    }
-
-    .login form {
-        padding: 25px;
-    }
-
-    .login h1,
-    .login h2 {
-        font-size: 26px;
+        padding: 30px 15px;
     }
 
     .login button {

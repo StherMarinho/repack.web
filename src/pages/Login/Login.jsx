@@ -25,10 +25,7 @@ const Login = () => {
         setCarregando(true);
 
         try {
-            const res = await login({
-                email,
-                senha
-            });
+            const res = await login({ email, senha });
 
             salvarLogin(res);
 
@@ -36,9 +33,9 @@ const Login = () => {
 
             setTimeout(() => {
                 navigate("/home");
-            }, 1000);
+            }, 1200);
 
-        } catch (e) {
+        } catch {
             alert("Erro ao realizar login");
         } finally {
             setCarregando(false);
@@ -49,15 +46,13 @@ const Login = () => {
         <>
             <Banner />
 
-            {/* OVERLAY DE LOADING */}
             {carregando && (
                 <div className="loading-overlay">
-                    <div className="loading-spinner"></div>
+                    <div className="loading-spinner" />
                     <p>Entrando no sistema...</p>
                 </div>
             )}
 
-            {/* TOAST DE SUCESSO */}
             {sucesso && (
                 <div className="success-toast">
                     ✓ Login realizado com sucesso
@@ -65,36 +60,39 @@ const Login = () => {
             )}
 
             <div className="login">
-                <Formulario
-                    titulo="Login"
-                    onSubmit={aoLogar}
-                >
-                    <CampoTexto
-                        obrigatorio
-                        label="Email"
-                        valor={email}
-                        aoAlterado={setEmail}
-                    />
+                <div className="login-card">
+                    <Formulario titulo="Login" onSubmit={aoLogar}>
 
-                    <CampoTexto
-                        obrigatorio
-                        label="Senha"
-                        type="password"
-                        valor={senha}
-                        aoAlterado={setSenha}
-                    />
+                        <CampoTexto
+                            obrigatorio
+                            label="Email"
+                            valor={email}
+                            aoAlterado={setEmail}
+                        />
 
-                    <Botao disabled={carregando}>
-                        Entrar
-                    </Botao>
+                        <CampoTexto
+                            obrigatorio
+                            label="Senha"
+                            type="password"
+                            valor={senha}
+                            aoAlterado={setSenha}
+                        />
 
-                    <p
-                        onClick={() => navigate("/cadastro")}
-                        className="link mt-4"
-                    >
-                        Não tem conta? Cadastre-se
-                    </p>
-                </Formulario>
+                        <div className="login-botao-area">
+                            <Botao disabled={carregando}>
+                                Entrar
+                            </Botao>
+                        </div>
+
+                        <p
+                            onClick={() => navigate("/cadastro")}
+                            className="link"
+                        >
+                            Não tem conta? Cadastre-se
+                        </p>
+
+                    </Formulario>
+                </div>
             </div>
         </>
     );
