@@ -39,7 +39,7 @@ const Navbar = () => {
                         <li><Link to="/cadastrar-envio" onClick={fecharMenu}>Cadastrar Envio</Link></li>
                         <li><Link to="/envios-empresa" onClick={fecharMenu}>Ver envios</Link></li>
                         <li><Link to="/aprovar-envios" onClick={fecharMenu}>Avaliar Envios</Link></li>
-                        <li><Link to="/funcionario/envios" onClick={fecharMenu}>Envios</Link></li>
+                        <li><Link to="/funcionario/envios" onClick={fecharMenu}>Editar Envios</Link></li>
                     </>
                 );
             case "Administrador":
