@@ -15,6 +15,11 @@ const GerenciarUsuarios = () => {
     const [usuarios, setUsuarios] =
         useState([]);
 
+    const [paginaAtual, setPaginaAtual] =
+        useState(1);
+
+    const itensPorPagina = 10;
+
     useEffect(() => {
 
         carregarUsuarios();
@@ -80,6 +85,25 @@ const GerenciarUsuarios = () => {
         }
     };
 
+    // PAGINAÇÃO
+
+    const indiceUltimo =
+        paginaAtual * itensPorPagina;
+
+    const indicePrimeiro =
+        indiceUltimo - itensPorPagina;
+
+    const usuariosPaginados =
+        usuarios.slice(
+            indicePrimeiro,
+            indiceUltimo
+        );
+
+    const totalPaginas =
+        Math.ceil(
+            usuarios.length / itensPorPagina
+        );
+
     return (
         <>
             <Navbar />
@@ -117,7 +141,7 @@ const GerenciarUsuarios = () => {
 
                         <tbody>
 
-                            {usuarios.map(usuario => (
+                            {usuariosPaginados.map(usuario => (
 
                                 <tr key={usuario.id}>
 
@@ -191,36 +215,43 @@ const GerenciarUsuarios = () => {
                         </tbody>
 
                     </table>
-                    <div className="paginacao">
-                        <button
-                            className="paginacao-btn"
-                            disabled={paginaAtual === 1}
-                            onClick={() =>
-                                setPaginaAtual(
-                                    paginaAtual - 1
-                                )
-                            }
-                        >
-                            Anterior
-                        </button>
 
-                        <span className="paginacao-info">
-                            Página {paginaAtual} de {totalPaginas}
-                        </span>
+                    {totalPaginas > 1 && (
 
-                        <button
-                            className="paginacao-btn"
-                            disabled={paginaAtual === totalPaginas}
-                            onClick={() =>
-                                setPaginaAtual(
-                                    paginaAtual + 1
-                                )
-                            }
-                        >
-                            Próxima
-                        </button>
+                        <div className="paginacao">
 
-                    </div>
+                            <button
+                                className="paginacao-btn"
+                                disabled={paginaAtual === 1}
+                                onClick={() =>
+                                    setPaginaAtual(
+                                        paginaAtual - 1
+                                    )
+                                }
+                            >
+                                Anterior
+                            </button>
+
+                            <span className="paginacao-info">
+                                Página {paginaAtual} de {totalPaginas}
+                            </span>
+
+                            <button
+                                className="paginacao-btn"
+                                disabled={paginaAtual === totalPaginas}
+                                onClick={() =>
+                                    setPaginaAtual(
+                                        paginaAtual + 1
+                                    )
+                                }
+                            >
+                                Próxima
+                            </button>
+
+                        </div>
+
+                    )}
+
                 </div>
 
             </div>
