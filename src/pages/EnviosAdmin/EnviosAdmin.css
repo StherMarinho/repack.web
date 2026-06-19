@@ -219,7 +219,7 @@
 .paginacao-btn {
     padding: 8px 14px;
     border: 1px solid #d1d5db;
-    background-color: #fff;
+    background: #fff;
     color: #374151;
     font-size: 14px;
     font-weight: 600;
@@ -229,7 +229,7 @@
 }
 
 .paginacao-btn:hover:not(:disabled) {
-    background-color: #f3f4f6;
+    background: #f3f4f6;
 }
 
 .paginacao-btn:disabled {

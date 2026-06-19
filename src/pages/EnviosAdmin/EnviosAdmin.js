@@ -35,7 +35,7 @@ const EnviosAdmin = () => {
                 }
 
                 setEmpresas(resultadoEmpresas.filter(e => e.ativo));
-            } catch (err) {
+            } catch {
                 setErro("Erro ao conectar com o servidor.");
             } finally {
                 setCarregando(false);
@@ -44,6 +44,11 @@ const EnviosAdmin = () => {
 
         carregar();
     }, []);
+
+    // RESET página quando dados mudam
+    useEffect(() => {
+        setPaginaAtual(1);
+    }, [envios]);
 
     const formatarData = (dataString) => {
         const data = new Date(dataString);
@@ -55,6 +60,7 @@ const EnviosAdmin = () => {
         if (!confirmar) return;
 
         const resultado = await envioService.cancelarEnvio(id);
+
         if (resultado.sucesso) {
             setEnvios((prev) =>
                 prev.map((e) =>
@@ -89,13 +95,14 @@ const EnviosAdmin = () => {
                     env.id === envioEditando.id
                         ? {
                             ...env,
-                            dataEnvio: dataEnvio,
+                            dataEnvio,
                             nomeEmpresa: empresas.find(e => e.id === parseInt(idEmpresa))?.nome,
                             quantidadeItens: parseInt(quantidadeItens),
                         }
                         : env
                 )
             );
+
             setMensagem({ tipo: "sucesso", texto: "Envio atualizado com sucesso!" });
             setEnvioEditando(null);
         } else {
@@ -103,38 +110,46 @@ const EnviosAdmin = () => {
         }
     };
 
-    // =========================
-    // PAGINAÇÃO LOGIC
-    // =========================
+    // PAGINAÇÃO
     const indiceUltimo = paginaAtual * itensPorPagina;
     const indicePrimeiro = indiceUltimo - itensPorPagina;
 
     const enviosPaginados = envios.slice(indicePrimeiro, indiceUltimo);
 
-    const totalPaginas = Math.ceil(envios.length / itensPorPagina);
+    const totalPaginas = Math.max(
+        1,
+        Math.ceil(envios.length / itensPorPagina)
+    );
 
-    if (carregando)
+    if (carregando) {
         return (
             <>
                 <Navbar />
                 <p className="envios-admin__mensagem">Carregando envios...</p>
             </>
         );
+    }
 
-    if (erro)
+    if (erro) {
         return (
             <>
                 <Navbar />
-                <p className="envios-admin__mensagem envios-admin__mensagem--erro">{erro}</p>
+                <p className="envios-admin__mensagem envios-admin__mensagem--erro">
+                    {erro}
+                </p>
             </>
         );
+    }
 
     return (
         <>
             <Navbar />
 
             <div className="envios-admin">
-                <div className="envios__titulo">Gerenciar Envios</div>
+
+                <div className="envios__titulo">
+                    Gerenciar Envios
+                </div>
 
                 <p className="subtitulo-pagina">
                     Edite ou cancele os envios realizados pelos usuários.
@@ -146,10 +161,13 @@ const EnviosAdmin = () => {
                     </p>
                 )}
 
-                {envios.length === 0 ? (
-                    <p className="envios-admin__mensagem">Nenhum envio encontrado.</p>
+                {enviosPaginados.length === 0 ? (
+                    <p className="envios-admin__mensagem">
+                        Nenhum envio encontrado.
+                    </p>
                 ) : (
                     <table className="envios-admin__tabela">
+
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -184,7 +202,6 @@ const EnviosAdmin = () => {
                                         </button>
 
                                         <button
-                                            type="button"
                                             className="envios-admin__btn envios-admin__btn--excluir"
                                             onClick={() => handleCancelar(envio.id)}
                                         >
@@ -194,10 +211,10 @@ const EnviosAdmin = () => {
                                 </tr>
                             ))}
                         </tbody>
+
                     </table>
                 )}
 
-                {/* ================= PAGINAÇÃO ================= */}
                 {totalPaginas > 1 && (
                     <div className="paginacao">
 
@@ -224,7 +241,7 @@ const EnviosAdmin = () => {
                     </div>
                 )}
 
-                {/* Modal de edição permanece igual */}
+                {/* MODAL permanece igual */}
                 {envioEditando && (
                     <div className="envios-admin__modal-overlay">
                         <div className="envios-admin__modal">
@@ -239,7 +256,6 @@ const EnviosAdmin = () => {
                                         type="date"
                                         value={dataEnvio}
                                         onChange={(e) => setDataEnvio(e.target.value)}
-                                        required
                                     />
                                 </div>
 
@@ -248,9 +264,8 @@ const EnviosAdmin = () => {
                                     <select
                                         value={idEmpresa}
                                         onChange={(e) => setIdEmpresa(e.target.value)}
-                                        required
                                     >
-                                        <option value="">Selecione uma empresa</option>
+                                        <option value="">Selecione</option>
                                         {empresas.map((empresa) => (
                                             <option key={empresa.id} value={empresa.id}>
                                                 {empresa.nome}
@@ -260,18 +275,16 @@ const EnviosAdmin = () => {
                                 </div>
 
                                 <div className="envios-admin__campo">
-                                    <label>Quantidade de embalagens</label>
+                                    <label>Quantidade</label>
                                     <input
                                         type="number"
                                         value={quantidadeItens}
                                         onChange={(e) => setQuantidadeItens(e.target.value)}
-                                        min="1"
-                                        required
                                     />
                                 </div>
 
                                 <div className="envios-admin__modal-acoes">
-                                    <button type="submit" className="envios-admin__btn envios-admin__btn--editar">
+                                    <button className="envios-admin__btn envios-admin__btn--editar">
                                         Salvar
                                     </button>
 
@@ -288,6 +301,7 @@ const EnviosAdmin = () => {
                         </div>
                     </div>
                 )}
+
             </div>
         </>
     );
