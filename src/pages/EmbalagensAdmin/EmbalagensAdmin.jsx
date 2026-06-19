@@ -21,6 +21,27 @@ export default function GerenciarEmbalagens() {
     pesoMedio: '',
     idTipo: '',
   });
+  const [paginaAtual, setPaginaAtual] = useState(1);
+
+  const itensPorPagina = 10;
+
+  const indiceInicial =
+    (paginaAtual - 1) * itensPorPagina;
+
+  const indiceFinal =
+    indiceInicial + itensPorPagina;
+
+  const embalagensPaginadas =
+    embalagens.slice(
+      indiceInicial,
+      indiceFinal
+    );
+
+  const totalPaginas =
+    Math.ceil(
+      embalagens.length /
+      itensPorPagina
+    );
 
   const carregarDadosTela = async () => {
     try {
@@ -33,6 +54,7 @@ export default function GerenciarEmbalagens() {
       ]);
 
       setEmbalagens(dadosEmbalagens || []);
+      setPaginaAtual(1);
       setMateriais(dadosMateriais || []);
     } catch (err) {
       setErro("Erro ao carregar as informações das embalagens.");
@@ -233,7 +255,7 @@ export default function GerenciarEmbalagens() {
                     </tr>
                   </thead>
                   <tbody>
-                    {embalagens.map((emb) => (
+                    {embalagensPaginadas.map((emb) => (
                       <tr key={emb.id}>
                         <td><span className="badge-id-embalagem">#{emb.id}</span></td>
                         <td><span className="descricao-embalagem-destaque">{emb.descricao}</span></td>
@@ -259,6 +281,41 @@ export default function GerenciarEmbalagens() {
                     ))}
                   </tbody>
                 </table>
+                {totalPaginas > 1 && (
+
+                  <div className="paginacao">
+
+                    <button
+                      className="paginacao-btn"
+                      disabled={paginaAtual === 1}
+                      onClick={() =>
+                        setPaginaAtual(
+                          paginaAtual - 1
+                        )
+                      }
+                    >
+                      Anterior
+                    </button>
+
+                    <span className="paginacao-info">
+                      Página {paginaAtual} de {totalPaginas}
+                    </span>
+
+                    <button
+                      className="paginacao-btn"
+                      disabled={paginaAtual === totalPaginas}
+                      onClick={() =>
+                        setPaginaAtual(
+                          paginaAtual + 1
+                        )
+                      }
+                    >
+                      Próxima
+                    </button>
+
+                  </div>
+
+                )}
               </div>
             )}
           </div>
