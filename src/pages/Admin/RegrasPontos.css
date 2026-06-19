@@ -1,212 +1,59 @@
-.regras-page {
-  padding: 1.5rem;
-}
-
-.regras-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.25rem;
-}
-
 .regras-titulo {
-  font-size: 20px;
-  font-weight: 500;
-  color: #1a1a1a;
+  font-size: 34px;
+  font-weight: 700;
+  color: #154570;
 }
 
 .btn-add {
-  background: #f97316;
-  border: solid 1px brown;
-  color: #7c2d12;
-  padding: 8px 16px;
+  background: #154570;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
   border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
-.btn-add:hover { background: #ea6c0a; }
+.btn-add:hover {
+  background: #0f3354;
+}
 
 .table-wrap {
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
+thead {
+  background: #154570;
+  color: #fff;
 }
-
-thead { background: #fafafa; }
 
 th {
-  padding: 10px 14px;
-  text-align: left;
-  font-weight: 500;
-  color: #888;
-  border-bottom: 1px solid #eee;
+  padding: 14px;
+  font-weight: 600;
+  border: none;
 }
 
-td {
-  padding: 10px 14px;
-  color: #1a1a1a;
-  border-bottom: 1px solid #eee;
-}
-
-tr:last-child td { border-bottom: none; }
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 11px;
-  padding: 3px 10px;
-  border-radius: 99px;
-  font-weight: 500;
-}
-
-.badge-active { background: #76e39c; color: #166534; }
-.badge-inactive { background: #7c7d7d; color: #1b1b1c; }
-
-.actions { display: flex; gap: 6px; }
-
-.btn-icon {
-  border: 1px solid #ddd;
-  background: #fff;
-  border-radius: 8px;
-  padding: 5px 8px;
-  cursor: pointer;
-  color: #555;
-  font-size: 14px;
+.paginacao {
   display: flex;
-  align-items: center;
-}
-
-.btn-icon:hover { background: #f5f5f5; }
-.btn-icon.danger { color: #dc2626; border-color: #fca5a5; }
-.btn-icon.danger:hover { background: #fef2f2; }
-
-/* ========================================
-   Modais (Criar, Editar e Deletar)
-   ======================================== */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5) !important; /* Escurece o fundo ligeiramente mais forte para contraste */
-  display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 9999 !important; /* Garante ficar por cima de tudo, inclusive da navbar sticky */
+  gap: 14px;
+  padding: 16px;
+  border-top: 1px solid #e2e8f0;
 }
 
-.modal {
-  position: relative;
-  z-index: 10000;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  width: 100%;
-  max-width: 400px;
-  border: 1px solid #eee;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-.delete-modal {
-  position: relative;
-  z-index: 10000;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  width: 100%;
-  max-width: 340px;
-  text-align: center;
-  border: 1px solid #eee;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-.modal-titulo {
-  font-size: 16px;
-  font-weight: 500;
-  color: #1a1a1a;
-  margin-bottom: 1.25rem;
-  text-align: left;
-}
-
-.form-group { 
-  margin-bottom: 1rem; 
-  text-align: left; /* Garante alinhamento correto dos labels */
-}
-
-.form-group label {
-  font-size: 12px;
-  color: #888;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  font-size: 13px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: #fff;
-  color: #1a1a1a;
-}
-
-.modal-actions {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-  margin-top: 1.25rem;
-}
-
-.btn-cancel {
-  background: transparent;
-  border: 1px solid #ddd;
-  padding: 7px 16px;
-  border-radius: 8px;
-  font-size: 13px;
-  cursor: pointer;
-  color: #1a1a1a;
-}
-
-.btn-save {
-  background: #f97316;
-  color: #7c2d12;
+.paginacao-btn {
+  background: #154570;
+  color: #fff;
   border: none;
-  padding: 7px 16px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 6px;
 }
 
-.btn-save:hover { background: #ea6c0a; }
-
-.delete-icon { font-size: 32px; color: #dc2626; margin-bottom: 12px; }
-.delete-msg { font-size: 15px; font-weight: 500; color: #1a1a1a; margin-bottom: 6px; }
-.delete-sub { font-size: 13px; color: #888; margin-bottom: 1.25rem; }
-
-.btn-delete {
-  background: #fef2f2;
-  color: #dc2626;
-  border: none;
-  padding: 7px 16px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
+.paginacao-btn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
 }
 
-.btn-delete:hover { background: #fee2e2; }
-
-.erro { color: #dc2626; font-size: 13px; margin-bottom: 1rem; }
+.paginacao-info {
+  color: #154570;
+  font-weight: 600;
+}

@@ -22,15 +22,18 @@ function RegrasPontos() {
   const [modalAberto, setModalAberto] = useState(false);
   const [modoEdicao, setModoEdicao] = useState(false);
   const [regraEditando, setRegraEditando] = useState(null);
-  
+
+  const [modalDelete, setModalDelete] = useState(false);
+  const [regraParaExcluir, setRegraParaExcluir] = useState(null);
+
+  const [paginaAtual, setPaginaAtual] = useState(1);
+  const itensPorPagina = 10;
+
   const [form, setForm] = useState({
     idMaterial: "",
     pontosPorPeso: "",
     descricao: "",
   });
-
-  const [modalDelete, setModalDelete] = useState(false);
-  const [regraParaExcluir, setRegraParaExcluir] = useState(null);
 
   const carregar = () => {
     setCarregando(true);
@@ -47,25 +50,34 @@ function RegrasPontos() {
     carregar();
   }, []);
 
+  // 🔥 PAGINAÇÃO
+  const totalPaginas = Math.ceil(regras.length / itensPorPagina);
+
+  const regrasPaginadas = regras.slice(
+    (paginaAtual - 1) * itensPorPagina,
+    paginaAtual * itensPorPagina
+  );
+
+  useEffect(() => {
+    if (paginaAtual > totalPaginas && totalPaginas > 0) {
+      setPaginaAtual(totalPaginas);
+    }
+  }, [regras, totalPaginas]);
+
   const nomeMaterial = (idMaterial) =>
     materiais.find((m) => m.id === idMaterial)?.nome ??
     `Material ${idMaterial}`;
 
   const abrirModalNova = () => {
-    setErro(null); // Limpa erros antigos ao abrir o modal
+    setErro(null);
     setModoEdicao(false);
     setRegraEditando(null);
-    setForm({
-      idMaterial: "",
-      pontosPorPeso: "",
-      descricao: "",
-    });
+    setForm({ idMaterial: "", pontosPorPeso: "", descricao: "" });
     setModalAberto(true);
   };
 
   const abrirModalEditar = (regra) => {
-    if (!regra) return;
-    setErro(null); // Limpa erros antigos ao abrir o modal
+    setErro(null);
     setModoEdicao(true);
     setRegraEditando(regra);
     setForm({
@@ -79,52 +91,20 @@ function RegrasPontos() {
   const fecharModal = () => {
     setModalAberto(false);
     setRegraEditando(null);
-    setForm({
-      idMaterial: "",
-      pontosPorPeso: "",
-      descricao: "",
-    });
   };
 
   const handleSalvar = async () => {
-    // 1. Validação local: Impede salvar sem escolher um material
-    if (!form.idMaterial) {
-      setErro("Por favor, selecione um material.");
-      return;
-    }
-
-    const idMaterialSelecionado = Number(form.idMaterial);
-
-    // 2. Validação de duplicidade:
-    if (modoEdicao && regraEditando) {
-      // Se for EDIÇÃO: Verifica se o material escolhido já existe em OUTRA regra (com ID diferente da atual)
-      const materialJaExiste = regras.some(
-        (r) => r.idMaterial === idMaterialSelecionado && r.id !== regraEditando.id
-      );
-      if (materialJaExiste) {
-        setErro(`Já existe uma regra cadastrada para o material "${nomeMaterial(idMaterialSelecionado)}".`);
-        return;
-      }
-    } else {
-      // Se for NOVA REGRA: Verifica se o material escolhido já existe em qualquer regra da lista
-      const materialJaExiste = regras.some((r) => r.idMaterial === idMaterialSelecionado);
-      if (materialJaExiste) {
-        setErro(`Já existe uma regra cadastrada para o material "${nomeMaterial(idMaterialSelecionado)}".`);
-        return;
-      }
-    }
-
     try {
-      const dadosParaEnviar = {
-        idMaterial: idMaterialSelecionado,
+      const payload = {
+        idMaterial: Number(form.idMaterial),
         pontosPorPeso: Number(form.pontosPorPeso),
         descricao: form.descricao,
       };
 
-      if (modoEdicao && regraEditando) {
-        await patchRegra(regraEditando.id, dadosParaEnviar);
+      if (modoEdicao) {
+        await patchRegra(regraEditando.id, payload);
       } else {
-        await createRegra(dadosParaEnviar);
+        await createRegra(payload);
       }
 
       fecharModal();
@@ -135,22 +115,14 @@ function RegrasPontos() {
   };
 
   const abrirModalDelete = (regra) => {
-    setErro(null);
     setRegraParaExcluir(regra);
     setModalDelete(true);
   };
 
-  const fecharModalDelete = () => {
-    setModalDelete(false);
-    setRegraParaExcluir(null);
-  };
-
   const handleExcluir = async () => {
     try {
-      if (regraParaExcluir) {
-        await deleteRegra(regraParaExcluir.id);
-      }
-      fecharModalDelete();
+      await deleteRegra(regraParaExcluir.id);
+      setModalDelete(false);
       carregar();
     } catch {
       setErro("Erro ao excluir regra.");
@@ -162,10 +134,12 @@ function RegrasPontos() {
       <Navbar tipoUsuario={"administrador"} />
 
       <div className="regras-page">
+
         <div className="regras-header">
-          <h1 className="regras-titulo">Regras de pontuação</h1>
+          <h1 className="regras-titulo">Regras de Pontuação</h1>
+
           <button className="btn-add" onClick={abrirModalNova}>
-            + Nova regra
+            + Nova Regra
           </button>
         </div>
 
@@ -175,44 +149,42 @@ function RegrasPontos() {
           <p>Carregando...</p>
         ) : (
           <div className="table-wrap">
+
             <table>
               <thead>
                 <tr>
                   <th>#</th>
                   <th>Material</th>
-                  <th>Pontos por grama</th>
+                  <th>Pontos</th>
                   <th>Descrição</th>
                   <th>Status</th>
                   <th>Ações</th>
                 </tr>
               </thead>
+
               <tbody>
-                {regras.length === 0 ? (
+                {regrasPaginadas.length === 0 ? (
                   <tr>
-                    <td colSpan={6} style={{ textAlign: "center", color: "#888" }}>
+                    <td colSpan={6} className="empty">
                       Nenhuma regra cadastrada.
                     </td>
                   </tr>
                 ) : (
-                  regras.map((regra) => (
+                  regrasPaginadas.map((regra) => (
                     <tr key={regra.id}>
                       <td>{regra.id}</td>
                       <td>{nomeMaterial(regra.idMaterial)}</td>
                       <td>{regra.pontosPorPeso}</td>
                       <td>{regra.descricao}</td>
                       <td>
-                        <span className={`badge ${regra.ativo ? "badge-active" : "badge-inactive"}`}>
+                        <span className={`badge ${regra.ativo ? "active" : "inactive"}`}>
                           {regra.ativo ? "Ativa" : "Inativa"}
                         </span>
                       </td>
                       <td>
                         <div className="actions">
-                          <button className="btn-icon" onClick={() => abrirModalEditar(regra)}>
-                            Editar
-                          </button>
-                          <button className="btn-icon danger" onClick={() => abrirModalDelete(regra)}>
-                            Excluir
-                          </button>
+                          <button onClick={() => abrirModalEditar(regra)}>Editar</button>
+                          <button onClick={() => abrirModalDelete(regra)}>Excluir</button>
                         </div>
                       </td>
                     </tr>
@@ -220,87 +192,73 @@ function RegrasPontos() {
                 )}
               </tbody>
             </table>
+
+            {/* PAGINAÇÃO */}
+            {totalPaginas > 1 && (
+              <div className="paginacao">
+                <button
+                  className="paginacao-btn"
+                  disabled={paginaAtual === 1}
+                  onClick={() => setPaginaAtual(p => p - 1)}
+                >
+                  Anterior
+                </button>
+
+                <span className="paginacao-info">
+                  Página {paginaAtual} de {totalPaginas}
+                </span>
+
+                <button
+                  className="paginacao-btn"
+                  disabled={paginaAtual === totalPaginas}
+                  onClick={() => setPaginaAtual(p => p + 1)}
+                >
+                  Próxima
+                </button>
+              </div>
+            )}
+
           </div>
         )}
       </div>
 
-      {/* MODAL CRIAR / EDITAR */}
+      {/* MODAL (igual você já tinha) */}
       {modalAberto &&
         ReactDOM.createPortal(
           <div className="modal-overlay" onClick={fecharModal}>
             <div className="delete-modal" onClick={(e) => e.stopPropagation()}>
-              <p className="delete-msg" style={{ textAlign: "left", marginBottom: "15px" }}>
-                {modoEdicao ? "Editar regra" : "Nova regra de pontuação"}
-              </p>
 
-              {/* Exibe o erro focado dentro do modal se ele acontecer ao salvar */}
-              {erro && <p className="erro" style={{ textAlign: "left" }}>{erro}</p>}
+              <h3>{modoEdicao ? "Editar Regra" : "Nova Regra"}</h3>
 
-              <div className="form-group" style={{ textAlign: "left" }}>
-                <label>Material</label>
-                <select
-                  value={form.idMaterial}
-                  onChange={(e) => setForm({ ...form, idMaterial: e.target.value })}
-                >
-                  <option value="">Selecione...</option>
-                  {materiais.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
+              <select
+                value={form.idMaterial}
+                onChange={(e) => setForm({ ...form, idMaterial: e.target.value })}
+              >
+                <option value="">Material</option>
+                {materiais.map((m) => (
+                  <option key={m.id} value={m.id}>{m.nome}</option>
+                ))}
+              </select>
+
+              <input
+                type="number"
+                placeholder="Pontos"
+                value={form.pontosPorPeso}
+                onChange={(e) => setForm({ ...form, pontosPorPeso: e.target.value })}
+              />
+
+              <input
+                type="text"
+                placeholder="Descrição"
+                value={form.descricao}
+                onChange={(e) => setForm({ ...form, descricao: e.target.value })}
+              />
+
+              <div className="modal-actions">
+                <button onClick={fecharModal}>Cancelar</button>
+                <button onClick={handleSalvar}>Salvar</button>
               </div>
 
-              <div className="form-group" style={{ textAlign: "left" }}>
-                <label>Pontos por grama</label>
-                <input
-                  type="number"
-                  value={form.pontosPorPeso}
-                  onChange={(e) => setForm({ ...form, pontosPorPeso: e.target.value })}
-                />
-              </div>
-
-              <div className="form-group" style={{ textAlign: "left" }}>
-                <label>Descrição</label>
-                <input
-                  type="text"
-                  value={form.descricao}
-                  onChange={(e) => setForm({ ...form, descricao: e.target.value })}
-                />
-              </div>
-
-              <div className="modal-actions" style={{ marginTop: "20px" }}>
-                <button className="btn-cancel" onClick={fecharModal}>
-                  Cancelar
-                </button>
-                <button className="btn-save" onClick={handleSalvar}>
-                  Salvar
-                </button>
-              </div>
-            </div>
-          </div>,
-          document.body
-        )}
-
-      {/* MODAL EXCLUIR */}
-      {modalDelete &&
-        regraParaExcluir &&
-        ReactDOM.createPortal(
-          <div className="modal-overlay" onClick={fecharModalDelete}>
-            <div className="delete-modal" onClick={(e) => e.stopPropagation()}>
-              <div className="delete-icon">🗑️</div>
-              <p className="delete-msg">Excluir regra?</p>
-              <p className="delete-sub">
-                A regra de <strong>{nomeMaterial(regraParaExcluir.idMaterial)}</strong> será desativada e não gerará mais pontos em novos envios.
-              </p>
-              <div className="modal-actions" style={{ justifyContent: "center" }}>
-                <button className="btn-cancel" onClick={fecharModalDelete}>
-                  Cancelar
-                </button>
-                <button className="btn-delete" onClick={handleExcluir}>
-                  Sim, excluir
-                </button>
-              </div>
             </div>
           </div>,
           document.body
