@@ -168,12 +168,20 @@
 }
 
 .tabela-embalagens th {
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: #154570;
+  color: #ffffff;
   padding: 14px 18px;
   font-weight: 600;
   font-size: 14px;
-  border-bottom: 2px solid #e2e8f0;
+  border-bottom: none;
+}
+
+.tabela-embalagens th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.tabela-embalagens th:last-child {
+  border-top-right-radius: 10px;
 }
 
 .tabela-embalagens td {
