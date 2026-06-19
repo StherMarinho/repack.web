@@ -7,13 +7,14 @@
 /* HEADER */
 .rel-header {
     margin-bottom: 2.5rem;
+    text-align: center; /* centraliza título e subtítulo */
 }
 
 .rel-titulo {
-    font-size: 2rem;
+    font-size: 34px; /* padrão solicitado */
     font-weight: 700;
-    color: #1a1a2e;
-    margin: 0 0 0.25rem;
+    color: #154570;
+    margin: 0 0 0.4rem;
 }
 
 .rel-subtitulo {
@@ -88,7 +89,7 @@
     flex-wrap: wrap;
 }
 
-/* GRÁFICO DE BARRAS (STATUS) */
+/* GRÁFICO DE STATUS */
 .rel-grafico-status {
     flex: 1;
     min-width: 260px;
@@ -146,7 +147,7 @@
     flex-shrink: 0;
 }
 
-/* GRÁFICO DE EMBALAGENS */
+/* EMBALAGENS */
 .rel-grafico-embalagens {
     background: #fff;
     border-radius: 12px;
@@ -163,6 +164,8 @@
     align-items: center;
     gap: 1rem;
 }
+
+/* restante mantido igual... */
 
 .rel-emb-info {
     display: flex;
