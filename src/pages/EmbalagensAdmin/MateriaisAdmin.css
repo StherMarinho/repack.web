@@ -294,6 +294,69 @@
   gap: 8px;
 }
 
+/* ==========================
+   PAGINAÇÃO
+========================== */
+
+.paginacao {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 20px;
+
+  border-top: 1px solid #e2e8f0;
+}
+
+.paginacao-btn {
+  background: #154570;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 18px;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.paginacao-btn:hover:not(:disabled) {
+  background: #1d5c96;
+}
+
+.paginacao-btn:disabled {
+  background: #cbd5e1;
+
+  cursor: not-allowed;
+}
+
+.paginacao-info {
+  color: #154570;
+
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+
+  .paginacao {
+    flex-direction: column;
+  }
+
+  .paginacao-btn {
+    width: 100%;
+    max-width: 220px;
+  }
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .titulo-pagina { font-size: 30px; }
