@@ -206,41 +206,6 @@
     color: #c0392b;
 }
 
-/* PAGINAÇÃO */
-.paginacao {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.paginacao-btn {
-    padding: 8px 14px;
-    border: none;
-    border-radius: 8px;
-    background-color: #154570;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.2s;
-}
-
-.paginacao-btn:hover:not(:disabled) {
-    background-color: #123b60;
-}
-
-.paginacao-btn:disabled {
-    background-color: #d1d5db;
-    cursor: not-allowed;
-}
-
-.paginacao-info {
-    font-size: 14px;
-    color: #374151;
-    font-weight: 500;
-}
-
 /* TABLET */
 
 @media (max-width: 768px) {
