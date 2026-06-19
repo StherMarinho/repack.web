@@ -1,12 +1,12 @@
 import './EmbalagensAdmin.css';
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa o hook para navegação
+import React, { useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../componentes/Navbar/Navbar';
 import embalagemService from '../../services/embalagemService';
 import { getMateriais } from "../../services/materialService";
 
 export default function GerenciarEmbalagens() {
-  const navigate = useNavigate(); // Inicializa a função de navegação
+  const navigate = useNavigate(); 
   const [embalagens, setEmbalagens] = useState([]);
   const [materiais, setMateriais] = useState([]);
   const [carregando, setCarregando] = useState(true);
