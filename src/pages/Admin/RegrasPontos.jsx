@@ -168,7 +168,7 @@ function RegrasPontos() {
           </div>
 
           <p className="regras-subtitulo">
-            Ajuste a regra dos pontos: ex. “Cada 1g de plástico gera 10 pontos para o usuário”
+            Ajuste a regra dos pontos para um envio.
           </p>
           <button className="btn-add" onClick={abrirModalNova}>
             + Nova regra
