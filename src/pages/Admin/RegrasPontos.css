@@ -2,39 +2,65 @@
   padding: 1.5rem;
 }
 
+/* =========================
+   HEADER (TÍTULO + SUBTÍTULO)
+========================= */
+
 .regras-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.25rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  gap: 6px;
+  position: relative;
 }
 
-/* 🔵 TÍTULO PADRÃO AJUSTADO */
 .regras-titulo {
   font-size: 34px;
   font-weight: 700;
   color: #154570;
   text-align: center;
-  width: 100%;
+  margin: 0;
 }
 
+.regras-subtitulo {
+  font-size: 15px;
+  color: #4b5563;
+  text-align: center;
+  max-width: 650px;
+  line-height: 1.4;
+}
+
+/* botão no canto direito do header */
+.regras-header .btn-add {
+  position: absolute;
+  right: 0;
+  top: 10px;
+}
+
+/* =========================
+   BOTÃO
+========================= */
+
 .btn-add {
-  background: #154570;
+  background: #d97706;
   border: none;
-  color: #fff;
+  color: black;
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .btn-add:hover {
-  background: #0f3354;
+  background: #d97706;
 }
+
+/* =========================
+   TABELA
+========================= */
 
 .table-wrap {
   background: #fff;
@@ -49,10 +75,9 @@ table {
   font-size: 13px;
 }
 
-/* 🔵 CABEÇALHO PADRÃO AZUL */
+/* HEADER AZUL PADRÃO */
 thead {
   background: #154570;
-  color: #fff;
 }
 
 th {
@@ -60,7 +85,7 @@ th {
   text-align: left;
   font-weight: 600;
   color: #fff;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: none;
 }
 
 td {
@@ -73,7 +98,10 @@ tr:last-child td {
   border-bottom: none;
 }
 
-/* BADGE STATUS */
+/* =========================
+   BADGES
+========================= */
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -94,7 +122,10 @@ tr:last-child td {
   color: #1b1b1c;
 }
 
-/* AÇÕES */
+/* =========================
+   AÇÕES
+========================= */
+
 .actions {
   display: flex;
   gap: 6px;
@@ -108,6 +139,8 @@ tr:last-child td {
   cursor: pointer;
   color: #555;
   font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 
 .btn-icon:hover {
@@ -123,60 +156,64 @@ tr:last-child td {
   background: #fef2f2;
 }
 
-/* ================= PAGINAÇÃO ================= */
-.paginacao {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
-  padding: 16px;
-  border-top: 1px solid #e2e8f0;
-}
+/* =========================
+   MODAIS
+========================= */
 
-.paginacao-btn {
-  background: #154570;
-  color: #fff;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.paginacao-btn:hover:not(:disabled) {
-  background: #1d5c96;
-}
-
-.paginacao-btn:disabled {
-  background: #cbd5e1;
-  cursor: not-allowed;
-}
-
-.paginacao-info {
-  color: #154570;
-  font-weight: 600;
-}
-
-/* MODAIS (mantidos) */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5) !important;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999 !important;
+  z-index: 9999;
 }
 
+.modal,
 .delete-modal {
   background: #fff;
   border-radius: 12px;
   padding: 1.5rem;
   width: 100%;
+  max-width: 400px;
+  border: 1px solid #eee;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.delete-modal {
   max-width: 340px;
   text-align: center;
-  border: 1px solid #eee;
 }
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 12px;
+  color: #6b7280;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* =========================
+   BOTÕES MODAL
+========================= */
 
 .modal-actions {
   display: flex;
@@ -185,20 +222,50 @@ tr:last-child td {
   margin-top: 1.25rem;
 }
 
-/* RESPONSIVO */
-@media (max-width: 768px) {
-  .regras-titulo {
-    font-size: 28px;
-  }
+.btn-cancel {
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #1a1a1a;
 }
 
-@media (max-width: 480px) {
-  .regras-header {
-    flex-direction: column;
-    gap: 10px;
-  }
+.btn-save {
+  background: #154570;
+  color: #fff;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
 
-  .paginacao {
-    flex-direction: column;
-  }
+.btn-save:hover {
+  background: #0f3354;
+}
+
+.btn-delete {
+  background: #fef2f2;
+  color: #dc2626;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background: #fee2e2;
+}
+
+/* =========================
+   ERRO
+========================= */
+
+.erro {
+  color: #dc2626;
+  font-size: 13px;
+  margin-bottom: 1rem;
 }
