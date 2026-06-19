@@ -32,7 +32,7 @@
 
     margin-bottom: 12px;
 
-    color: #2b95d6;
+    color: #154570;
 
     font-size: 1.25rem;
 }
@@ -67,7 +67,7 @@
 
     text-align: center;
 
-    color: #2b95d6;
+    color: #154570;
 
     font-size: 1.5rem;
 }
@@ -86,7 +86,7 @@
     border-bottom: 1px solid #e5e7eb;
 }
 
-.usuario-top3-item:last-child {
+.usuario-top3-item:last-of-type {
     border-bottom: none;
 }
 
@@ -120,6 +120,42 @@
     background: #fff2e8;
 }
 
+/* Botão Ranking */
+
+.usuario-ranking-botao {
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 24px;
+}
+
+.usuario-btn-ranking {
+    background: #154570;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 12px 28px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.usuario-btn-ranking:hover {
+    background: #1b5b91;
+
+    transform: translateY(-2px);
+}
+
 /* Mobile */
 
 @media (max-width: 768px) {
@@ -134,5 +170,9 @@
 
     .usuario-nome {
         font-size: 1.1rem;
+    }
+
+    .usuario-btn-ranking {
+        width: 100%;
     }
 }

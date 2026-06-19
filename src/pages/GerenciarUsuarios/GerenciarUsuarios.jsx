@@ -28,8 +28,6 @@ const GerenciarUsuarios = () => {
             const data =
                 await listarUsuarios();
 
-            console.log(data);
-
             setUsuarios(data);
 
         } catch {
@@ -72,10 +70,6 @@ const GerenciarUsuarios = () => {
 
             await desativarUsuario(id);
 
-            alert(
-                "Usuário desativado!"
-            );
-
             carregarUsuarios();
 
         } catch {
@@ -92,9 +86,17 @@ const GerenciarUsuarios = () => {
 
             <div className="usuarios-container">
 
-                <h1>
-                    Gerenciar Usuários
-                </h1>
+                <div className="usuarios-cabecalho">
+
+                    <h1 className="usuarios-titulo">
+                        Gerenciar Usuários
+                    </h1>
+
+                    <p className="usuarios-subtitulo">
+                        Visualize, acompanhe e gerencie os usuários cadastrados na plataforma.
+                    </p>
+
+                </div>
 
                 <div className="tabela-wrapper">
 
@@ -189,7 +191,36 @@ const GerenciarUsuarios = () => {
                         </tbody>
 
                     </table>
+                    <div className="paginacao">
+                        <button
+                            className="paginacao-btn"
+                            disabled={paginaAtual === 1}
+                            onClick={() =>
+                                setPaginaAtual(
+                                    paginaAtual - 1
+                                )
+                            }
+                        >
+                            Anterior
+                        </button>
 
+                        <span className="paginacao-info">
+                            Página {paginaAtual} de {totalPaginas}
+                        </span>
+
+                        <button
+                            className="paginacao-btn"
+                            disabled={paginaAtual === totalPaginas}
+                            onClick={() =>
+                                setPaginaAtual(
+                                    paginaAtual + 1
+                                )
+                            }
+                        >
+                            Próxima
+                        </button>
+
+                    </div>
                 </div>
 
             </div>

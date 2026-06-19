@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import rankingService from "../../services/rankingService";
 import { getUserId } from "../../services/auth";
+
 import "./DashboardUsuario.css";
 
 const DashboardUsuario = () => {
+
+    const navigate = useNavigate();
 
     const [ranking, setRanking] = useState([]);
     const [minhaPosicao, setMinhaPosicao] = useState(null);
@@ -85,6 +90,17 @@ const DashboardUsuario = () => {
                     </div>
 
                 ))}
+
+                <div className="usuario-ranking-botao">
+
+                    <button
+                        className="usuario-btn-ranking"
+                        onClick={() => navigate("/ranking")}
+                    >
+                        Ver Ranking Completo
+                    </button>
+
+                </div>
 
             </div>
 
