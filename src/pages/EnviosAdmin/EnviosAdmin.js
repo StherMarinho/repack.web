@@ -20,10 +20,11 @@ const EnviosAdmin = () => {
         const carregar = async () => {
             try {
                 const [resultadoEnvios, resultadoEmpresas] = await Promise.all([
-                    envioService.listarEnvios({tamanhoPagina: 100}),
+                    envioService.listarEnvios({tamanhoPagina: 100} ),
                     empresaService.listarEmpresas()
                 ]);
- 
+                    console.log("ENVIOS:", resultadoEnvios);
+
                 if (resultadoEnvios.sucesso) {
                     setEnvios(resultadoEnvios.dados.dados);
                 } else {
@@ -106,14 +107,8 @@ const EnviosAdmin = () => {
         <>
         <Navbar />
         <div className="envios-admin">
-            <div className="envios__titulo">
-                Gerenciar Envios
-            </div>
-
-            <p className="subtitulo-pagina">
-                Edite ou cancele os envios realizados pelos usuários.
-            </p>
-
+            <h2 className="envios-admin__titulo">Gerenciar Envios</h2>
+ 
             {mensagem && (
                 <p className={`envios-admin__feedback envios-admin__feedback--${mensagem.tipo}`}>
                     {mensagem.texto}
@@ -174,10 +169,8 @@ const EnviosAdmin = () => {
             {envioEditando && (
                 <div className="envios-admin__modal-overlay">
                     <div className="envios-admin__modal">
-                        <div className="formEnvios__titulo">
-                            Editar Envio #{envioEditando.id}
-                        </div>
-
+                        <h3>Editar Envio #{envioEditando.id}</h3>
+ 
                         <form onSubmit={handleEditar}>
                             <div className="envios-admin__campo">
                                 <label>Data do envio</label>
