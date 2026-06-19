@@ -65,18 +65,14 @@ function RegrasPontos() {
     return regras.slice(inicio, inicio + itensPorPagina);
   }, [regras, paginaAtual]);
 
-  // 🔥 garante pagina válida SEM bug
   useEffect(() => {
-    if (paginaAtual > totalPaginas) {
-      setPaginaAtual(totalPaginas);
-    }
-    if (paginaAtual < 1) {
-      setPaginaAtual(1);
-    }
+    if (paginaAtual > totalPaginas) setPaginaAtual(totalPaginas);
   }, [totalPaginas, paginaAtual]);
 
   const nomeMaterial = (id) =>
     materiais.find((m) => m.id === id)?.nome ?? "Material";
+
+  // ================= MODAL CREATE/EDIT =================
 
   const abrirModalNova = () => {
     setModoEdicao(false);
@@ -96,6 +92,11 @@ function RegrasPontos() {
     setModalAberto(true);
   };
 
+  const fecharModal = () => {
+    setModalAberto(false);
+    setRegraEditando(null);
+  };
+
   const handleSalvar = async () => {
     try {
       const payload = {
@@ -110,12 +111,14 @@ function RegrasPontos() {
         await createRegra(payload);
       }
 
-      setModalAberto(false);
+      fecharModal();
       carregar();
     } catch {
       setErro("Erro ao salvar regra.");
     }
   };
+
+  // ================= MODAL DELETE =================
 
   const abrirModalDelete = (regra) => {
     setRegraParaExcluir(regra);
@@ -132,7 +135,14 @@ function RegrasPontos() {
     }
   };
 
-  if (carregando) return <p>Carregando...</p>;
+  if (carregando) {
+    return (
+      <>
+        <Navbar tipoUsuario="administrador" />
+        <p>Carregando...</p>
+      </>
+    );
+  }
 
   return (
     <>
@@ -178,8 +188,13 @@ function RegrasPontos() {
                     <td>{r.ativo ? "Ativa" : "Inativa"}</td>
                     <td>
                       <div className="actions">
-                        <button onClick={() => abrirModalEditar(r)}>Editar</button>
-                        <button onClick={() => abrirModalDelete(r)}>Excluir</button>
+                        <button onClick={() => abrirModalEditar(r)}>
+                          Editar
+                        </button>
+
+                        <button onClick={() => abrirModalDelete(r)}>
+                          Excluir
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -190,7 +205,6 @@ function RegrasPontos() {
 
           {totalPaginas > 1 && (
             <div className="paginacao">
-
               <button
                 className="paginacao-btn"
                 disabled={paginaAtual === 1}
@@ -210,17 +224,66 @@ function RegrasPontos() {
               >
                 Próxima
               </button>
-
             </div>
           )}
         </div>
       </div>
 
+      {/* MODAL CREATE / EDIT */}
+      {modalAberto &&
+        ReactDOM.createPortal(
+          <div className="modal-overlay">
+            <div className="modal">
+
+              <h3>{modoEdicao ? "Editar Regra" : "Nova Regra"}</h3>
+
+              <select
+                value={form.idMaterial}
+                onChange={(e) =>
+                  setForm({ ...form, idMaterial: e.target.value })
+                }
+              >
+                <option value="">Material</option>
+                {materiais.map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.nome}
+                  </option>
+                ))}
+              </select>
+
+              <input
+                type="number"
+                placeholder="Pontos por peso"
+                value={form.pontosPorPeso}
+                onChange={(e) =>
+                  setForm({ ...form, pontosPorPeso: e.target.value })
+                }
+              />
+
+              <input
+                type="text"
+                placeholder="Descrição"
+                value={form.descricao}
+                onChange={(e) =>
+                  setForm({ ...form, descricao: e.target.value })
+                }
+              />
+
+              <div className="modal-actions">
+                <button onClick={fecharModal}>Cancelar</button>
+                <button onClick={handleSalvar}>Salvar</button>
+              </div>
+
+            </div>
+          </div>,
+          document.body
+        )}
+
       {/* MODAL DELETE */}
       {modalDelete &&
         ReactDOM.createPortal(
           <div className="modal-overlay">
-            <div className="delete-modal">
+            <div className="modal">
 
               <h3>Confirmar exclusão?</h3>
               <p>{regraParaExcluir?.descricao}</p>
@@ -239,7 +302,6 @@ function RegrasPontos() {
           </div>,
           document.body
         )}
-
     </>
   );
 }
