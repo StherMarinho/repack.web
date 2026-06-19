@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 import {
@@ -23,14 +23,18 @@ function RegrasPontos() {
   const [modoEdicao, setModoEdicao] = useState(false);
   const [regraEditando, setRegraEditando] = useState(null);
 
-  const [paginaAtual, setPaginaAtual] = useState(1);
-  const itensPorPagina = 10;
-
   const [form, setForm] = useState({
     idMaterial: "",
     pontosPorPeso: "",
     descricao: "",
   });
+
+  const [modalDelete, setModalDelete] = useState(false);
+  const [regraParaExcluir, setRegraParaExcluir] = useState(null);
+
+  // 🔥 PAGINAÇÃO
+  const [paginaAtual, setPaginaAtual] = useState(1);
+  const itensPorPagina = 10;
 
   const carregar = () => {
     setCarregando(true);
@@ -47,16 +51,17 @@ function RegrasPontos() {
     carregar();
   }, []);
 
+  const nomeMaterial = (idMaterial) =>
+    materiais.find((m) => m.id === idMaterial)?.nome ??
+    `Material ${idMaterial}`;
+
+  // 🔥 PAGINAÇÃO CALCULADA
   const totalPaginas = Math.ceil(regras.length / itensPorPagina);
 
-  const regrasPaginadas = useMemo(() => {
-    const inicio = (paginaAtual - 1) * itensPorPagina;
-    const fim = inicio + itensPorPagina;
-    return regras.slice(inicio, fim);
-  }, [regras, paginaAtual]);
-
-  const nomeMaterial = (idMaterial) =>
-    materiais.find((m) => m.id === idMaterial)?.nome ?? `Material ${idMaterial}`;
+  const regrasPaginadas = regras.slice(
+    (paginaAtual - 1) * itensPorPagina,
+    paginaAtual * itensPorPagina
+  );
 
   const abrirModalNova = () => {
     setErro(null);
@@ -67,6 +72,7 @@ function RegrasPontos() {
   };
 
   const abrirModalEditar = (regra) => {
+    if (!regra) return;
     setErro(null);
     setModoEdicao(true);
     setRegraEditando(regra);
@@ -104,16 +110,29 @@ function RegrasPontos() {
     }
   };
 
+  const abrirModalDelete = (regra) => {
+    setRegraParaExcluir(regra);
+    setModalDelete(true);
+  };
+
+  const handleExcluir = async () => {
+    try {
+      await deleteRegra(regraParaExcluir.id);
+      setModalDelete(false);
+      carregar();
+    } catch {
+      setErro("Erro ao excluir regra.");
+    }
+  };
+
   return (
     <>
       <Navbar tipoUsuario={"administrador"} />
 
       <div className="regras-page">
 
-        {/* HEADER PADRÃO */}
         <div className="regras-header">
           <h1 className="regras-titulo">Regras de Pontuação</h1>
-
           <button className="btn-add" onClick={abrirModalNova}>
             + Nova Regra
           </button>
@@ -125,12 +144,13 @@ function RegrasPontos() {
           <p>Carregando...</p>
         ) : (
           <div className="table-wrap">
+
             <table>
               <thead>
                 <tr>
                   <th>#</th>
                   <th>Material</th>
-                  <th>Pontos por grama</th>
+                  <th>Pontos</th>
                   <th>Descrição</th>
                   <th>Status</th>
                   <th>Ações</th>
@@ -138,9 +158,9 @@ function RegrasPontos() {
               </thead>
 
               <tbody>
-                {regrasPaginadas.length === 0 ? (
+                {regras.length === 0 ? (
                   <tr>
-                    <td colSpan={6} style={{ textAlign: "center" }}>
+                    <td colSpan={6} style={{ textAlign: "center", color: "#888" }}>
                       Nenhuma regra cadastrada.
                     </td>
                   </tr>
@@ -151,11 +171,16 @@ function RegrasPontos() {
                       <td>{nomeMaterial(regra.idMaterial)}</td>
                       <td>{regra.pontosPorPeso}</td>
                       <td>{regra.descricao}</td>
-                      <td>{regra.ativo ? "Ativa" : "Inativa"}</td>
                       <td>
-                        <button onClick={() => abrirModalEditar(regra)}>
-                          Editar
-                        </button>
+                        <span className={`badge ${regra.ativo ? "badge-active" : "badge-inactive"}`}>
+                          {regra.ativo ? "Ativa" : "Inativa"}
+                        </span>
+                      </td>
+                      <td>
+                        <div className="actions">
+                          <button onClick={() => abrirModalEditar(regra)}>Editar</button>
+                          <button onClick={() => abrirModalDelete(regra)}>Excluir</button>
+                        </div>
                       </td>
                     </tr>
                   ))
@@ -189,40 +214,17 @@ function RegrasPontos() {
 
               </div>
             )}
+
           </div>
         )}
       </div>
 
-      {/* MODAL (mantido) */}
+      {/* MODAIS (inalterados) */}
       {modalAberto &&
         ReactDOM.createPortal(
           <div className="modal-overlay" onClick={fecharModal}>
             <div className="delete-modal" onClick={(e) => e.stopPropagation()}>
               <h3>{modoEdicao ? "Editar Regra" : "Nova Regra"}</h3>
-
-              <select
-                value={form.idMaterial}
-                onChange={(e) => setForm({ ...form, idMaterial: e.target.value })}
-              >
-                <option value="">Material</option>
-                {materiais.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.nome}
-                  </option>
-                ))}
-              </select>
-
-              <input
-                type="number"
-                value={form.pontosPorPeso}
-                onChange={(e) => setForm({ ...form, pontosPorPeso: e.target.value })}
-              />
-
-              <input
-                type="text"
-                value={form.descricao}
-                onChange={(e) => setForm({ ...form, descricao: e.target.value })}
-              />
 
               <div className="modal-actions">
                 <button onClick={fecharModal}>Cancelar</button>

@@ -2,7 +2,6 @@
   padding: 1.5rem;
 }
 
-/* HEADER */
 .regras-header {
   display: flex;
   align-items: center;
@@ -10,7 +9,7 @@
   margin-bottom: 1.25rem;
 }
 
-/* TÍTULO PADRÃO DO SISTEMA */
+/* 🔵 TÍTULO PADRÃO AJUSTADO */
 .regras-titulo {
   font-size: 34px;
   font-weight: 700;
@@ -19,23 +18,24 @@
   width: 100%;
 }
 
-/* BOTÃO NOVO */
 .btn-add {
   background: #154570;
   border: none;
   color: #fff;
-  padding: 10px 16px;
+  padding: 8px 16px;
   border-radius: 8px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .btn-add:hover {
   background: #0f3354;
 }
 
-/* CONTAINER TABELA */
 .table-wrap {
   background: #fff;
   border: 1px solid #eee;
@@ -43,31 +43,28 @@
   overflow: hidden;
 }
 
-/* =========================
-   TABELA
-========================= */
-
 table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
 }
 
-/* CABEÇALHO PADRÃO AZUL */
+/* 🔵 CABEÇALHO PADRÃO AZUL */
 thead {
   background: #154570;
   color: #fff;
 }
 
 th {
-  padding: 14px;
-  font-weight: 600;
-  border: none;
+  padding: 12px 14px;
   text-align: left;
+  font-weight: 600;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
 td {
-  padding: 12px 14px;
+  padding: 10px 14px;
   color: #1a1a1a;
   border-bottom: 1px solid #eee;
 }
@@ -76,7 +73,7 @@ tr:last-child td {
   border-bottom: none;
 }
 
-/* BADGES */
+/* BADGE STATUS */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -88,13 +85,13 @@ tr:last-child td {
 }
 
 .badge-active {
-  background: #d1fae5;
+  background: #76e39c;
   color: #166534;
 }
 
 .badge-inactive {
-  background: #e5e7eb;
-  color: #374151;
+  background: #7c7d7d;
+  color: #1b1b1c;
 }
 
 /* AÇÕES */
@@ -103,14 +100,30 @@ tr:last-child td {
   gap: 6px;
 }
 
-button {
+.btn-icon {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 8px;
+  padding: 5px 8px;
   cursor: pointer;
+  color: #555;
+  font-size: 14px;
 }
 
-/* =========================
-   PAGINAÇÃO
-========================= */
+.btn-icon:hover {
+  background: #f5f5f5;
+}
 
+.btn-icon.danger {
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+.btn-icon.danger:hover {
+  background: #fef2f2;
+}
+
+/* ================= PAGINAÇÃO ================= */
 .paginacao {
   display: flex;
   justify-content: center;
@@ -126,9 +139,8 @@ button {
   border: none;
   padding: 8px 14px;
   border-radius: 6px;
-  font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
+  font-weight: 600;
 }
 
 .paginacao-btn:hover:not(:disabled) {
@@ -145,18 +157,15 @@ button {
   font-weight: 600;
 }
 
-/* =========================
-   MODAIS
-========================= */
-
+/* MODAIS (mantidos) */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5) !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 9999 !important;
 }
 
 .delete-modal {
@@ -164,35 +173,11 @@ button {
   border-radius: 12px;
   padding: 1.5rem;
   width: 100%;
-  max-width: 360px;
+  max-width: 340px;
   text-align: center;
   border: 1px solid #eee;
-  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* FORM */
-.form-group {
-  margin-bottom: 1rem;
-  text-align: left;
-}
-
-.form-group label {
-  font-size: 12px;
-  color: #888;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  font-size: 13px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-/* BOTÕES MODAL */
 .modal-actions {
   display: flex;
   gap: 8px;
@@ -200,28 +185,20 @@ button {
   margin-top: 1.25rem;
 }
 
-.btn-cancel {
-  background: transparent;
-  border: 1px solid #ddd;
-  padding: 7px 16px;
-  border-radius: 8px;
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .regras-titulo {
+    font-size: 28px;
+  }
 }
 
-.btn-save {
-  background: #154570;
-  color: #fff;
-  border: none;
-  padding: 7px 16px;
-  border-radius: 8px;
-}
+@media (max-width: 480px) {
+  .regras-header {
+    flex-direction: column;
+    gap: 10px;
+  }
 
-.btn-save:hover {
-  background: #0f3354;
-}
-
-/* ERRO */
-.erro {
-  color: #dc2626;
-  font-size: 13px;
-  margin-bottom: 1rem;
+  .paginacao {
+    flex-direction: column;
+  }
 }
