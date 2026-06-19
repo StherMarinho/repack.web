@@ -11,7 +11,6 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-
     margin: 30px 0 40px;
     flex-wrap: wrap;
 }
@@ -45,16 +44,54 @@
 
 .msg-erro {
     color: #c0392b;
-    padding: 10px 0;
     font-size: 15px;
     margin: 10px;
+    text-align: center;
 }
 
 .msg-carregando {
-    padding: 10px 0;
     font-size: 15px;
     color: #555;
+    text-align: center;
     margin: 10px;
+}
+
+/* ================= PAGINAÇÃO ================= */
+
+.paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    margin: 20px 0 40px;
+}
+
+.paginacao-btn {
+    background: #154570;
+    color: white;
+    border: none;
+
+    padding: 10px 18px;
+    border-radius: 8px;
+
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.paginacao-btn:hover:not(:disabled) {
+    background: #1d5c96;
+}
+
+.paginacao-btn:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+}
+
+.paginacao-info {
+    color: #154570;
+    font-weight: 600;
 }
 
 /* TABLET */
@@ -65,16 +102,11 @@
 
     .subtitulo-pontos,
     .enviosPontuados {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .valor-pontos {
-        font-size: 24px;
-    }
-
-    .cards {
-        justify-content: center;
-        margin: 20px;
+        font-size: 22px;
     }
 }
 
@@ -82,26 +114,19 @@
 @media (max-width: 480px) {
     .titulo-pontos {
         font-size: 26px;
-        padding: 0 10px;
-    }
-
-    .subtitulo-pontos,
-    .enviosPontuados {
-        font-size: 18px;
-    }
-
-    .valor-pontos {
-        font-size: 22px;
-        text-align: center;
-    }
-
-    .pontuacao-container {
-        gap: 6px;
-        padding: 0 10px;
     }
 
     .cards {
         margin: 15px;
         gap: 15px;
+    }
+
+    .paginacao {
+        flex-direction: column;
+    }
+
+    .paginacao-btn {
+        width: 100%;
+        max-width: 220px;
     }
 }
