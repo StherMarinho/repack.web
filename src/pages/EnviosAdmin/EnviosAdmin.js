@@ -21,9 +21,8 @@ const EnviosAdmin = () => {
             try {
                 const [resultadoEnvios, resultadoEmpresas] = await Promise.all([
                     envioService.listarEnvios(),
-                    empresaService.listarEmpresas()
+                    empresaService.listarEmpresas({})
                 ]);
-                    console.log("ENVIOS:", resultadoEnvios);
 
                 if (resultadoEnvios.sucesso) {
                     setEnvios(resultadoEnvios.dados.dados);
