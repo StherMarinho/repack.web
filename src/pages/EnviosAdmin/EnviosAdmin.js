@@ -45,10 +45,10 @@ const EnviosAdmin = () => {
         carregar();
     }, []);
 
-    // RESET página quando dados mudam
+    // RESET pagina quando muda lista
     useEffect(() => {
         setPaginaAtual(1);
-    }, [envios]);
+    }, [envios.length]);
 
     const formatarData = (dataString) => {
         const data = new Date(dataString);
@@ -116,30 +116,7 @@ const EnviosAdmin = () => {
 
     const enviosPaginados = envios.slice(indicePrimeiro, indiceUltimo);
 
-    const totalPaginas = Math.max(
-        1,
-        Math.ceil(envios.length / itensPorPagina)
-    );
-
-    if (carregando) {
-        return (
-            <>
-                <Navbar />
-                <p className="envios-admin__mensagem">Carregando envios...</p>
-            </>
-        );
-    }
-
-    if (erro) {
-        return (
-            <>
-                <Navbar />
-                <p className="envios-admin__mensagem envios-admin__mensagem--erro">
-                    {erro}
-                </p>
-            </>
-        );
-    }
+    const totalPaginas = Math.ceil(envios.length / itensPorPagina);
 
     return (
         <>
@@ -147,9 +124,7 @@ const EnviosAdmin = () => {
 
             <div className="envios-admin">
 
-                <div className="envios__titulo">
-                    Gerenciar Envios
-                </div>
+                <div className="envios__titulo">Gerenciar Envios</div>
 
                 <p className="subtitulo-pagina">
                     Edite ou cancele os envios realizados pelos usuários.
@@ -161,87 +136,87 @@ const EnviosAdmin = () => {
                     </p>
                 )}
 
-                {enviosPaginados.length === 0 ? (
-                    <p className="envios-admin__mensagem">
-                        Nenhum envio encontrado.
-                    </p>
+                {carregando ? (
+                    <p className="envios-admin__mensagem">Carregando...</p>
+                ) : envios.length === 0 ? (
+                    <p className="envios-admin__mensagem">Nenhum envio encontrado.</p>
                 ) : (
-                    <table className="envios-admin__tabela">
-
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Usuário</th>
-                                <th>Empresa</th>
-                                <th>Data</th>
-                                <th>Status</th>
-                                <th>Qtd.</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {enviosPaginados.map((envio) => (
-                                <tr key={envio.id}>
-                                    <td>{envio.id}</td>
-                                    <td>{envio.nomeUsuario}</td>
-                                    <td>{envio.nomeEmpresa}</td>
-                                    <td>{formatarData(envio.dataEnvio)}</td>
-                                    <td>
-                                        <span className={`envios-admin__status envios-admin__status--${envio.statusEnvio?.toLowerCase()}`}>
-                                            {envio.statusEnvio}
-                                        </span>
-                                    </td>
-                                    <td>{envio.quantidadeItens}</td>
-                                    <td className="envios-admin__acoes">
-                                        <button
-                                            className="envios-admin__btn envios-admin__btn--editar"
-                                            onClick={() => abrirEdicao(envio)}
-                                        >
-                                            Editar
-                                        </button>
-
-                                        <button
-                                            className="envios-admin__btn envios-admin__btn--excluir"
-                                            onClick={() => handleCancelar(envio.id)}
-                                        >
-                                            Cancelar
-                                        </button>
-                                    </td>
+                    <>
+                        <table className="envios-admin__tabela">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Usuário</th>
+                                    <th>Empresa</th>
+                                    <th>Data</th>
+                                    <th>Status</th>
+                                    <th>Qtd.</th>
+                                    <th>Ações</th>
                                 </tr>
-                            ))}
-                        </tbody>
+                            </thead>
 
-                    </table>
+                            <tbody>
+                                {enviosPaginados.map((envio) => (
+                                    <tr key={envio.id}>
+                                        <td>{envio.id}</td>
+                                        <td>{envio.nomeUsuario}</td>
+                                        <td>{envio.nomeEmpresa}</td>
+                                        <td>{formatarData(envio.dataEnvio)}</td>
+                                        <td>
+                                            <span className={`envios-admin__status envios-admin__status--${envio.statusEnvio?.toLowerCase()}`}>
+                                                {envio.statusEnvio}
+                                            </span>
+                                        </td>
+                                        <td>{envio.quantidadeItens}</td>
+                                        <td className="envios-admin__acoes">
+                                            <button
+                                                className="envios-admin__btn envios-admin__btn--editar"
+                                                onClick={() => abrirEdicao(envio)}
+                                            >
+                                                Editar
+                                            </button>
+
+                                            <button
+                                                className="envios-admin__btn envios-admin__btn--excluir"
+                                                onClick={() => handleCancelar(envio.id)}
+                                            >
+                                                Cancelar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+
+                        {totalPaginas > 1 && (
+                            <div className="paginacao">
+
+                                <button
+                                    className="paginacao-btn"
+                                    disabled={paginaAtual === 1}
+                                    onClick={() => setPaginaAtual(p => p - 1)}
+                                >
+                                    Anterior
+                                </button>
+
+                                <span className="paginacao-info">
+                                    Página {paginaAtual} de {totalPaginas}
+                                </span>
+
+                                <button
+                                    className="paginacao-btn"
+                                    disabled={paginaAtual === totalPaginas}
+                                    onClick={() => setPaginaAtual(p => p + 1)}
+                                >
+                                    Próxima
+                                </button>
+
+                            </div>
+                        )}
+                    </>
                 )}
 
-                {totalPaginas > 1 && (
-                    <div className="paginacao">
-
-                        <button
-                            className="paginacao-btn"
-                            disabled={paginaAtual === 1}
-                            onClick={() => setPaginaAtual(paginaAtual - 1)}
-                        >
-                            Anterior
-                        </button>
-
-                        <span className="paginacao-info">
-                            Página {paginaAtual} de {totalPaginas}
-                        </span>
-
-                        <button
-                            className="paginacao-btn"
-                            disabled={paginaAtual === totalPaginas}
-                            onClick={() => setPaginaAtual(paginaAtual + 1)}
-                        >
-                            Próxima
-                        </button>
-
-                    </div>
-                )}
-
-                {/* MODAL permanece igual */}
+                {/* modal mantido igual */}
                 {envioEditando && (
                     <div className="envios-admin__modal-overlay">
                         <div className="envios-admin__modal">
@@ -251,7 +226,7 @@ const EnviosAdmin = () => {
 
                             <form onSubmit={handleEditar}>
                                 <div className="envios-admin__campo">
-                                    <label>Data do envio</label>
+                                    <label>Data</label>
                                     <input
                                         type="date"
                                         value={dataEnvio}
@@ -297,7 +272,6 @@ const EnviosAdmin = () => {
                                     </button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 )}
