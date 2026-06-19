@@ -45,6 +45,11 @@ const EnviosAdmin = () => {
         carregar();
     }, []);
 
+    // 🔥 CORREÇÃO ESSENCIAL: reset da página quando lista muda
+    useEffect(() => {
+        setPaginaAtual(1);
+    }, [envios]);
+
     const formatarData = (dataString) => {
         const data = new Date(dataString);
         return data.toLocaleDateString("pt-BR");
@@ -107,10 +112,10 @@ const EnviosAdmin = () => {
     };
 
     // =========================
-    // PAGINAÇÃO
+    // PAGINAÇÃO (CORRIGIDA)
     // =========================
-    const indiceUltimo = paginaAtual * itensPorPagina;
-    const indicePrimeiro = indiceUltimo - itensPorPagina;
+    const indicePrimeiro = (paginaAtual - 1) * itensPorPagina;
+    const indiceUltimo = indicePrimeiro + itensPorPagina;
 
     const enviosPaginados = envios.slice(indicePrimeiro, indiceUltimo);
 
@@ -237,7 +242,7 @@ const EnviosAdmin = () => {
                     </div>
                 )}
 
-                {/* MODAL */}
+                {/* MODAL (inalterado) */}
                 {envioEditando && (
                     <div className="envios-admin__modal-overlay">
                         <div className="envios-admin__modal">
@@ -247,7 +252,6 @@ const EnviosAdmin = () => {
                             </div>
 
                             <form onSubmit={handleEditar}>
-
                                 <div className="envios-admin__campo">
                                     <label>Data do envio</label>
                                     <input
