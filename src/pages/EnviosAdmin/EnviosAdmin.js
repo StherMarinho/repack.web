@@ -20,7 +20,7 @@ const EnviosAdmin = () => {
         const carregar = async () => {
             try {
                 const [resultadoEnvios, resultadoEmpresas] = await Promise.all([
-                    envioService.listarEnvios({}),
+                    envioService.listarEnvios(),
                     empresaService.listarEmpresas()
                 ]);
                     console.log("ENVIOS:", resultadoEnvios);
