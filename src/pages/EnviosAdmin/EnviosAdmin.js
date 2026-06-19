@@ -16,7 +16,7 @@ const EnviosAdmin = () => {
     const [idEmpresa, setIdEmpresa] = useState("");
     const [quantidadeItens, setQuantidadeItens] = useState("");
 
-    // ✅ PAGINAÇÃO
+    /* ================= PAGINAÇÃO ================= */
     const [paginaAtual, setPaginaAtual] = useState(1);
     const itensPorPagina = 10;
 
@@ -55,6 +55,7 @@ const EnviosAdmin = () => {
         if (!confirmar) return;
 
         const resultado = await envioService.cancelarEnvio(id);
+
         if (resultado.sucesso) {
             setEnvios((prev) =>
                 prev.map((e) =>
@@ -89,13 +90,14 @@ const EnviosAdmin = () => {
                     env.id === envioEditando.id
                         ? {
                             ...env,
-                            dataEnvio: dataEnvio,
+                            dataEnvio,
                             nomeEmpresa: empresas.find(e => e.id === parseInt(idEmpresa))?.nome,
                             quantidadeItens: parseInt(quantidadeItens),
                         }
                         : env
                 )
             );
+
             setMensagem({ tipo: "sucesso", texto: "Envio atualizado com sucesso!" });
             setEnvioEditando(null);
         } else {
@@ -103,7 +105,7 @@ const EnviosAdmin = () => {
         }
     };
 
-    // ================= PAGINAÇÃO =================
+    /* ================= PAGINAÇÃO ================= */
     const totalPaginas = Math.ceil(envios.length / itensPorPagina);
 
     const enviosPaginados = envios.slice(
@@ -111,10 +113,12 @@ const EnviosAdmin = () => {
         paginaAtual * itensPorPagina
     );
 
-    const mudarPagina = (pagina) => {
-        if (pagina >= 1 && pagina <= totalPaginas) {
-            setPaginaAtual(pagina);
-        }
+    const irAnterior = () => {
+        if (paginaAtual > 1) setPaginaAtual(p => p - 1);
+    };
+
+    const irProxima = () => {
+        if (paginaAtual < totalPaginas) setPaginaAtual(p => p + 1);
     };
 
     if (carregando)
@@ -136,9 +140,12 @@ const EnviosAdmin = () => {
     return (
         <>
             <Navbar />
+
             <div className="envios-admin">
 
-                <div className="envios__titulo">Gerenciar Envios</div>
+                <div className="envios__titulo">
+                    Gerenciar Envios
+                </div>
 
                 <p className="subtitulo-pagina">
                     Edite ou cancele os envios realizados pelos usuários.
@@ -188,7 +195,6 @@ const EnviosAdmin = () => {
                                                 Editar
                                             </button>
                                             <button
-                                                type="button"
                                                 className="envios-admin__btn envios-admin__btn--excluir"
                                                 onClick={() => handleCancelar(envio.id)}
                                             >
@@ -200,13 +206,14 @@ const EnviosAdmin = () => {
                             </tbody>
                         </table>
 
-                        {/* ================= PAGINAÇÃO UI ================= */}
+                        {/* ================= PAGINAÇÃO ================= */}
                         {totalPaginas > 1 && (
                             <div className="paginacao">
+
                                 <button
                                     className="paginacao-btn"
-                                    onClick={() => mudarPagina(paginaAtual - 1)}
                                     disabled={paginaAtual === 1}
+                                    onClick={irAnterior}
                                 >
                                     Anterior
                                 </button>
@@ -217,17 +224,18 @@ const EnviosAdmin = () => {
 
                                 <button
                                     className="paginacao-btn"
-                                    onClick={() => mudarPagina(paginaAtual + 1)}
                                     disabled={paginaAtual === totalPaginas}
+                                    onClick={irProxima}
                                 >
                                     Próxima
                                 </button>
+
                             </div>
                         )}
                     </>
                 )}
 
-                {/* MODAL (inalterado) */}
+                {/* MODAL (mantido igual) */}
                 {envioEditando && (
                     <div className="envios-admin__modal-overlay">
                         <div className="envios-admin__modal">
@@ -286,6 +294,7 @@ const EnviosAdmin = () => {
                                     </button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 )}
