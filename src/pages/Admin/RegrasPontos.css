@@ -2,6 +2,15 @@
   font-size: 34px;
   font-weight: 700;
   color: #154570;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.regras-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
 
 .btn-add {
@@ -10,15 +19,24 @@
   border: none;
   padding: 10px 16px;
   border-radius: 8px;
+  font-weight: 600;
 }
 
 .btn-add:hover {
   background: #0f3354;
 }
 
+/* TABELA */
 .table-wrap {
+  margin: 20px;
   border-radius: 8px;
   overflow: hidden;
+  background: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 thead {
@@ -28,13 +46,23 @@ thead {
 
 th {
   padding: 14px;
-  font-weight: 600;
-  border: none;
+  text-align: left;
 }
 
+td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* PAGINAÇÃO */
 .paginacao {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 14px;
   padding: 16px;
   border-top: 1px solid #e2e8f0;
@@ -46,6 +74,7 @@ th {
   border: none;
   padding: 8px 14px;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .paginacao-btn:disabled {
@@ -56,4 +85,28 @@ th {
 .paginacao-info {
   color: #154570;
   font-weight: 600;
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 300px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
 }
