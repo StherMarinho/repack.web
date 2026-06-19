@@ -1,5 +1,5 @@
 import Navbar from "../../componentes/Navbar/Navbar";
-import './pontuacao.css'
+import './pontuacao.css';
 import { useEffect, useState, useMemo } from "react";
 import { getPontuacaoUsuario } from "../../services/pontuacaoService";
 import envioService from "../../services/envioService";
@@ -11,11 +11,9 @@ const Pontos = () => {
   const [idsConcluidos, setIdsConcluidos] = useState([]);
   const [erro, setErro] = useState(null);
   const [carregando, setCarregando] = useState(true);
-
   const [paginaAtual, setPaginaAtual] = useState(1);
 
   const itensPorPagina = 10;
-
   const idUsuario = getUserId();
 
   useEffect(() => {
@@ -85,10 +83,16 @@ const Pontos = () => {
     <>
       <Navbar tipoUsuario={"comum"} />
 
-      <div className="titulo-pontos">
-        Minha Pontuação
+      {/* HEADER PADRÃO */}
+      <div className="cabecalho-pontos">
+        <h1 className="titulo-pontos">Regras de Pontuação</h1>
+
+        <p className="subtitulo-pontos-texto">
+          Ajuste a regra dos pontos do sistema.
+        </p>
       </div>
 
+      {/* TOTAL */}
       <div className="pontuacao-container">
         <span className="subtitulo-pontos">Total de pontos:</span>
 
@@ -97,10 +101,16 @@ const Pontos = () => {
         </strong>
       </div>
 
-      <div className="enviosPontuados">
-        Envios que pontuaram:
+      {/* SEÇÃO ENVIOS */}
+      <div className="secao-envios">
+        <h2 className="titulo-secao">Envios Pontuados</h2>
+
+        <p className="subtitulo-secao">
+          Lista de envios concluídos que geraram pontuação no sistema.
+        </p>
       </div>
 
+      {/* CARDS */}
       <div className="cards">
         {historicoFiltrado.length === 0 ? (
           <p>Nenhum envio concluído ainda.</p>
