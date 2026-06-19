@@ -14,11 +14,9 @@ export default function GerenciarEmbalagens() {
   const [erro, setErro] = useState("");
 
   const [exibirFormulario, setExibirFormulario] = useState(false);
-  const [enviandoFormulario, setEnviandoFormulario] = useState(false);
   const [editandoId, setEditandoId] = useState(null);
 
   const [paginaAtual, setPaginaAtual] = useState(1);
-
   const itensPorPagina = 10;
 
   const [formData, setFormData] = useState({
@@ -42,7 +40,6 @@ export default function GerenciarEmbalagens() {
 
     } catch (err) {
       setErro("Erro ao carregar as informações das embalagens.");
-      console.error(err);
     } finally {
       setCarregando(false);
     }
@@ -52,20 +49,13 @@ export default function GerenciarEmbalagens() {
     carregarDadosTela();
   }, []);
 
-  // 🔥 recalcula total de páginas sempre
+  // 🔥 garante reset de página quando lista muda
+  useEffect(() => {
+    setPaginaAtual(1);
+  }, [embalagens]);
+
   const totalPaginas = Math.ceil(embalagens.length / itensPorPagina);
 
-  // 🔥 garante que página nunca fique inválida
-  useEffect(() => {
-    if (paginaAtual > totalPaginas && totalPaginas > 0) {
-      setPaginaAtual(totalPaginas);
-    }
-    if (totalPaginas === 0) {
-      setPaginaAtual(1);
-    }
-  }, [embalagens, totalPaginas]);
-
-  // 🔥 dados paginados
   const embalagensPaginadas = useMemo(() => {
     const inicio = (paginaAtual - 1) * itensPorPagina;
     const fim = inicio + itensPorPagina;
@@ -87,7 +77,6 @@ export default function GerenciarEmbalagens() {
     const material = materiais.find(m => m.nome === emb.materialNome);
 
     setEditandoId(emb.id);
-
     setFormData({
       descricao: emb.descricao,
       pesoMedio: emb.pesoMedio,
@@ -111,7 +100,6 @@ export default function GerenciarEmbalagens() {
       carregarDadosTela();
     } catch (err) {
       alert("Erro ao excluir embalagem.");
-      console.error(err);
     }
   };
 
@@ -124,8 +112,6 @@ export default function GerenciarEmbalagens() {
     }
 
     try {
-      setEnviandoFormulario(true);
-
       if (editandoId) {
         await embalagemService.atualizarEmbalagem(editandoId, formData);
       } else {
@@ -137,9 +123,6 @@ export default function GerenciarEmbalagens() {
 
     } catch (err) {
       alert("Erro ao salvar embalagem.");
-      console.error(err);
-    } finally {
-      setEnviandoFormulario(false);
     }
   };
 
@@ -161,11 +144,17 @@ export default function GerenciarEmbalagens() {
 
         {!exibirFormulario && (
           <div className="acoes-lista-container">
-            <button onClick={() => navigate('/materiaisAdmin')} className="btn btn-voltar">
+            <button
+              onClick={() => navigate('/materiaisAdmin')}
+              className="btn btn-voltar"
+            >
               Materiais
             </button>
 
-            <button onClick={() => setExibirFormulario(true)} className="btn btn-novo">
+            <button
+              onClick={() => setExibirFormulario(true)}
+              className="btn btn-novo"
+            >
               + Nova Embalagem
             </button>
           </div>
@@ -173,7 +162,7 @@ export default function GerenciarEmbalagens() {
 
         {exibirFormulario ? (
           <div className="form-card">
-            <h3>{editandoId ? "Editar" : "Cadastrar"}</h3>
+            <h3>{editandoId ? "Editar Embalagem" : "Cadastrar Embalagem"}</h3>
 
             <form onSubmit={handleSubmit}>
               <div className="form-group">
@@ -224,7 +213,6 @@ export default function GerenciarEmbalagens() {
             </form>
           </div>
         ) : (
-
           <div className="tabela-wrapper">
 
             <table className="tabela-embalagens">
@@ -247,11 +235,17 @@ export default function GerenciarEmbalagens() {
                     <td>{emb.pesoMedio} kg</td>
 
                     <td className="coluna-acoes">
-                      <button onClick={() => handleEditarClique(emb)} className="btn-acao btn-editar">
+                      <button
+                        onClick={() => handleEditarClique(emb)}
+                        className="btn-acao btn-editar"
+                      >
                         Editar
                       </button>
 
-                      <button onClick={() => handleDelete(emb.id, emb.descricao)} className="btn-acao btn-excluir">
+                      <button
+                        onClick={() => handleDelete(emb.id, emb.descricao)}
+                        className="btn-acao btn-excluir"
+                      >
                         Excluir
                       </button>
                     </td>
@@ -265,8 +259,8 @@ export default function GerenciarEmbalagens() {
 
                 <button
                   className="paginacao-btn"
-                  onClick={() => setPaginaAtual(p => p - 1)}
                   disabled={paginaAtual === 1}
+                  onClick={() => setPaginaAtual(p => p - 1)}
                 >
                   Anterior
                 </button>
@@ -277,8 +271,8 @@ export default function GerenciarEmbalagens() {
 
                 <button
                   className="paginacao-btn"
-                  onClick={() => setPaginaAtual(p => p + 1)}
                   disabled={paginaAtual === totalPaginas}
+                  onClick={() => setPaginaAtual(p => p + 1)}
                 >
                   Próxima
                 </button>
