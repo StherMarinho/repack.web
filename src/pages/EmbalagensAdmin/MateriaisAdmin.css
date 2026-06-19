@@ -1,3 +1,4 @@
+
 .painel-container {
   padding: 30px;
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -18,14 +19,6 @@
   color: #154570;
   line-height: 1.1;
   letter-spacing: -0.5px;
-}
-
-.subtitulo-pagina {
-  margin-top: 10px;
-  margin-bottom: 0;
-  font-size: 15px;
-  color: #6b7280;
-  line-height: 1.5;
 }
 
 /* Área de Ações da Lista (Topo) */
@@ -51,11 +44,10 @@
   transform: scale(0.96);
 }
 
-/* Área de Ações da Lista (Topo) */
 .acoes-lista-container {
   display: flex;
   justify-content: flex-end;
-  gap: 12px; /* Espaço uniforme entre os botões de controle */
+  gap: 12px;
   margin-bottom: 20px;
 }
 
@@ -69,7 +61,6 @@
   background-color: #0f3354;
   box-shadow: 0 4px 6px rgba(15, 51, 84, 0.3);
 }
-
 
 .btn-salvar {
   background-color: #e0f2fe !important;
@@ -95,7 +86,7 @@
   box-shadow: 0 4px 6px rgba(127, 29, 29, 0.2);
 }
 
-/* Estrutura do Form-Card (Baseado na estrutura do Modal Box) */
+/* Estrutura do Form-Card */
 .form-card {
   background-color: #fff;
   padding: 25px;
@@ -127,7 +118,7 @@
   color: #344155;
 }
 
-.form-input, .form-select {
+.form-input {
   width: 100%;
   padding: 10px;
   border: 1px solid #cbd5e1;
@@ -138,7 +129,7 @@
   transition: border-color 0.2s;
 }
 
-.form-input:focus, .form-select:focus {
+.form-input:focus {
   outline: none;
   border-color: #154570;
   box-shadow: 0 0 0 3px rgba(21, 69, 112, 0.1);
@@ -164,7 +155,22 @@
 .tabela-embalagens {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
+  table-layout: fixed;
+}
+
+.tabela-embalagens th:nth-child(1),
+.tabela-embalagens td:nth-child(1) {
+  width: 80px;
+}
+
+.tabela-embalagens th:nth-child(3),
+.tabela-embalagens td:nth-child(3) {
+  width: 180px;
+}
+
+.tabela-embalagens th:nth-child(2),
+.tabela-embalagens td:nth-child(2) {
+  text-align: center !important;
 }
 
 .tabela-embalagens th {
@@ -187,13 +193,7 @@
   background-color: #f8fafc;
 }
 
-
-.coluna-cabecalho-acoes {
-  width: 160px;
-  text-align: center !important;
-}
-
-/* Badges de Destaque */
+/* Badges e Textos */
 .badge-id-embalagem {
   background-color: #e2e8f0;
   color: #475569;
@@ -205,12 +205,9 @@
 .descricao-embalagem-destaque {
   font-weight: 600;
   color: #1e293b;
+  display: block;
+  text-align: center;
 }
-
-.material-embalagem-texto {
-  color: #64748b;
-}
-
 
 /* Feedbacks globais */
 .mensagem-carregando {
@@ -245,7 +242,6 @@
   transform: none !important;
 }
 
-/* Container de ações dentro da célula da tabela */
 .coluna-acoes {
   display: flex;
   justify-content: center;
@@ -267,7 +263,6 @@
   transform: scale(0.95);
 }
 
-/* Botão Editar (Tom azul corporativo sutil) */
 .btn-editar {
   background-color: #e0f2fe;
   color: #0369a1;
@@ -278,7 +273,6 @@
   color: #0c4a6e;
 }
 
-/* Botão Excluir (Tom vermelho/alerta sutil) */
 .btn-excluir {
   background-color: #fee2e2;
   color: #b91c1c;
@@ -289,14 +283,22 @@
   color: #7f1d1d;
 }
 
+.coluna-cabecalho-acoes {
+  width: 160px;
+  text-align: center !important;
+}
+
+.coluna-acoes {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .titulo-pagina { font-size: 30px; }
-  .subtitulo-pagina { font-size: 14px; }
 }
 
 @media (max-width: 480px) {
   .titulo-pagina { font-size: 26px; }
-  .subtitulo-pagina { font-size: 13px; }
 }
-
