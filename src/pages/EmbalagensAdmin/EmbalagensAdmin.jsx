@@ -232,7 +232,7 @@ export default function GerenciarEmbalagens() {
                     <td>#{emb.id}</td>
                     <td>{emb.descricao}</td>
                     <td>{emb.materialNome}</td>
-                    <td>{emb.pesoMedio} kg</td>
+                    <td>{emb.pesoMedio} g</td>
 
                     <td className="coluna-acoes">
                       <button
