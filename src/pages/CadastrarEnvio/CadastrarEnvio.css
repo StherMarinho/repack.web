@@ -125,7 +125,7 @@ select.input-field {
 .seta {
   margin-left: auto;
   font-size: 11px;
-  color: black;
+  color: #333;
   font-weight: bolder;
   line-height: 1;
   padding-left: 46%;
