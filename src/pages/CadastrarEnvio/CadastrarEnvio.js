@@ -164,7 +164,7 @@ export default function CadastroRecebimento() {
                       ? `${itensSelecionados.length} item(ns) selecionado(s)`
                           : "Selecione as embalagens..."}
                 </span>
-                <span className="seta">{menuAberto ? '▲' : '▼'}</span>
+                <span className="seta">⌵</span>
               </div>
 
               {menuAberto && (
