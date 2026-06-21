@@ -159,7 +159,7 @@ export default function CadastroRecebimento() {
                 className={`dropdown-header ${menuAberto ? 'ativo' : ''}`} 
                 onClick={() => setMenuAberto(!menuAberto)}
               >
-                <span>
+                <span className="texto-dropdown">
                   {itensSelecionados.length > 0
                       ? `${itensSelecionados.length} item(ns) selecionado(s)`
                           : "Selecione as embalagens..."}
