@@ -168,8 +168,9 @@
 }
 
 .tabela-embalagens th {
-  background-color: #154570;
-  color: #ffffff;
+  background-color: #154570 !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
   padding: 14px 18px;
   font-weight: 600;
   font-size: 14px;
