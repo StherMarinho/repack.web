@@ -19,18 +19,26 @@ const Cadastro = () => {
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [telefone, setTelefone] = useState("");
     const [carregando, setCarregando] = useState(false);
-    const [sucesso, setSucesso] = useState(false);
+    const [toast, setToast] = useState(null);
+
+    const mostrarToast = (tipo, texto) => {
+    setToast({ tipo, texto });
+
+    setTimeout(() => {
+        setToast(null);
+    }, 3000);
+};
 
     const aoCadastrar = async (e) => {
         e.preventDefault();
 
         if (!nome || !email || !senha) {
-            alert("Preencha os campos obrigatórios");
+            mostrarToast("erro", "Preencha os campos obrigatórios");
             return;
         }
 
         if (senha !== confirmarSenha) {
-            alert("As senhas não coincidem");
+            mostrarToast("erro", "As senhas não coincidem");
             return;
         }
 
@@ -45,14 +53,14 @@ const Cadastro = () => {
                 idTipoUsuario: 1
             });
 
-            setSucesso(true);
+            mostrarToast("sucesso", "Cadastro realizado com sucesso");
 
             setTimeout(() => {
                 navigate("/");
             }, 1200);
 
         } catch {
-            alert("Erro no cadastro");
+            mostrarToast("erro", "Erro no cadastro");
         } finally {
             setCarregando(false);
         }
@@ -71,9 +79,9 @@ const Cadastro = () => {
             )}
 
             {/* TOAST SUCESSO */}
-            {sucesso && (
-                <div className="success-toast">
-                    ✓ Cadastro realizado com sucesso
+            {toast && (
+                <div className={`toast toast--${toast.tipo}`}>
+                    {toast.tipo === "sucesso" ? "✓" : "✕"} {toast.texto}
                 </div>
             )}
 
