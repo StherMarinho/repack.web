@@ -134,7 +134,7 @@
 /* RESPONSIVO */
 @media (max-width: 768px) {
     .cadastro-page form {
-        max-width: 520px;
+        max-width: 750px;
         padding: 30px;
     }
 
