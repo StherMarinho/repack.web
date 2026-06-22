@@ -59,7 +59,8 @@ const Cadastro = () => {
                 navigate("/");
             }, 1200);
 
-        } catch {
+        } catch (erro) {
+            console.log(erro);
             mostrarToast("erro", "Erro no cadastro");
         } finally {
             setCarregando(false);
@@ -69,7 +70,9 @@ const Cadastro = () => {
     return (
         <>
             <Banner />
-
+            <div className="toast toast--sucesso">
+                TESTE TOAST
+            </div>
             {/* LOADING OVERLAY */}
             {carregando && (
                 <div className="loading-overlay">
