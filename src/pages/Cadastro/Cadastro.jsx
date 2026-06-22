@@ -19,26 +19,19 @@ const Cadastro = () => {
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [telefone, setTelefone] = useState("");
     const [carregando, setCarregando] = useState(false);
-    const [toast, setToast] = useState(null);
-
-    const mostrarToast = (tipo, texto) => {
-    setToast({ tipo, texto });
-
-    setTimeout(() => {
-        setToast(null);
-    }, 3000);
-};
+    const [sucesso, setSucesso] = useState(false);
+    const [erroCadastro, setErroCadastro] = useState(false);
 
     const aoCadastrar = async (e) => {
         e.preventDefault();
 
         if (!nome || !email || !senha) {
-            mostrarToast("erro", "Preencha os campos obrigatórios");
+            alert("Preencha os campos obrigatórios");
             return;
         }
 
         if (senha !== confirmarSenha) {
-            mostrarToast("erro", "As senhas não coincidem");
+            alert("As senhas não coincidem");
             return;
         }
 
@@ -53,15 +46,18 @@ const Cadastro = () => {
                 idTipoUsuario: 1
             });
 
-            mostrarToast("sucesso", "Cadastro realizado com sucesso");
+            setSucesso(true);
 
             setTimeout(() => {
                 navigate("/");
             }, 1200);
 
-        } catch (erro) {
-            console.log(erro);
-            mostrarToast("erro", "Erro no cadastro");
+        } catch {
+            setErroCadastro(true);
+
+            setTimeout(() => {
+                setErroCadastro(false);
+            }, 3000);
         } finally {
             setCarregando(false);
         }
@@ -70,9 +66,7 @@ const Cadastro = () => {
     return (
         <>
             <Banner />
-            <div className="toast toast--sucesso">
-                TESTE TOAST
-            </div>
+
             {/* LOADING OVERLAY */}
             {carregando && (
                 <div className="loading-overlay">
@@ -82,9 +76,16 @@ const Cadastro = () => {
             )}
 
             {/* TOAST SUCESSO */}
-            {toast && (
-                <div className={`toast toast--${toast.tipo}`}>
-                    {toast.tipo === "sucesso" ? "✓" : "✕"} {toast.texto}
+            {sucesso && (
+                <div className="success-toast">
+                    ✓ Cadastro realizado com sucesso
+                </div>
+            )}
+
+            {/* TOAST ERRO */}
+            {erroCadastro && (
+                <div className="error-toast">
+                    ✕ Erro ao realizar cadastro
                 </div>
             )}
 
