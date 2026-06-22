@@ -106,7 +106,13 @@ const EnviosAdmin = () => {
         <>
         <Navbar />
         <div className="envios-admin">
-            <h2 className="envios-admin__titulo">Gerenciar Envios</h2>
+            <div className="envios__titulo">
+                Gerenciar Envios
+            </div>
+
+            <p className="subtitulo-pagina">
+                Visualize, edite e acompanhe os envios cadastrados na plataforma.
+            </p>
  
             {mensagem && (
                 <p className={`envios-admin__feedback envios-admin__feedback--${mensagem.tipo}`}>
